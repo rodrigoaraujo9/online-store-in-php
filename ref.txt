@@ -1,0 +1,109 @@
+Entities and Their Attributes:
+
+User
+
+ID
+Name
+Username
+Password (hashed)
+Email
+Role (Buyer, Seller, Admin)
+Profile Picture URL
+Registered Date
+
+
+
+Book
+
+ID
+Title
+Author
+ISBN
+Genre ID
+Seller ID
+Condition
+ListedPrice (initial listing price)
+Description
+Image URL
+Listing Date
+
+
+
+Transaction
+
+ID
+Buyer ID
+Seller ID
+Book ID
+SalePrice (final agreed-upon price)
+Transaction Date
+Status(Pending, Completed, Cancelled)
+
+
+
+Message
+
+ID
+Sender ID (reference to User)
+Receiver ID (reference to User)
+Book ID (reference to Book, optional)
+Content
+Timestamp
+
+
+
+Genre
+
+ID
+Name
+Description
+
+
+
+Review
+
+ID
+Book ID (reference to Book)
+Reviewer ID (reference to User)
+Rating
+Comment
+Date
+
+
+
+Wishlist
+
+ID
+User ID (reference to User)
+Book ID (reference to Book)
+
+
+
+ShoppingCart
+
+ID
+User ID (reference to User)
+Book ID (reference to Book)
+Quantity
+
+
+
+Relationships:
+User to Book: A one-to-many relationship, as a single user can list multiple books.
+User to Transaction: A one-to-many relationship from both buyer and seller perspectives, as users can engage in multiple transactions.
+Book to Transaction: A one-to-one relationship, assuming each transaction involves a single book sale.
+User to Message: A many-to-many relationship, as users can send and receive messages to/from multiple users.
+Book to Genre: A many-to-one relationship, as each book belongs to one genre, but a genre can include many books.
+Book to Review: A one-to-many relationship, as each book can have multiple reviews.
+User to Wishlist: A many-to-many relationship, as users can have multiple books in their wishlist, and each book can be in the wishlists of multiple users.
+User to ShoppingCart: A many-to-many relationship, as users can have multiple books in their shopping cart, and each book can be in the shopping carts of multiple users.
+
+
+
+Complexities and Additional Considerations:
+Security: Incorporate classes or methods that focus on sanitizing input, hashing passwords, and handling tokens for CSRF protection.
+Book Images: Consider a separate entity for storing multiple images per book if necessary.
+Category Management: Admin-specific functionalities for managing genres/categories.
+Ratings and Reviews: Complexities around calculating average ratings and displaying reviews.
+Messages and Notifications: System for managing real-time or asynchronous communications.
+Search and Filter: Implementations for handling complex queries based on user inputs.
