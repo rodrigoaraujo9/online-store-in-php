@@ -1,51 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="style.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vintage Books</title>
-    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
+    <title>Book Hub</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <h1>Book Hub</h1>
         <nav>
             <ul>
-                <li><a href="login.html">Login</a></li>
-                <li><a href="register.html">Register</a></li>
-                <li><a href="logout.php">Logout</a></li> <!-- Handle logout functionality with PHP -->
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Books</a></li>
+                <li><a href="#">Cart</a></li>
+                <li><a href="#">Wishlist</a></li>
+                <!-- Add additional nav items here -->
             </ul>
         </nav>
+        <div class="search-container">
+            <input type="text" placeholder="Pesquisar">
+            <button>Q</button>
+        </div>
     </header>
     
-    <section id="book-types">
-        <h2>Book Types</h2>
-        <div id="types">
-            <!-- Dynamically load book types here -->
-            <p>Finance</p>
-            <p>Literature</p>
-            <!-- Add more as needed -->
-        </div>
-    </section>
+    <div class="main-feature">
+        <h2>PRÉMIO LIVRO DO ANO</h2>
+        <p>Os melhores livros de 2023</p>
+        <!-- Add more content if needed -->
+    </div>
     
-    <section id="featured-books">
-        <h2>Featured Books</h2>
-        <div class="book">
-            <img src="path/to/book/image.jpg" alt="Book Name">
-            <h3>Book Name</h3>
-            <p>Author: Author Name</p>
-            <p>Condition: New/Used</p>
-            <p>Publisher: Publisher Name</p>
-            <!-- Add more book details as needed -->
+    <div class="books-grid">
+        <!-- Repeat this div for each book, replacing # with book details -->
+        <div class="book-item">
+            <img src="#" alt="Book Name">
+            <p>Book Name</p>
+            <p>Author Name</p>
         </div>
-        <!-- Repeat for more books -->
-    </section>
-    
-    <aside id="wishlist">
-        <h2>My Wishlist</h2>
-        <!-- Wishlist items go here -->
-    </aside>
+        <!-- Add more book items here -->
+    </div>
     
     <footer>
         <p>&copy; 2024 Book Hub. All rights reserved.</p>
