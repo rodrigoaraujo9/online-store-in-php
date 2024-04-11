@@ -119,3 +119,20 @@ footer p {
         float: none;
     }
 }
+
+/* coração para item da wishlist */
+.heart-icon {
+    width: 24px;
+    height: 24px;
+    fill: none;
+    stroke: #000;
+    stroke-width: 2;
+    cursor: pointer;
+  }
+  .heart-icon.active {
+    fill: red;
+    stroke: red;
+  }
+  .heart-icon:hover {
+    stroke: red;
+  }
