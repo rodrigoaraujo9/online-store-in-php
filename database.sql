@@ -1,4 +1,4 @@
--- Create the 'users' table
+
 CREATE TABLE users (
     user_id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE users (
     registered_date DATE NOT NULL
 );
 
--- Create the 'genres' table
+
 CREATE TABLE genres (
     genre_id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL,
@@ -22,6 +22,7 @@ CREATE TABLE books (
     book_id INTEGER PRIMARY KEY AUTOINCREMENT,
     title TEXT NOT NULL,
     author TEXT NOT NULL,
+    language TEXT NOT NULL
     isbn TEXT NOT NULL,
     genre_id INTEGER,
     seller_id INTEGER NOT NULL,
@@ -34,7 +35,7 @@ CREATE TABLE books (
     FOREIGN KEY (seller_id) REFERENCES users(user_id)
 );
 
--- Create the 'transactions' table
+
 CREATE TABLE transactions (
     transaction_id INTEGER PRIMARY KEY AUTOINCREMENT,
     buyer_id INTEGER NOT NULL,
@@ -48,7 +49,7 @@ CREATE TABLE transactions (
     FOREIGN KEY (book_id) REFERENCES books(book_id)
 );
 
--- Create the 'messages' table
+
 CREATE TABLE messages (
     message_id INTEGER PRIMARY KEY AUTOINCREMENT,
     sender_id INTEGER NOT NULL,
@@ -61,7 +62,7 @@ CREATE TABLE messages (
     FOREIGN KEY (book_id) REFERENCES books(book_id)
 );
 
--- Create the 'reviews' table
+
 CREATE TABLE reviews (
     review_id INTEGER PRIMARY KEY AUTOINCREMENT,
     book_id INTEGER NOT NULL,
@@ -73,7 +74,7 @@ CREATE TABLE reviews (
     FOREIGN KEY (reviewer_id) REFERENCES users(user_id)
 );
 
--- Create the 'wishlists' table
+
 CREATE TABLE wishlists (
     wishlist_id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
@@ -82,7 +83,7 @@ CREATE TABLE wishlists (
     FOREIGN KEY (book_id) REFERENCES books(book_id)
 );
 
--- Create the 'shopping_cart' table
+
 CREATE TABLE shopping_cart (
     cart_id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
