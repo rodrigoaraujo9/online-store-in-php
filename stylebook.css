@@ -1,0 +1,81 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
+    line-height: 1.5;
+}
+
+/* Styling the Book Container */
+.book-container {
+    display: flex;
+    background: #fff;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.book-image img {
+    max-width: 200px;
+    margin-right: 20px;
+}
+
+.book-info {
+    flex-grow: 1;
+}
+
+.book-info h1 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.book-info p {
+    margin-bottom: 10px;
+    color: #666;
+}
+
+#book-price, #book-condition {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* Transaction Container Styling */
+.transaction-container {
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.transaction-container h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.transaction-info {
+    margin-bottom: 10px;
+}
+
+.transaction-info p {
+    margin-bottom: 5px;
+    color: #666;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .book-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .book-image img {
+        margin: 0 0 20px 0;
+    }
+}
