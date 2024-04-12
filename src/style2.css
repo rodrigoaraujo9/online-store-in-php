@@ -1,0 +1,237 @@
+:root {
+    --pastel-blue: #AEC6CF; /* Existing */
+    --pastel-red: #C9A0DC; /* Existing */
+    --pastel-green: #77DD77; /* Existing */
+    --pastel-yellow: #FDFD96; /* Existing */
+
+    /* Darker shades of green */
+    --moss-green: #507556;
+    --forest-green: #3C6E47;
+
+    /* Complementary colors */
+    --muted-rose: #D0B6B1;
+    --dusky-pink: #AA8A86;
+    --blue-grey: #A0AEB2;
+    --almost-white: #FAFAF9;
+    --text-dark: #2A3132;
+}
+
+@font-face {
+    font-family: 'CustomFont';
+    src: url('../fonts/font.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'CustomFontBold';
+    src: url('../fonts/fontBOLD.ttf') format('truetype');
+}
+
+body {
+    font-family: 'CustomFont', Arial, sans-serif;
+    background-color: #FAFAF9;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #507556;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+}
+nav {
+    display: flex;
+    flex: 1; /* Takes up any remaining space */
+    justify-content:end; /* Separates left and right nav */
+}
+
+
+.logo-title {
+    font-family: 'CustomFontBold', Arial, sans-serif;
+    color: white;
+}
+
+
+.nav-left, .nav-right {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.nav-left {
+    float: left;
+    
+}
+
+#logo {
+    border-radius: 50%;
+    width: 50px;
+}
+
+.nav-right {
+    float: right;
+}
+
+/* Clearfix for the floated elements */
+nav::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+#logo {
+    border-radius: 50%;
+    width: 50px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+nav ul li {
+    padding: 0 15px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    border-radius: 20px;
+    padding: 10px 15px;
+    transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+    background-color: #BF616A;
+}
+
+.sell-cta {
+    background-color: #EAE7C6; /* Light background color from your palette */
+    color: var(--text-dark); /* Dark color for text for readability */
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.sell-cta h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.sell-cta p {
+    font-size: 1.25rem;
+    margin-bottom: 30px;
+}
+
+.sell-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: var(--moss-green); /* A contrasting button color */
+    color: #fff;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.sell-button:hover {
+    background-color: #BF616A; /* Slightly lighter color for hover */
+}
+
+
+.search-container input[type="text"] {
+    padding: 6px;
+    border: none;
+    border-radius: 20px;
+}
+
+.search-container button {
+    background-color: #507556;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    padding: 6px 10px;
+    cursor: pointer;
+}
+
+.main-feature {
+    text-align: center;
+    color: #2A3132;
+    padding: 30px 0;
+    border-radius: 20px;
+}
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    padding: 20px;
+    justify-content: center; /* Centers grid items within the grid area */
+    align-items: start; /* Aligns items from the start vertically */
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0 auto; /* Centers the grid container horizontally */
+}
+
+.book-item {
+    padding: 10px;
+    text-align: center;
+    color: #2A3132;
+}
+
+
+.book-item img {
+    width: 100%;
+    height: 180px; /* Fixed height */
+    object-fit:contain; /* This will cover the area without distorting the aspect ratio */
+
+}
+
+.book-item:hover {
+    background-color: #F0F0F0; /* Slightly darker shade when hovering */
+}
+
+
+footer {
+    background-color: #507556;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+}
+
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    nav ul {
+        flex-direction: column;
+    }
+
+    nav ul li a {
+        padding: 10px;
+    }
+
+    .search-container {
+        margin-top: 10px;
+    }
+
+    .search-container input[type="text"],
+    .search-container button {
+        width: 100%;
+    }
+    .nav-left, .nav-right {
+        float: none;
+        width: 100%;
+        justify-content: center;
+    }
+
+    .nav-left li, .nav-right li {
+        width: 100%;
+        text-align: center;
+    }
+}
