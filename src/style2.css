@@ -26,6 +26,11 @@
     src: url('../fonts/fontBOLD.ttf') format('truetype');
 }
 
+@font-face {
+    font-family: 'CustomFontSemi';
+    src: url('../fonts/fontsemi.ttf') format('truetype');
+}
+
 body {
     font-family: 'CustomFont', Arial, sans-serif;
     background-color: #FAFAF9;
@@ -35,14 +40,21 @@ body {
 
 header {
     background-color: #FAFAF9;
-    padding: 10px 20px;
+    padding: 1em;
     display: flex;
     align-items: center;
     justify-content:space-between;
+    position: fixed; /* Makes the header fixed at the top */
+    top: 0; /* Align the header at the top */
+    left: 0; /* Align the header to the left side */
+    width: 100%; /* Ensures the header spans the full width of the viewport */
+    z-index: 1000; /* Ensures the header stays above other content */
+    
 }
 nav {
-    display: flex;
-    flex: 1; /* Takes up any remaining space */
+    font-family: 'CustomFontSemi', Arial, sans-serif;
+    display:inline-flex;
+    flex: 2; /* Takes up any remaining space */
     justify-content:end; /* Separates left and right nav */
 }
 
@@ -50,6 +62,8 @@ nav {
 .logo-title {
     font-family: 'CustomFontBold', Arial, sans-serif;
     color: #3C6E47;
+    margin-right: 1em;
+
 }
 
 
@@ -58,6 +72,7 @@ nav {
     padding: 0;
     margin: 0;
     display: flex;
+    margin-bottom: 0.5em;
 }
 
 .nav-left {
@@ -96,13 +111,23 @@ nav ul {
 nav ul li {
     padding: 0 15px;
 }
+.nav-left li, .nav-right li {
+    padding: 0 15px; /* Provides spacing between navigation items */
+}
 
+.nav-left li a, .nav-right li a {
+    text-decoration: none;
+    color: var(--text-dark); /* Same dark color for text */
+    padding: 0.5em 1em;
+    border-radius: 20px; /* Rounded edges for aesthetic */
+}
 nav ul li a {
     text-decoration: none;
     color: #2A3132;
     border-radius: 20px;
     padding: 10px 15px;
     transition: background-color 0.05s;
+    white-space: nowrap; /* Prevents text from wrapping inside links */
 }
 
 nav ul li a:hover {
@@ -114,10 +139,11 @@ nav ul li a:hover {
     background-color: #FAFAF9; /* Light background color from your palette */
     color: var(--text-dark); /* Dark color for text for readability */
     text-align: center;
-    padding: 200px 80px;
+    padding: 300px 80px;
 }
 
 .sell-cta h1 {
+    font-family: 'CustomFontSemi', Arial, sans-serif;
     font-size: 2rem;
     margin-bottom: 20px;
 }
@@ -128,6 +154,7 @@ nav ul li a:hover {
 }
 
 .sell-button {
+    font-family: 'CustomFontSemi', Arial, sans-serif;
     display: inline-block;
     padding: 1px 30px;
     background-color: var(--text-dark); /* A contrasting button color */
@@ -140,10 +167,12 @@ nav ul li a:hover {
 
 .sell-button:hover {
     background-color:var(--moss-green); /* Slightly lighter color for hover */
+    transform: scale(1.02);
 }
 
 
 .main-feature {
+    font-family: 'CustomFontSemi', Arial, sans-serif;
     text-align: center;
     color: #2A3132;
     padding: 50px 0;
@@ -173,20 +202,19 @@ nav ul li a:hover {
 .book-item img {
     width: 100%;
     height: 280px; /* Fixed height */
-    object-fit:cover; /* This will cover the area without distorting the aspect ratio */
+    object-fit:fill; /* This will cover the area without distorting the aspect ratio */
     
 
 }
 
 
 footer {
-    background-color: #507556;
-    color: #fff;
+    color: var(--text-dark);
     text-align: center;
     padding: 10px 0;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 300px) {
     header {
         flex-direction: column;
         text-align: center;
@@ -218,4 +246,161 @@ footer {
         width: 100%;
         text-align: center;
     }
+    .nav-left li:not(:first-child),  /* Hide all nav-left links except the first */
+    .nav-right li:not(:last-child) { /* Hide all nav-right links except the last */
+        display: none;
+    }
 }
+
+
+
+
+.login-container {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh; /* Sets the minimum height of the login container */
+    padding: 30px;
+}
+
+.login-form {
+    width: 100%;
+    max-width: 320px; /* Maximum width of the form */
+    background-color: var(--almost-white);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.form-title {
+    font-family: 'CustomFontSemi', Arial, sans-serif;
+    text-align: center;
+    color: var(--text-dark);
+    margin-bottom: 1em;
+}
+
+.form-field {
+    margin-bottom: 2em;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 0.5em;
+    color: var(--text-dark);
+}
+
+.form-field input[type="text"],
+.form-field input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    box-sizing: border-box; /* Ensures padding is included in total width and height */
+}
+
+.login-button {
+    font-family: 'CustomFontSemi', Arial, sans-serif;
+    width: 100%;
+    padding: 1px;
+    border: none;
+    background-color: var(--text-dark);
+    color: var(--almost-white);
+    border-radius: 40px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-button:hover {
+    background-color: var(--moss-green);
+    transform: scale(1.02);
+}
+
+
+
+
+
+.book-detail-container {
+    margin-top: 120px;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: var(--almost-white);
+}
+
+.book-detail {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 800px;
+    background-color: var(--almost-white);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+.book-image {
+    flex-basis: 40%;
+    text-align: center;
+}
+
+.book-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.book-metadata {
+    flex-basis: 60%;
+    padding: 20px;
+}
+
+.book-title, .book-author, .book-isbn, .book-genre, .book-seller, .book-condition, .book-price, .book-description, .book-listing-date {
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+.book-title {
+    font-family: 'CustomFontBold', Arial, sans-serif;
+    font-size: 1.5em;
+}
+
+.book-price {
+    font-weight: bold;
+}
+
+
+
+
+
+
+.books-container {
+    margin-top: 120px;
+    padding: 20px;
+    background-color: var(--almost-white);
+}
+
+.filter-sort-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 8px;
+    color: var(--text-dark);
+}
+
+.book-filter label, .book-sort label {
+    margin-right: 10px;
+}
+
+.book-filter select, .book-sort select {
+    padding: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 15px;
+    justify-content: center;
+}
+
+/* Add specific styling for the book items similar to previous examples */
