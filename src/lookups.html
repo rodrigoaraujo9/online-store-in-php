@@ -12,10 +12,11 @@
     </div>
     <nav class="nav-left">
         <ul>
-            <li><a href="#">Shop All</a></li>
-            <li><a href="#">Portuguese Literature</a></li>
-            <li><a href="#">Premium</a></li>
-            <li><a href="#">Classics</a></li>
+            <li><a href="main2.html">Home</a></li>
+            <li><a href="lookups.html">Shop All</a></li>
+            <li><a href="lookups.html">Portuguese Literature</a></li>
+            <li><a href="lookups.html">Premium</a></li>
+            <li><a href="lookups.html">Classics</a></li>
         </ul>
     </nav>
     <nav class="nav-right">
@@ -31,8 +32,24 @@
     <main class="books-container">
         <section class="filter-sort-bar">
             <div class="book-filter">
-                <label for="genre-select">Choose a genre:</label>
+                <label for="genre-select">Genre:</label>
                 <select id="genre-select" name="genre">
+                    <option value="none">None</option>
+                    <option value="romance">Romance</option>
+                    <option value="thriller">Thriller</option>
+                    <option value="adventure">Adventure</option>
+                    <option value="action">Action</option>
+                    <option value="novel">Novel</option>
+                    <!-- Genre options here -->
+                </select>
+
+                <label for="age-select">Age Group:</label>
+                <select id="age-select" name="genre">
+                    <option value="none">None</option>
+                    <option value="adults">Adults</option>
+                    <option value="teens">Teens</option>
+                    <option value="children">Children</option>
+                    <option value="toddlers">Toddlers</option>
                     <!-- Genre options here -->
                 </select>
             </div>
@@ -49,6 +66,33 @@
         </section>
 
         <section class="books-grid">
+            <div class="book-item">
+                <img src="../images/bookcover.jpg" alt="The Great Adventure">
+                <h3 class="book-item-title">1984</h3>
+                <p class="book-item-author">by George Orwell</p>
+                <p class="book-item-price">€20.00</p>
+                <div class="book-item-labels">
+                    <span class="book-item-label">New Arrival</span>
+                </div>
+            </div>
+            <div class="book-item">
+                <img src="../images/bookcover4.jpg" alt="Journey Through Time">
+                <h3 class="book-item-title">American Gods</h3>
+                <p class="book-item-author">by Neil Gaiman</p>
+                <p class="book-item-price">€18.50</p>
+                <div class="book-item-labels">
+                    <span class="book-item-label">Bestseller</span>
+                </div>
+            </div>
+            <div class="book-item">
+                <img src="../images/bookcover3.jpg" alt="Mystery of the Ancients">
+                <h3 class="book-item-title">Fight Club</h3>
+                <p class="book-item-author">by Chuck Palahniuk</p>
+                <p class="book-item-price">€22.00</p>
+                <div class="book-item-labels">
+                    <span class="book-item-label">Editor's Choice</span>
+                </div>
+            </div>
             <!-- Books will be displayed here -->
         </section>
     </main>

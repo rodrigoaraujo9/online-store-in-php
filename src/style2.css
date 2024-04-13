@@ -369,8 +369,6 @@ footer {
 
 
 
-
-
 .books-container {
     margin-top: 120px;
     padding: 20px;
@@ -401,6 +399,77 @@ footer {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 15px;
     justify-content: center;
+    align-items: stretch;
 }
+
+/* Style for each book item */
+.book-item {
+    border: 2px solid var(--moss-green); /* Small green outline */
+    border-radius: 4px; /* Slight rounding of corners for aesthetics */
+    overflow: hidden; /* Ensures no content spills out of border-radius */
+    padding: 10px;
+    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.book-item:hover {
+    transform: translateY(-5px); /* Lifts the item slightly on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow for depth */
+}
+
+/* Additional styles for content inside .book-item */
+.book-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 10px; /* Space between image and text */
+    object-fit: cover; /* Keeps aspect ratio but may crop the image */
+    flex-grow: 0; /* Prevents the image from stretching */
+    flex-shrink: 0; /* Prevents the image from shrinking */
+}
+
+.book-item-title {
+
+    font-size: 1rem;
+    font-family: 'CustomFontSemi';
+    margin: 10px 0;
+    color: var(--text-dark);
+}
+
+.book-item-author {
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    margin: 5px 0;
+}
+
+.book-item-price {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--moss-green);
+    margin-bottom: 10px;
+}
+
+.book-item-labels {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.book-item-title, .book-item-author, .book-item-price {
+    margin: 5px 0; /* Adjusts spacing between text elements */
+}
+
+.book-item-label {
+    background-color: var(--muted-rose);
+    border-radius: 5px;
+    padding: 3px 6px;
+    font-size: 0.75rem;
+    margin: 2px;
+    color: var(--almost-white);
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: auto; 
+}
+
+
 
 /* Add specific styling for the book items similar to previous examples */
