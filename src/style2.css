@@ -23,6 +23,10 @@
     font-family: 'CustomFont';
     src: url('../fonts/font.ttf') format('truetype');
 }
+@font-face {
+    font-family: 'CustomFontLight';
+    src: url('../fonts/fontlight.ttf') format('truetype');
+}
 
 @font-face {
     font-family: 'CustomFontBold';
@@ -476,113 +480,133 @@ footer {
 
 
 
-
-
 .cart-container {
-    padding: 2em;
+   
+    max-width: 800px;
+    margin: 40px auto;
     background-color: var(--almost-white);
+    padding: 20px;
+    box-sizing: border-box;
+    margin-top: 80px;
 }
 
-.cart-items {
-    margin-top: 1em;
+h1 {
+    font-family: 'CustomFontSemi', sans-serif;
+    color: var(--text-dark);
+    padding-bottom: 20px;
 }
 
 .cart-item {
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 1fr auto auto auto;
+    gap: 10px;
     align-items: center;
-    margin-bottom: 1em;
-    background: var(--almost-white);
-    padding: 1em;
-    border-radius: 4px;
-    height: auto;
-    object-fit: cover; /* Keeps aspect ratio but may crop the image */
-
+    border-bottom: 1px solid var(--darker-forest-green);
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    flex: auto;
 }
 
-.cart-item-image {
-    width: 80px;
-    height: 120px;
-    object-fit: cover;
-    margin-right: 1em;
+.cart-item-image img {
+    width: 100px;
+    height: 100px;
+    object-fit:contain;
+    margin-right: 10px;
+    margin-top: 10px;
 }
 
-.cart-item-details {
-    flex-grow: 1;
+.cart-item-info h2 {
+    font-family: 'CustomFontSemi', sans-serif;
+    color: var(--text-dark);
+    margin-bottom: 5px;
 }
 
-
-.cart-item-author,
-.cart-item-condition,
-.cart-item-publisher {
-    font-size: 0.9em;
-}
-
-.cart-item-price p {
+.cart-item-info p {
+    font-family: 'CustomFont', sans-serif;
     color: var(--text-dark);
 }
 
-.cart-item-quantity {
-    padding: 0.5em;
-    margin-left: 1em;
+.cart-item-quantity input {
+    width: 50px;
+    padding: 5px;
+    text-align: center;
 }
 
-.cart-item-remove {
-    padding: 0.7em 1em;
-    background-color: var(--darker-forest-green);
-    color: var(--almost-white);
-    border: none;
-    border-radius: 20px;
-    cursor: pointer;
-    margin-left: 1em;
-    font-family: 'CustomFont';
+.cart-item-total p {
+    font-family: 'CustomFont', sans-serif;
+    color: var(--moss-green);
 }
-
-.cart-item-remove:hover {
-    transform: scale(1.04);
-    transition: background-color 0.3s;
-    background-color: var(--darker-forest-green);
-}
-
 
 .cart-summary {
+    font-family: 'CustomFontLight', sans-serif;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 2em;
-    padding: 1em;
-    color:var(--text-dark);
-    border-radius: 8px;
-}
-
-.cart-total {
-    display: flex;
-    align-items: center;
-}
-
-.cart-total h3 {
-    margin-right: 10px;
-}
-
-.total-price {
-    font-size: 1.25em;
-    color: var(--almost-white);
-    border: 1px solid #ccc;
-}
-
-.button-checkout {
-    font-family: 'CustomFontSemi';
-    padding: 1em 2em;
-    background-color: var(--text-dark);
-    color: var(--almost-white);
-    border: none;
-    border-radius: 40px;
-    cursor: pointer;
-    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
     
 }
 
-.button-checkout:hover {
-    background-color: var(--darker-forest-green); /* Change color on hover */
+.button-continue {
+    font-family: 'CustomFont', sans-serif;
+    background-color: transparent;
+    color: var(--text-dark);
+    border: 2px solid var(--text-dark);
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 50px;
+    text-decoration: none;
+
+    transition: background-color 0.1s;
+}
+
+.button-continue:hover {
+    background-color: var(--text-dark);
+    color: var(--almost-white);
+}
+
+.total-container {
+    text-align: center;
+    align-items: center;
+    width: 100%;
+
+}
+
+.total-container h3 {
+    font-family: 'CustomFontSemi', sans-serif;
+    color: var(--text-dark);
+}
+
+.total-price {
+    font-family: 'CustomFontSemi', sans-serif;
+    font-size: 1.5rem;
+    color: var(--moss-green);
+}
+
+.total-container p {
+    font-family: 'CustomFont', sans-serif;
+    color: var(--text-dark);
+    align-items:center;
+}
+
+.button-checkout {
+    font-family: 'CustomFont', sans-serif;
+    background-color: transparent;
+    color: var(--text-dark);
+    border: 2px solid var(--text-dark);
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 10px;
+    text-decoration: none;
+    
+
+    transition: background-color 0.1s;
+    text-transform: uppercase;
+
     transition: background-color 0.3s;
-    transform: scale(1.02);
+}
+
+.button-checkout:hover {
+    background-color: var(--darker-forest-green);
+    color: var(--almost-white);
 }
