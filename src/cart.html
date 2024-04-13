@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart - FableFoundry</title>
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body>
+    <header>
+        <h2 class="logo-title">FableFoundry</h2>
+
+        <nav class="nav-left">
+            <ul>
+                <li><a href="main2.html">Home</a></li>
+                <li><a href="lookups.html">Shop All</a></li>
+                <li><a href="lookups.html">Portuguese Literature</a></li>
+                <li><a href="lookups.html">Premium</a></li>
+                <li><a href="lookups.html">Classics</a></li>
+            </ul>
+        </nav>
+        <nav class="nav-right">
+            <ul>
+                <li><a href="#">Selling</a></li>
+                <li><a href="#">Wishlist</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </nav>
+        <!-- Navigation goes here -->
+    </header>
+
+    <main class="cart-container">
+        <h1>Your Cart</h1>
+        <div class="cart-items">
+            <!-- Repeat this div for each book in the cart -->
+            <div class="cart-item">
+                <img src="../images/bookcover.jpg" alt="Book Title" class="cart-item-image">
+                <div class="cart-item-details">
+                    <h2 class="cart-item-title">1984</h2>
+                    <p class="cart-item-author">by George Orwell</p>
+                    <p class="cart-item-condition">Condition: Like New</p>
+                </div>
+                <div class="cart-item-price">
+                    <p>€20.00</p>
+                </div>
+                <input type="number" value="1" min="1" class="cart-item-quantity">
+                <button class="cart-item-remove">Remove</button>
+            </div>
+
+            <div class="cart-item">
+                <img src="../images/bookcover3.jpg" alt="Book Title" class="cart-item-image">
+                <div class="cart-item-details">
+                    <h2 class="cart-item-title">Fight Club</h2>
+                    <p class="cart-item-author">by Chuck Palahniuk</p>
+                    <p class="cart-item-condition">Condition: Beat to a Pulp</p>
+                </div>
+                <div class="cart-item-price">
+                    <p>€20.00</p>
+                </div>
+                <input type="number" value="1" min="1" class="cart-item-quantity">
+                <button class="cart-item-remove">Remove</button>
+            </div>
+            <!-- End of cart item div -->
+        </div>
+        <div class="cart-summary">
+            <div class="cart-total">
+                <h3>Total:</h3>
+                <p class="total-price"><h1>€60.50<h1></p> <!-- Example total price, you'll generate this dynamically -->
+            </div>
+            <button class="button-checkout">Proceed to Checkout</button>
+        </div>
+    </main>
+
+    <footer>
+        <p>© 2024 FableFoundry. All rights reserved.</p>
+    </footer>
+</body>
+</html>
