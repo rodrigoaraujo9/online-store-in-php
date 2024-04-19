@@ -21,21 +21,21 @@
 
 @font-face {
     font-family: 'CustomFont';
-    src: url('../fonts/font.ttf') format('truetype');
+    src: url('../../fonts/font.ttf') format('truetype');
 }
 @font-face {
     font-family: 'CustomFontLight';
-    src: url('../fonts/fontlight.ttf') format('truetype');
+    src: url('../../fonts/fontlight.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'CustomFontBold';
-    src: url('../fonts/fontBOLD.ttf') format('truetype');
+    src: url('../../fonts/fontBOLD.ttf') format('truetype');
 }
 
 @font-face {
     font-family: 'CustomFontSemi';
-    src: url('../fonts/fontsemi.ttf') format('truetype');
+    src: url('../../fonts/fontsemi.ttf') format('truetype');
 }
 
 body {
