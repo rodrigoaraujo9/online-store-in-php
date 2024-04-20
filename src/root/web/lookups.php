@@ -12,7 +12,7 @@
     </div>
     <nav class="nav-left">
         <ul>
-            <li><a href="index.html">Home</a></li>
+            <li><a href="../index.php">Home</a></li>
             <li><a href="lookups.php">Shop All</a></li>
             <?php
             include 'db.php';

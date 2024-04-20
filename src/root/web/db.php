@@ -1,5 +1,7 @@
 <?php
-$dbFile = '../database.db'; // Path to your SQLite database file
+$rootPath = $_SERVER['DOCUMENT_ROOT'];
+$descendedPath = dirname($rootPath);
+$dbFile = $descendedPath . '/database.db'; // Path to your SQLite database file
 $dsn = 'mysql:host=localhost;dbname=fablefoundry';
 $username = 'root';
 $password = 'root';
