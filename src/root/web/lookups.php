@@ -18,7 +18,7 @@
             include 'db.php';
 
             // Fetch genres from the database
-            $sql = "SELECT genre_id, name FROM genres";
+            $sql = "SELECT genre_id, name FROM genres LIMIT 2";
             $stmt = $conn->query($sql);
             $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -33,7 +33,7 @@
         <ul>
             <li><a href="#">Selling</a></li>
             <li><a href="#">Wishlist</a></li>
-            <li><a href="login.html">Profile</a></li>
+            <li><a href="profile.php">Profile</a></li>
             <li><a href="cart.html">Cart</a></li>
         </ul>
     </nav>
@@ -109,7 +109,7 @@
                 // Display filtered books
                 while ($book = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     echo '<div class="book-item">';
-                    echo '<img src="' . htmlspecialchars($book['image_url']) . '" alt="' . htmlspecialchars($book['title']) . '">';
+                    echo '<img src="../images/' . htmlspecialchars($book['image_url']) . '" alt="' . htmlspecialchars($book['title']) . '">';
                     echo '<h3 class="book-item-title">' . htmlspecialchars($book['title']) . '</h3>';
                     echo '<p class="book-item-author">by ' . htmlspecialchars($book['author']) . '</p>';
                     echo '<p class="book-item-price">€' . number_format($book['listed_price'], 2) . '</p>';

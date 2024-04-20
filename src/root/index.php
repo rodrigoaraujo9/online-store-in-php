@@ -11,17 +11,28 @@
         <h2 class="logo-title">FableFoundry</h2>
         <nav class="nav-left">
             <ul>
-                <li><a href="/web/lookups.php">Shop All</a></li>
-                <li><a href="/web/lookups.php">Portuguese Literature</a></li>
-                <li><a href="/web/lookups.php">Premium</a></li>
-                <li><a href="/web/lookups.php">Classics</a></li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="./web/lookups.php">Shop All</a></li>
+                <?php
+                include './web/db.php';
+
+                // Fetch genres from the database
+                $sql = "SELECT genre_id, name FROM genres LIMIT 2";
+                $stmt = $conn->query($sql);
+                $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                // Display genre filters
+                foreach ($genres as $genre) {
+                    echo '<li><a href="lookups.php?genre=' . $genre['genre_id'] . '">' . htmlspecialchars($genre['name']) . '</a></li>';
+                }
+                ?>
             </ul>
         </nav>
         <nav class="nav-right">
             <ul>
                 <li><a href="/web/selling.php">Selling</a></li>
                 <li><a href="/web/wishlist.php">Wishlist</a></li>
-                <li><a href="/web/login.php">Profile</a></li>
+                <li><a href="/web/profile.php">Profile</a></li>
                 <li><a href="/web/cart.php">Cart</a></li>
             </ul>
         </nav>
@@ -37,11 +48,11 @@
         <h1>Shop Our Picks For the Week</h1>
         <div class="books-grid">
             <?php
-            include './web/db.php';
+            // Ensure that you are only selecting the necessary information for books
             try {
                 $sql = "SELECT title, author, listed_price, image_url FROM books LIMIT 8";
                 $stmt = $conn->query($sql);
-            
+
                 while ($book = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     echo '<div class="book-item">';
                     echo '<img src="./images/' . htmlspecialchars($book['image_url']) . '" alt="' . htmlspecialchars($book['title']) . '">';
@@ -62,4 +73,4 @@
         <p>© 2024 FableFoundry. All rights reserved.</p>
     </footer>
 </body>
-</html>
+        </html>
