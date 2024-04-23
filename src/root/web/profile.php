@@ -27,7 +27,7 @@ function echoSessionVar($varName) {
 </head>
 <body>
     <header>
-    <h2 class="logo-title">FableFoundry</h2>
+    <h2 class="logo-title"><a href="../index.php">FableFoundry</a></h2>
         <nav class="nav-left">
             <ul>
                 <li><a href="../index.php">Home</a></li>

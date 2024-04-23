@@ -12,11 +12,11 @@ $book = $stmt->fetch(PDO::FETCH_ASSOC);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Details - FableFoundry</title>
-    <link rel="stylesheet" href="../style2.css">
+    <link rel="stylesheet" href="style2.css">
 </head>
 <body>
     <header>
-        <h2 class="logo-title">FableFoundry</h2>
+        <h2 class="logo-title"><a href="../index.php">FableFoundry </a></h2>
     </header>
 
     <main class="book-detail-container">
@@ -34,6 +34,7 @@ $book = $stmt->fetch(PDO::FETCH_ASSOC);
                 <p class="book-price">Listed Price: $<?= number_format($book['listed_price'], 2); ?></p>
                 <p class="book-description">Description: <?= htmlspecialchars($book['description']); ?></p>
                 <p class="book-listing-date">Listing Date: <?= $book['listing_date']; ?></p>
+                <button class="add-to-cart-button">Add to Cart</button>
             </div>
         </div>
     </main>
