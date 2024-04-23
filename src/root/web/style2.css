@@ -263,6 +263,26 @@ footer {
 
 
 
+.text-button {
+    background: none;
+    border: none;
+    color: var(--text-dark);
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    display: block; /* To make it a block-level element, aligning it nicely */
+    margin-top: 10px; /* Adds some space between the Enter button and this link */
+    width: 100%;
+    font-family: 'CustomFontLight', Arial, sans-serif;
+    
+}
+
+.text-button:hover {
+    text-decoration: underline;
+    color: var(--darker-forest-green);
+}
+
+
 
 .login-container {
     margin-top: 30px;
@@ -279,6 +299,7 @@ footer {
     background-color: var(--almost-white);
     padding: 20px;
     border-radius: 8px;
+    
 }
 
 .form-title {
@@ -664,4 +685,11 @@ header, footer {
 footer {
     font-size: 0.8em;
     margin-top: 20px;
+}
+
+.error {
+    color: var(--dusky-pink);
+    font-family: 'CustomFontLight', sans-serif;
+    text-align: center;
+
 }
