@@ -17,7 +17,8 @@ CREATE TABLE users (
     email TEXT UNIQUE NOT NULL,
     role TEXT NOT NULL CHECK(role IN ('Buyer', 'Seller', 'Admin')),
     profile_picture_url TEXT,
-    registered_date DATE NOT NULL
+    registered_date DATE NOT NULL,
+    bio TEXT
 );
 
 -- Create genres table
