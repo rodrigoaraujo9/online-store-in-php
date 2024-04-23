@@ -365,7 +365,6 @@ footer {
 
 .book-detail {
     display: flex;
-    /*flex-wrap: wrap;*/
     max-width: 800px;
     background-color: var(--almost-white);
     border-radius: 8px;
@@ -519,6 +518,38 @@ footer {
     background-color: var(--button-hover-purple);
 }
 
+.seller-profile {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    padding: 20px;
+    background-color: var(--forest-green);
+    border-radius: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    max-width: 800px;
+    margin-left: auto; /* Align to right side */
+    margin-right: auto; /* Align to left side */
+}
+
+
+.seller-info {
+    display: flex;
+    align-items: center; /* Center items vertically */
+}
+
+.seller-photo {
+    width: 60px; /* Adjust size as needed */
+    height: 60px; /* Adjust size as needed */
+    border-radius: 50%; /* This makes the image circular */
+    object-fit: cover; /* Ensures the image fills the circle */
+    margin-right: 20px; /* Add spacing between the photo and the name */
+}
+
+.seller-profile h3 {
+    margin: 0; /* Remove default margin for h3 */
+    font-size: 1.2em; /* Adjust font size as needed */
+    color: #fff; /* Set color for the name */
+}
 
 
 /* Add specific styling for the book items similar to previous examples */

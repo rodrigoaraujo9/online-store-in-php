@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
     <header>
-        <h2 class="logo-title">FableFoundry</h2>
+        <h2 class="logo-title"><a href="../index.php">FableFoundry</a></h2>
     </header>
 
     <main class="login-container">

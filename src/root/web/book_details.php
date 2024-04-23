@@ -38,6 +38,12 @@ $book = $stmt->fetch(PDO::FETCH_ASSOC);
             </div>
         </div>
     </main>
+    <div class="seller-profile">
+                <div class="seller-info">
+                <img src="../images/profile_picture.png" alt="seller Photo" class="seller-photo">
+                    <h3>Seller Name</h3>
+                </div>
+            </div>
 
     <footer>
         <p>© 2024 FableFoundry. All rights reserved.</p>

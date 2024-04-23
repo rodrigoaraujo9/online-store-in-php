@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h2 class="logo-title">FableFoundry</h2>
+        <h2 class="logo-title"><a href="../index.php">FableFoundry</a></h2>
     </div>
     <nav class="nav-left">
         <ul>
