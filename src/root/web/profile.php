@@ -1,9 +1,9 @@
 <?php
 session_start();
 
-// Check if user is not logged in, redirect to register page
+// Redirect to login if not logged in
 if (!isset($_SESSION['username'])) {
-    header("Location: register.php");
+    header("Location: login.php");
     exit;
 }
 
