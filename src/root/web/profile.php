@@ -54,7 +54,8 @@ function echoSessionVar($varName) {
 
     <main class="profile-container">
         <section class="profile-info">
-            <img src="<?php echo !empty($_SESSION['profile_picture_url']) ? htmlspecialchars($_SESSION['profile_picture_url'], ENT_QUOTES, 'UTF-8') : '../images/default_profile.png'; ?>" alt="Profile Photo" class="profile-photo">
+        <img src="<?php echo !empty($_SESSION['profile_picture_url']) ? htmlspecialchars($_SESSION['profile_picture_url'], ENT_QUOTES, 'UTF-8') . '?t=' . time() : '../images/default_profile.png'; ?>" alt="Profile Photo" class="profile-photo">
+
             <h1><?php echoSessionVar('name'); ?></h1>
             <p>Email: <?php echoSessionVar('email'); ?></p>
             <p>Bio: <?php echoSessionVar('bio'); ?></p>

@@ -31,19 +31,24 @@ try {
 
     // Handle profile photo upload
     if (!empty($_FILES['profile_photo']['name'])) {
-        $target_dir = "uploads/";
-        $target_file = $target_dir . basename($_FILES['profile_photo']['name']);
+        $target_dir = "../images/profiles/";
+        $originalFileName = basename($_FILES['profile_photo']['name']);
+        $imageFileType = strtolower(pathinfo($originalFileName, PATHINFO_EXTENSION));
+        $sanitizedFileName = preg_replace("/[^a-zA-Z0-9.]/", "_", $originalFileName); // Sanitizing file name
+        $target_file = $target_dir . $sanitizedFileName;
+    
         if (move_uploaded_file($_FILES['profile_photo']['tmp_name'], $target_file)) {
             $stmt = $conn->prepare("UPDATE users SET profile_picture_url = :profileUrl WHERE user_id = :userId");
             $profileUrl = $target_file;
             $stmt->bindParam(':profileUrl', $profileUrl);
             $stmt->bindParam(':userId', $userId);
             $stmt->execute();
-
+    
             // Update the session variable for the profile picture URL
             $_SESSION['profile_picture_url'] = $profileUrl;
         }
     }
+    
 
     $_SESSION['flash_message'] = ['type' => 'success', 'message' => 'Profile updated successfully'];
 } catch (PDOException $e) {
