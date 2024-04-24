@@ -86,7 +86,17 @@ function echoSessionVar($varName) {
                 <textarea id="editBio" name="bio"><?php echoSessionVar('bio'); ?></textarea><br>
 
                 <label for="editPhoto">Profile Photo:</label>
-                <input type="file" id="editPhoto" name="profile_photo"><br>
+                <div class="file-upload-wrapper">
+                    <div class="profile-photo-wrapper">
+                        <img src="<?php echo !empty($_SESSION['profile_picture_url']) ? htmlspecialchars($_SESSION['profile_picture_url'], ENT_QUOTES, 'UTF-8') : '../images/default_profile.png'; ?>" alt="Previous Profile Photo" class="previous-profile-photo">
+                     </div>
+                    <div>
+                        <button type="button" class="custom-file-upload">Choose New Photo</button>
+                        <span id="file-chosen">No file chosen</span>
+                        <input type="file" id="editPhoto" name="profile_photo" hidden>
+                     </div>
+                </div>
+
 
                 <button type="submit" class="action-button">Save Changes</button>
             </form>
@@ -116,6 +126,16 @@ function echoSessionVar($varName) {
                 }
             });
         }
+
+        document.querySelector('.custom-file-upload').addEventListener('click', function() {
+    document.getElementById('editPhoto').click();
+});
+
+document.getElementById('editPhoto').addEventListener('change', function() {
+    var fileName = document.getElementById('editPhoto').files[0].name;
+    document.getElementById('file-chosen').textContent = fileName;
+});
+
     </script>
 </body>
 </html>

@@ -3,6 +3,8 @@
     --pastel-red: #C9A0DC; /* Existing */
     --pastel-green: #a4e5a4; /* Existing */
     --pastel-yellow: #FDFD96; /* Existing */
+    --darker-pastel-green: #6dbd6d; /* Darker pastel green */
+
 
     /* Darker shades of green */
     --moss-green: #2A4238;
@@ -811,4 +813,56 @@ footer {
 .modal textarea {
     height: 100px;
     resize: vertical; /* Allows vertical resizing only */
+}
+
+.file-upload-wrapper {
+    margin: 10px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.custom-file-upload {
+    border: 2px solid var(--darker-pastel-green);  /* Use the brand color */
+    color: var(--darker-pastel-green); ;
+    background-color: var(--almost-white);
+    border-radius: 20px;
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-family: 'CustomFont', sans-serif;
+}
+
+.custom-file-upload:hover {
+    background-color: var(--darker-pastel-green); /* Darker shade on hover */
+    color: var(--almost-white);
+}
+
+#file-chosen {
+    margin-left: 10px;
+    font-size: 0.9em;
+    color: #555;
+    
+}
+
+.file-upload-wrapper {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+
+.profile-photo-wrapper {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 20px;
+    border: 5px solid var(--pastel-green);
+}
+
+.previous-profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
 }
