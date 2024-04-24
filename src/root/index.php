@@ -23,7 +23,7 @@
 
                 // Display genre filters
                 foreach ($genres as $genre) {
-                    echo '<li><a href="lookups.php?genre=' . $genre['genre_id'] . '">' . htmlspecialchars($genre['name']) . '</a></li>';
+                    echo '<li><a href="/web/lookups.php?genre=' . $genre['genre_id'] . '">' . htmlspecialchars($genre['name']) . '</a></li>';
                 }
                 ?>
             </ul>
