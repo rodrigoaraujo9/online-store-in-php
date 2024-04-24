@@ -71,37 +71,33 @@ function echoSessionVar($varName) {
 </main>
 
 
-    <div id="editProfileModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal('editProfileModal')">&times;</span>
-            <h2>Edit Profile</h2>
-            <form action="update_profile.php" method="post" enctype="multipart/form-data">
-                <label for="editName">Name:</label>
-                <input type="text" id="editName" name="name" value="<?php echoSessionVar('name'); ?>"><br>
-
-                <label for="editEmail">Email:</label>
-                <input type="email" id="editEmail" name="email" value="<?php echoSessionVar('email'); ?>"><br>
-
-                <label for="editBio">Bio:</label>
-                <textarea id="editBio" name="bio"><?php echoSessionVar('bio'); ?></textarea><br>
-
-                <label for="editPhoto">Profile Photo:</label>
-                <div class="file-upload-wrapper">
-                    <div class="profile-photo-wrapper">
-                        <img src="<?php echo !empty($_SESSION['profile_picture_url']) ? htmlspecialchars($_SESSION['profile_picture_url'], ENT_QUOTES, 'UTF-8') : '../images/default_profile.png'; ?>" alt="Previous Profile Photo" class="previous-profile-photo">
-                     </div>
-                    <div>
-                        <button type="button" class="custom-file-upload">Choose New Photo</button>
-                        <span id="file-chosen">No file chosen</span>
-                        <input type="file" id="editPhoto" name="profile_photo" hidden>
-                     </div>
+<div id="editProfileModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('editProfileModal')">&times;</span>
+        <h2 class="modal-title">Edit Profile</h2>
+        <div class="profile-photo-wrapper">
+            <a href="#editProfileModal">
+                <img src="<?php echo !empty($_SESSION['profile_picture_url']) ? htmlspecialchars($_SESSION['profile_picture_url'], ENT_QUOTES, 'UTF-8') : '../images/default_profile.png'; ?>" alt="Profile Photo" class="previous-profile-photo">
+                <div class="edit-overlay">
+                    <div class="edit-text">Edit</div>
+                    <div class="edit-icon"><i class="fas fa-edit"></i></div>
                 </div>
-
-
-                <button type="submit" class="action-button">Save Changes</button>
-            </form>
+            </a>
         </div>
+        <form action="update_profile.php" method="post" enctype="multipart/form-data">
+            <label for="editName">Name:</label>
+            <input type="text" id="editName" name="name" value="<?php echoSessionVar('name'); ?>"><br>
+
+            <label for="editEmail">Email:</label>
+            <input type="email" id="editEmail" name="email" value="<?php echoSessionVar('email'); ?>"><br>
+
+            <label for="editBio">Bio:</label>
+            <textarea id="editBio" name="bio"><?php echoSessionVar('bio'); ?></textarea><br>
+            <button type="submit" class="save-button">Save Changes</button>
+        </form>
     </div>
+</div>
+
 
     <footer>
         <p>© 2024 FableFoundry. All rights reserved.</p>
