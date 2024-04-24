@@ -53,18 +53,23 @@ function echoSessionVar($varName) {
     </header>
 
     <main class="profile-container">
+    <div class="profile-card"> <!-- New wrapper div for profile card -->
         <section class="profile-info">
-        <img src="<?php echo !empty($_SESSION['profile_picture_url']) ? htmlspecialchars($_SESSION['profile_picture_url'], ENT_QUOTES, 'UTF-8') . '?t=' . time() : '../images/default_profile.png'; ?>" alt="Profile Photo" class="profile-photo">
-
+            <img src="<?php echo !empty($_SESSION['profile_picture_url']) ? htmlspecialchars($_SESSION['profile_picture_url'], ENT_QUOTES, 'UTF-8') . '?t=' . time() : '../images/default_profile.png'; ?>" alt="Profile Photo" class="profile-photo">
             <h1><?php echoSessionVar('name'); ?></h1>
-            <p>Email: <?php echoSessionVar('email'); ?></p>
-            <p>Bio: <?php echoSessionVar('bio'); ?></p>
-            <button class="action-button" onclick="openModal('editProfileModal')">Edit Profile</button>
-            <form action="logout.php" method="post">
-                <button type="submit" class="action-button">Logout</button>
-            </form>
+            <h3><?php echoSessionVar('bio'); ?></h3>
+            <p><?php echoSessionVar('email'); ?></p>
+            
+            <div class="profile-action-buttons">
+                <button class="action-button" onclick="openModal('editProfileModal')">Edit Profile</button>
+                <form action="logout.php" method="post">
+                    <button type="submit" class="action-button">Logout</button>
+                </form>
+            </div>
         </section>
-    </main>
+    </div>
+</main>
+
 
     <div id="editProfileModal" class="modal">
         <div class="modal-content">
