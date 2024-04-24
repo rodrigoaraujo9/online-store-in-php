@@ -11,6 +11,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
+    // Default profile picture URL
+    $profilePictureUrl = '../images/profile_picture.png'; // Ensure this path points to your default image
+
     // Check if username or email already exists
     $checkSql = "SELECT username, email FROM users WHERE username = :username OR email = :email";
     $checkStmt = $conn->prepare($checkSql);
@@ -28,13 +31,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     } else {
         // Proceed with registration if no conflicts
-        $sql = "INSERT INTO users (name, username, password, email, role, registered_date) 
-                VALUES (:name, :username, :password, :email, 'Buyer', DATE('now'))";
+        $sql = "INSERT INTO users (name, username, password, email, role, registered_date, profile_picture_url) 
+                VALUES (:name, :username, :password, :email, 'Buyer', DATE('now'), :profile_picture_url)";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':username', $username);
         $stmt->bindParam(':password', $hashed_password);
         $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':profile_picture_url', $profilePictureUrl);
 
         try {
             $stmt->execute();
@@ -44,9 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: profile.php");
             exit;
         } catch (PDOException $e) {
-            // Check if the error is a unique constraint violation
             if ($e->getCode() == 23000) {
-                // Additional check to handle or log the error more specifically if needed
                 $error = "Email or username already in use.";
             } else {
                 $error = "Registration failed. Please try again later.";
