@@ -40,37 +40,36 @@
     </header>
 
     <main class="books-container">
-        <section class="filter-sort-bar">
-            <form method="GET">
-                <div class="book-filter">
-                    <label for="age-select">Age Group:</label>
-                    <select id="age-select" name="age">
-                        <option value="none">None</option>
-                        <option value="Adults">Adults</option>
-                        <option value="Teens">Teens</option>
-                        <option value="Children">Children</option>
-                    </select>
+    <section class="filter-sort-bar">
+    <div class="book-filter">
+        <label for="age-select">Age Group:</label>
+        <select id="age-select" name="age">
+            <option value="none">None</option>
+            <option value="Adults">Adults</option>
+            <option value="Teens">Teens</option>
+            <option value="Children">Children</option>
+        </select>
 
-                    <label for="condition-select">Condition:</label>
-                    <select id="condition-select" name="condition">
-                        <option value="none">None</option>
-                        <option value="New">New</option>
-                        <option value="Used">Used</option>
-                    </select>
-                </div>
+        <label for="condition-select">Condition:</label>
+        <select id="condition-select" name="condition">
+            <option value="none">None</option>
+            <option value="New">New</option>
+            <option value="Used">Used</option>
+        </select>
+    </div>
 
-                <div class="book-sort">
-                    <label for="sort-select">Sort by:</label>
-                    <select id="sort-select" name="sort">
-                        <option value="title">Title</option>
-                        <option value="author">Author</option>
-                        <option value="listed_price">Price</option>
-                    </select>
-                </div>
+    <div class="book-sort">
+        <label for="sort-select">Sort by:</label>
+        <select id="sort-select" name="sort">
+            <option value="title">Title</option>
+            <option value="author">Author</option>
+            <option value="listed_price">Price</option>
+        </select>
+    </div>
 
-                <button type="submit">Apply Filters</button>
-            </form>
-        </section>
+    <button class= "apply" type="submit">Apply Filters</button>
+</section>
+
 
         <section class="books-grid">
             <?php
