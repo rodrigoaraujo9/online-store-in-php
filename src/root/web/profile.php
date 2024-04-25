@@ -76,13 +76,14 @@ function echoSessionVar($varName) {
         <span class="close" onclick="closeModal('editProfileModal')">&times;</span>
         <h2 class="modal-title">Edit Profile</h2>
         <div class="profile-photo-wrapper">
-            <a href="#editProfileModal">
+            <label for="profilePhotoUpload" style="cursor: pointer;">
                 <img src="<?php echo !empty($_SESSION['profile_picture_url']) ? htmlspecialchars($_SESSION['profile_picture_url'], ENT_QUOTES, 'UTF-8') : '../images/default_profile.png'; ?>" alt="Profile Photo" class="previous-profile-photo">
                 <div class="edit-overlay">
                     <div class="edit-text">Edit</div>
                     <div class="edit-icon"><i class="fas fa-edit"></i></div>
                 </div>
-            </a>
+            </label>
+            <input type="file" id="profilePhotoUpload" name="profile_photo" style="display: none;" onchange="previewProfilePhoto(this);">
         </div>
         <form action="update_profile.php" method="post" enctype="multipart/form-data">
             <label for="editName">Name:</label>
@@ -99,39 +100,45 @@ function echoSessionVar($varName) {
 </div>
 
 
+
     <footer>
         <p>© 2024 FableFoundry. All rights reserved.</p>
     </footer>
 
     <script>
-        function openModal(modalId) {
-            var modal = document.getElementById(modalId);
-            modal.style.display = "block";
-        }
+function previewProfilePhoto(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            // Assume the image to update has class 'previous-profile-photo'
+            var profilePhoto = document.querySelector('.previous-profile-photo');
+            if (profilePhoto) {
+                profilePhoto.src = e.target.result;
+            }
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 
-        function closeModal(modalId) {
-            var modal = document.getElementById(modalId);
+function openModal(modalId) {
+    var modal = document.getElementById(modalId);
+    modal.style.display = "block";
+}
+
+function closeModal(modalId) {
+    var modal = document.getElementById(modalId);
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    var modals = document.querySelectorAll('.modal');
+    modals.forEach(function(modal) {
+        if (event.target == modal) {
             modal.style.display = "none";
         }
+    });
+}
+</script>
 
-        window.onclick = function(event) {
-            var modals = document.querySelectorAll('.modal');
-            modals.forEach(function(modal) {
-                if (event.target == modal) {
-                    modal.style.display = "none";
-                }
-            });
-        }
-
-        document.querySelector('.custom-file-upload').addEventListener('click', function() {
-    document.getElementById('editPhoto').click();
-});
-
-document.getElementById('editPhoto').addEventListener('change', function() {
-    var fileName = document.getElementById('editPhoto').files[0].name;
-    document.getElementById('file-chosen').textContent = fileName;
-});
-
-    </script>
 </body>
 </html>
