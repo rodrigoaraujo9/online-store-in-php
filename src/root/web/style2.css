@@ -747,3 +747,54 @@ footer {
     text-align: center;
 
 }
+
+.sell-container {
+    margin-top: 120px;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: var(--almost-white);
+}
+
+.sell-container h2 {
+    width: 100%;
+    max-width: 320px; /* Maximum width of the form */
+    background-color: var(--almost-white);
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.sell-page-button {
+    margin-top: 20px;
+    background-color: var(--forest-green);
+    color: white;
+    border: none;
+    font-family: 'CustomFontSemi';
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sell-page-button:hover {
+    background-color: var(--button-hover-purple);
+}
+
+
+.form-group {
+    margin-bottom: 20px;
+    margin-bottom: 2em;
+}
+
+.form-group-condition {
+    margin-bottom: 20px;
+    margin-bottom: 2em;
+}
+
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5em;
+    color: var(--text-dark);
+}
