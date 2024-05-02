@@ -1,13 +1,16 @@
 <?php
 session_start();
 
-// Redirect to login if not logged in
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit;
 }
 
-// Define a function to safely echo session variables
+if (isset($_SESSION['flash_message'])) {
+    $flash = $_SESSION['flash_message'];
+    unset($_SESSION['flash_message']); // Clear the flash message so it doesn't show again on refresh
+}
+
 function echoSessionVar($varName) {
     if (isset($_SESSION[$varName])) {
         echo htmlspecialchars($_SESSION[$varName], ENT_QUOTES, 'UTF-8');
@@ -26,19 +29,17 @@ function echoSessionVar($varName) {
     <link rel="stylesheet" href="style2.css">
 </head>
 <body>
+    <?php if (isset($flash)): ?>
+        <div class="alert <?php echo htmlspecialchars($flash['type']); ?>">
+            <?php echo htmlspecialchars($flash['message']); ?>
+        </div>
+    <?php endif; ?>
     <header>
-    <h2 class="logo-title"><a href="../index.php">FableFoundry</a></h2>
+        <h2 class="logo-title">FableFoundry</h2>
         <nav class="nav-left">
             <ul>
                 <li><a href="../index.php">Home</a></li>
                 <li><a href="lookups.php">Shop All</a></li>
-                <?php
-                // Display generic navigation if user is not logged in
-                if (!isset($_SESSION['username'])) {
-                    echo '<li><a href="login.php">Login</a></li>';
-                    echo '<li><a href="register.php">Register</a></li>';
-                }
-                ?>
             </ul>
         </nav>
         <nav class="nav-right">
@@ -52,24 +53,92 @@ function echoSessionVar($varName) {
     </header>
 
     <main class="profile-container">
+    <div class="profile-card"> <!-- New wrapper div for profile card -->
         <section class="profile-info">
-            <img src="../images/profile_picture.png" alt="Profile Photo" class="profile-photo">
+            <img src="<?php echo !empty($_SESSION['profile_picture_url']) ? htmlspecialchars($_SESSION['profile_picture_url'], ENT_QUOTES, 'UTF-8') . '?t=' . time() : '../images/default_profile.png'; ?>" alt="Profile Photo" class="profile-photo">
             <h1><?php echoSessionVar('name'); ?></h1>
-            <p>Email: <?php echoSessionVar('email'); ?></p>
-            <button class="action-button">Edit Profile</button>
-            <!-- Logout button moved here -->
-            <form action="logout.php" method="post">
-                <button type="submit" class="action-button">Logout</button>
-            </form>
+            <h3><?php echoSessionVar('bio'); ?></h3>
+            <p><?php echoSessionVar('email'); ?></p>
+            
+            <div class="profile-action-buttons">
+                <button class="action-button" onclick="openModal('editProfileModal')">Edit Profile</button>
+                <form action="logout.php" method="post">
+                    <button type="submit" class="action-button">Logout</button>
+                </form>
+            </div>
         </section>
-        <section class="actions">
-            <button class="action-button">Orders</button>
-            <button class="action-button">Listings</button>
-        </section>
-    </main>
+    </div>
+</main>
+
+
+<div id="editProfileModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal('editProfileModal')">&times;</span>
+        <h2 class="modal-title">Edit Profile</h2>
+        <div class="profile-photo-wrapper">
+            <label for="profilePhotoUpload" style="cursor: pointer;">
+                <img src="<?php echo !empty($_SESSION['profile_picture_url']) ? htmlspecialchars($_SESSION['profile_picture_url'], ENT_QUOTES, 'UTF-8') : '../images/default_profile.png'; ?>" alt="Profile Photo" class="previous-profile-photo">
+                <div class="edit-overlay">
+                    <div class="edit-text">Edit</div>
+                    <div class="edit-icon"><i class="fas fa-edit"></i></div>
+                </div>
+            </label>
+            <input type="file" id="profilePhotoUpload" name="profile_photo" style="display: none;" onchange="previewProfilePhoto(this);">
+        </div>
+        <form action="update_profile.php" method="post" enctype="multipart/form-data">
+            <label for="editName">Name:</label>
+            <input type="text" id="editName" name="name" value="<?php echoSessionVar('name'); ?>"><br>
+
+            <label for="editEmail">Email:</label>
+            <input type="email" id="editEmail" name="email" value="<?php echoSessionVar('email'); ?>"><br>
+
+            <label for="editBio">Bio:</label>
+            <textarea id="editBio" name="bio"><?php echoSessionVar('bio'); ?></textarea><br>
+            <button type="submit" class="save-button">Save Changes</button>
+        </form>
+    </div>
+</div>
+
+
 
     <footer>
         <p>© 2024 FableFoundry. All rights reserved.</p>
     </footer>
+
+    <script>
+function previewProfilePhoto(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            // Assume the image to update has class 'previous-profile-photo'
+            var profilePhoto = document.querySelector('.previous-profile-photo');
+            if (profilePhoto) {
+                profilePhoto.src = e.target.result;
+            }
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+}
+
+function openModal(modalId) {
+    var modal = document.getElementById(modalId);
+    modal.style.display = "block";
+}
+
+function closeModal(modalId) {
+    var modal = document.getElementById(modalId);
+    modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+    var modals = document.querySelectorAll('.modal');
+    modals.forEach(function(modal) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    });
+}
+</script>
+
 </body>
 </html>

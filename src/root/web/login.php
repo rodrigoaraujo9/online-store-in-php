@@ -1,36 +1,38 @@
 <?php
-include 'db.php';
+include 'db.php';  // Ensure your database connection details are correct in this file
+
+session_start(); // Start session at the beginning to ensure it's available
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     try {
-        $sql = "SELECT username, name, email, password FROM users WHERE username = :username";
+        // Include user_id in your SELECT query
+        $sql = "SELECT user_id, username, name, email, password, role, bio, profile_picture_url FROM users WHERE username = :username";
         
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':username', $username);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
-        if ($user) {
+        if ($user && password_verify($password, $user['password'])) {
+            // Set all necessary session variables
+            $_SESSION['user_id'] = $user['user_id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['name'] = $user['name'];
+            $_SESSION['email'] = $user['email'];
+            $_SESSION['role'] = $user['role'];
+            $_SESSION['bio'] = $user['bio'];
+            $_SESSION['profile_picture_url'] = $user['profile_picture_url'];
 
-            if (password_verify($password, $user['password'])) {
-                session_start();
-                $_SESSION['username'] = $username;
-                $_SESSION['email'] = $user['email'];
-                $_SESSION['name'] = $user['name'];
-                header("Location: profile.php");
-                exit;
-            } else {
-                // Incorrect password
-                echo "<script>alert('Invalid username or password.');</script>";
-            }
+            header("Location: profile.php");
+            exit;
         } else {
-            // User does not exist
-            echo "<script>alert('Invalid username or password.');</script>";
+            // Handle errors for invalid username/password with a simple message
+            $login_error = 'Invalid username or password.';
         }
     } catch (PDOException $e) {
-        echo "<script>alert('Error: " . $e->getMessage() . "');</script>";
+        $login_error = 'Error: ' . $e->getMessage();
     }
 }
 ?>
