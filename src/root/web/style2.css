@@ -75,7 +75,11 @@ nav {
     font-family: 'CustomFontBold', Arial, sans-serif;
     color: #3C6E47;
     margin-right: 1em;
+}
 
+.logo-title a {
+    text-decoration: none;
+    color: #3C6E47;
 }
 
 
@@ -369,11 +373,14 @@ footer {
     background-color: var(--almost-white);
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    align-items: center; /* Align items vertically in the center */
 }
 
 .book-image {
     flex-basis: 40%;
     text-align: center;
+    padding: 20px;
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
 }
 
 .book-image img {
@@ -385,6 +392,7 @@ footer {
 .book-metadata {
     flex-basis: 60%;
     padding: 20px;
+    box-sizing: border-box; /* Ensure padding is included in width calculation */
 }
 
 .book-title, .book-author, .book-isbn, .book-genre, .book-seller, .book-condition, .book-price, .book-description, .book-listing-date {
@@ -398,6 +406,55 @@ footer {
 }
 
 
+.add-to-cart-button {
+    margin-top: 20px;
+    background-color: var(--forest-green);
+    color: white;
+    border: none;
+    font-family: 'CustomFontSemi';
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart-button:hover {
+    background-color: var(--button-hover-purple);
+}
+
+.seller-profile {
+    margin-top: 12px;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    padding: 20px;
+    background-color: var(--forest-green);
+    border-radius: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    max-width: 800px;
+    margin-left: auto; /* Align to right side */
+    margin-right: auto; /* Align to left side */
+}
+
+
+.seller-info {
+    display: flex;
+    align-items: center; /* Center items vertically */
+}
+
+.seller-photo {
+    width: 60px; /* Adjust size as needed */
+    height: 60px; /* Adjust size as needed */
+    border-radius: 50%; /* This makes the image circular */
+    object-fit: cover; /* Ensures the image fills the circle */
+    margin-right: 20px; /* Add spacing between the photo and the name */
+}
+
+.seller-profile h3 {
+    margin: 0; /* Remove default margin for h3 */
+    font-size: 1.2em; /* Adjust font size as needed */
+    color: #fff; /* Set color for the name */
+}
 
 
 
