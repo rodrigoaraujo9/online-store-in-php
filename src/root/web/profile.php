@@ -92,14 +92,14 @@ function echoSessionVar($varName) {
             <label for="editEmail">Email:</label>
             <input type="email" id="editEmail" name="email" value="<?php echoSessionVar('email'); ?>"><br>
 
-            <label for="editBio">Bio:</label>
-            <textarea id="editBio" name="bio"><?php echoSessionVar('bio'); ?></textarea><br>
-            <button type="submit" class="save-button">Save Changes</button>
-        </form>
+                <label for="editBio">Bio:</label>
+                <textarea id="editBio" name="bio"><?php echoSessionVar('bio'); ?></textarea><br>
+
+
+                <button type="submit" class="action-button">Save Changes</button>
+            </form>
+        </div>
     </div>
-</div>
-
-
 
     <footer>
         <p>© 2024 FableFoundry. All rights reserved.</p>

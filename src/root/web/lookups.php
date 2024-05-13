@@ -40,7 +40,9 @@
     </header>
 
     <main class="books-container">
+    <form method="GET">
     <section class="filter-sort-bar">
+   
     <div class="book-filter">
         <label for="age-select">Age Group:</label>
         <select id="age-select" name="age">
