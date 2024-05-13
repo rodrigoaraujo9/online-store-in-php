@@ -88,6 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <main>
         <section class="sell-container">
+            <div class="selling-details">
             <h2>Enter Book Details</h2>
             <form action="submit_book.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">

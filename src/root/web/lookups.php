@@ -34,7 +34,7 @@
             <li><a href="#">Selling</a></li>
             <li><a href="#">Wishlist</a></li>
             <li><a href="profile.php">Profile</a></li>
-            <li><a href="cart.html">Cart</a></li>
+            <li><a href="cart.php">Cart</a></li>
         </ul>
     </nav>
     </header>
