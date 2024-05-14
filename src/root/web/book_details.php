@@ -50,7 +50,7 @@ if (!$book) {
                 <p class="book-price">Listed Price: $<?= number_format($book['listed_price'], 2); ?></p>
                 <p class="book-description">Description: <?= htmlspecialchars($book['description']); ?></p>
                 <p class="book-listing-date">Listing Date: <?= $book['listing_date']; ?></p>
-                <button class="add-to-cart-button">Add to Cart</button>
+                <button id="add-to-cart-button" class="add-to-cart-button" data-book-id="<?= $book_id ?>">Add to Cart</button>
             </div>
         </div>
     </main>
@@ -66,3 +66,28 @@ if (!$book) {
     </footer>
 </body>
 </html>
+
+<script>
+document.getElementById('add-to-cart-button').addEventListener('click', function() {
+    var bookId = this.getAttribute('data-book-id');
+
+    // Send an AJAX request to add_book_to_cart.php with the book_id parameter
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'add_book_to_cart.php?book_id=' + bookId, true);
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            // Show a pop-up message confirming that the book has been added to the cart
+            alert('Book added to cart!');
+        } else {
+            // Handle errors if necessary
+            console.error('Error adding book to cart:', xhr.statusText);
+        }
+    };
+    xhr.onerror = function() {
+        // Handle errors if necessary
+        console.error('Error adding book to cart:', xhr.statusText);
+    };
+    xhr.send();
+});
+</script>
+
