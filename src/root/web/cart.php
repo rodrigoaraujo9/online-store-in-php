@@ -42,6 +42,43 @@ $cartItems = $stmt->fetchAll();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FableFoundry - Cart</title>
     <link rel="stylesheet" href="style2.css">
+    <style>
+        /* Your custom styles for cart.php */
+        .cart-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
+        }
+
+        .cart-items {
+            flex: 1;
+            margin-right: 20px;
+        }
+
+        .checkout-form {
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .checkout-form input {
+            width: 100%;
+            margin-bottom: 10px;
+            padding: 8px;
+        }
+
+        .checkout-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -62,30 +99,47 @@ $cartItems = $stmt->fetchAll();
     </nav>
 </header>
 
-<main>
-    <h1>Shopping Cart</h1>
-    <?php if (empty($cartItems)) : ?>
-        <p>Your cart is empty.</p>
-    <?php else : ?>
-        <div class="books-container-cart">
-            <?php foreach ($cartItems as $item) : ?>
-                <div class="book-item-cart">
-                    <div class="book-card-cart">
-                        <img src="./images/<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>">
-                        <div class="book-details-cart">
-                            <h3 class="book-item-title-cart"><?php echo htmlspecialchars($item['title']); ?></h3>
-                            <p class="book-item-author-cart">by <?php echo htmlspecialchars($item['author']); ?></p>
-                            <p class="book-item-price-cart">€<?php echo number_format($item['listed_price'], 2); ?></p>
-                            <!-- Add a link to remove the item from the cart -->
-                            <a href="cart.php?remove_from_cart=true&book_id=<?php echo $item['book_id']; ?>" class="remove-from-cart">Remove from Cart</a>
+<main class="cart-container">
+    <div class="cart-items">
+        <br>
+        <br>
+        <h2>Shopping Cart</h2>
+        <?php if (empty($cartItems)) : ?>
+            <p>Your cart is empty.</p>
+        <?php else : ?>
+            <div class="books-container-cart">
+                <?php foreach ($cartItems as $item) : ?>
+                    <div class="book-item-cart">
+                        <div class="book-card-cart">
+                            <img src="./images/<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>">
+                            <div class="book-details-cart">
+                                <h3 class="book-item-title-cart"><?php echo htmlspecialchars($item['title']); ?></h3>
+                                <p class="book-item-author-cart">by <?php echo htmlspecialchars($item['author']); ?></p>
+                                <p class="book-item-price-cart">€<?php echo number_format($item['listed_price'], 2); ?></p>
+                                <!-- Add a link to remove the item from the cart -->
+                                <a href="cart.php?remove_from_cart=true&book_id=<?php echo $item['book_id']; ?>" class="remove-from-cart">Remove from Cart</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
+                <?php endforeach; ?>
+            </div>
+        <?php endif; ?>
+    </div>
 
-    <button class="checkout-button">Checkout</button>
+    <div class="checkout-form">
+        <h2>Checkout</h2>
+        <form action="#" method="post">
+            <input type="text" name="address" placeholder="Address" required>
+            <input type="text" name="postal_code" placeholder="Postal Code" required>
+            <select name="payment_type" required>
+                <option value="" disabled selected>Select Payment Type</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="PayPal">PayPal</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+            </select>
+            <button type="submit" class="checkout-button">Checkout</button>
+        </form>
+    </div>
 </main>
 
 

@@ -217,11 +217,9 @@ nav ul li a:hover {
 
 
 .book-item img {
-    width: 100%;
+    max-width: 100%;
     height: 280px; /* Fixed height */
     object-fit:fill; /* This will cover the area without distorting the aspect ratio */
-    
-
 }
 
 
@@ -547,7 +545,7 @@ footer {
 
 /* Additional styles for content inside .book-item */
 .book-item img {
-    width: 100%;
+    max-width: 100%;
     height: auto;
     display: block;
     margin-bottom: 10px; /* Space between image and text */
@@ -631,7 +629,7 @@ h1 {
 }
 
 .cart-item-image img {
-    width: 100px;
+    max-width: 100px;
     height: 100px;
     object-fit:contain;
     margin-right: 10px auto;
@@ -1156,7 +1154,7 @@ footer {
 }
 
 .book-card-wishlist img {
-    width: 120px; /* Adjust the width of the image as needed */
+    max-width: 120px; /* Adjust the width of the image as needed */
     margin-right: 20px; /* Adjust the spacing between the image and text */
 }
 
@@ -1224,7 +1222,19 @@ footer {
 }
 
 
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+    .books-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center-align the books vertically */
+    }
 
+    /* Optional: Adjust individual book items for better spacing */
+    .book-item {
+        margin-bottom: 20px;
+    }
+}
 
 
 
