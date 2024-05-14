@@ -1135,3 +1135,96 @@ footer {
 }
 
 
+.books-container-wishlist {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Add gap between each book item */
+    padding: 20px; /* Add padding to the container */
+}
+
+.book-item-wishlist {
+    margin-bottom: 20px;
+}
+
+.book-card-wishlist {
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9; /* Adjust the background color as needed */
+    border: 2px solid var(--forest-green); /* Adjust the border color and thickness as needed */
+    border-radius: 8px; /* Adjust the border radius as needed */
+    padding: 20px; /* Adjust the padding as needed */
+}
+
+.book-card-wishlist img {
+    width: 120px; /* Adjust the width of the image as needed */
+    margin-right: 20px; /* Adjust the spacing between the image and text */
+}
+
+.book-details-wishlist {
+    flex: 1;
+}
+
+.remove-from-wishlist {
+    margin-left: 10px; /* Push the link to the right */
+    color: var(--darker-forest-green); /* Adjust the color as needed */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.remove-from-wishlist a {
+    text-decoration: none;
+}
+
+.add-to-cart {
+    color: var(--darker-forest-green);
+    margin-left: 15px;    
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.add-to-cart a {
+    text-decoration: none;
+}
+
+.books-container-cart {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Add gap between each book item */
+    padding: 20px; /* Add padding to the container */
+}
+
+.book-item-cart {
+    margin-bottom: 20px;
+}
+
+.book-card-cart {
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9; /* Adjust the background color as needed */
+    border: 2px solid var(--forest-green); /* Adjust the border color and thickness as needed */
+    border-radius: 8px; /* Adjust the border radius as needed */
+    padding: 20px; /* Adjust the padding as needed */
+}
+
+.book-card-cart img {
+    width: 120px; /* Adjust the width of the image as needed */
+    margin-right: 20px; /* Adjust the spacing between the image and text */
+}
+
+.book-details-cart {
+    flex: 1;
+}
+
+.remove-from-cart {
+    margin-left: 10px; /* Push the link to the right */
+    color: var(--darker-forest-green); /* Adjust the color as needed */
+    cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.remove-from-cart a {
+    text-decoration: none;
+}
+
+
+
+
+
+

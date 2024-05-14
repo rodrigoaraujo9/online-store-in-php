@@ -1,4 +1,6 @@
 <?php
+session_start(); // Start the session
+
 include 'db.php'; // Include your database connection
 
 // Retrieve book_id from the URL parameter
@@ -19,6 +21,41 @@ if (!$book) {
     // Redirect or display an error message if the book does not exist
     header("Location: index.php");
     exit;
+}
+
+// Check if a book is being added to the cart
+if (isset($_POST['add_to_cart'])) {
+    if (!isset($_SESSION['user_id'])) {
+        // Redirect to login page if user is not logged in
+        header("Location: login.php");
+        exit;
+    }
+
+    $user_id = $_SESSION['user_id'];
+    $book_id = $_POST['book_id'];
+
+    // Check if the book is not already in the cart
+    $stmt = $conn->prepare("SELECT * FROM shopping_cart WHERE user_id = :user_id AND book_id = :book_id");
+    $stmt->execute(['user_id' => $user_id, 'book_id' => $book_id]);
+    $existingItem = $stmt->fetch();
+
+    if (!$existingItem) {
+        // Insert the book into the cart with a quantity of 1
+        $stmt = $conn->prepare("INSERT INTO shopping_cart (user_id, book_id, quantity) VALUES (:user_id, :book_id, 1)");
+        $result = $stmt->execute(['user_id' => $user_id, 'book_id' => $book_id]);
+
+        if ($result) {
+            // Set session variable to show the pop-up message on cart.php
+            $_SESSION['added_to_cart'] = true;
+            // Redirect back to book_details.php after adding the book to the cart
+            header("Location: book_details.php?book_id=" . $book_id);
+            exit;
+        } else {
+            echo "Error adding book to cart: " . $stmt->errorInfo()[2];
+        }
+    } else {
+        echo "Book already exists in the cart.";
+    }
 }
 ?>
 
@@ -50,44 +87,23 @@ if (!$book) {
                 <p class="book-price">Listed Price: $<?= number_format($book['listed_price'], 2); ?></p>
                 <p class="book-description">Description: <?= htmlspecialchars($book['description']); ?></p>
                 <p class="book-listing-date">Listing Date: <?= $book['listing_date']; ?></p>
-                <button id="add-to-cart-button" class="add-to-cart-button" data-book-id="<?= $book_id ?>">Add to Cart</button>
+                <!-- Add form to submit book to cart -->
+                <form method="post">
+                    <input type="hidden" name="book_id" value="<?= $book_id ?>">
+                    <button type="submit" name="add_to_cart" class="add-to-cart-button">Add to Cart</button>
+                </form>
             </div>
         </div>
     </main>
     <div class="seller-profile">
-                <div class="seller-info">
-                <img src="../images/profile_picture.png" alt="seller Photo" class="seller-photo">
-                    <h3>Seller Name</h3>
-                </div>
-            </div>
+        <div class="seller-info">
+            <img src="../images/profile_picture.png" alt="seller Photo" class="seller-photo">
+            <h3>Seller Name</h3>
+        </div>
+    </div>
 
     <footer>
         <p>© 2024 FableFoundry. All rights reserved.</p>
     </footer>
 </body>
 </html>
-
-<script>
-document.getElementById('add-to-cart-button').addEventListener('click', function() {
-    var bookId = this.getAttribute('data-book-id');
-
-    // Send an AJAX request to add_book_to_cart.php with the book_id parameter
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'add_book_to_cart.php?book_id=' + bookId, true);
-    xhr.onload = function() {
-        if (xhr.status === 200) {
-            // Show a pop-up message confirming that the book has been added to the cart
-            alert('Book added to cart!');
-        } else {
-            // Handle errors if necessary
-            console.error('Error adding book to cart:', xhr.statusText);
-        }
-    };
-    xhr.onerror = function() {
-        // Handle errors if necessary
-        console.error('Error adding book to cart:', xhr.statusText);
-    };
-    xhr.send();
-});
-</script>
-
