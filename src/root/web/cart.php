@@ -10,9 +10,26 @@ if (!isset($_SESSION['username'])) {
     exit;
 }
 
+// Check if a book is being removed from the cart
+if (isset($_GET['remove_from_cart']) && isset($_GET['book_id'])) {
+    $user_id = $_SESSION['user_id'];
+    $book_id = $_GET['book_id'];
+    
+    // Remove the book from the cart
+    $stmt = $conn->prepare("DELETE FROM shopping_cart WHERE user_id = :user_id AND book_id = :book_id");
+    $result = $stmt->execute(['user_id' => $user_id, 'book_id' => $book_id]);
+    if ($result) {
+        // Redirect back to cart.php after removing the book from the cart
+        header("Location: cart.php");
+        exit;
+    } else {
+        echo "Error removing book from cart: " . $conn->errorInfo()[2];
+    }
+}
+
 // Fetch cart items from the database for the current user
 $user_id = $_SESSION['user_id'];
-$sql = "SELECT b.title, b.author, b.listed_price, b.image_url FROM shopping_cart c JOIN books b ON c.book_id = b.book_id WHERE c.user_id = :user_id";
+$sql = "SELECT b.title, b.author, b.listed_price, b.image_url, c.book_id FROM shopping_cart c JOIN books b ON c.book_id = b.book_id WHERE c.user_id = :user_id";
 $stmt = $conn->prepare($sql);
 $stmt->execute(['user_id' => $user_id]);
 $cartItems = $stmt->fetchAll();
@@ -57,7 +74,8 @@ $cartItems = $stmt->fetchAll();
                     <h3 class="book-item-title"><?php echo htmlspecialchars($item['title']); ?></h3>
                     <p class="book-item-author">by <?php echo htmlspecialchars($item['author']); ?></p>
                     <p class="book-item-price">€<?php echo number_format($item['listed_price'], 2); ?></p>
-                    <!-- Add more details or customize as needed -->
+                    <!-- Add a link to remove the item from the cart -->
+                    <a href="cart.php?remove_from_cart=true&book_id=<?php echo $item['book_id']; ?>">Remove from Cart</a>
                 </div>
             <?php endforeach; ?>
         </div>

@@ -12,7 +12,7 @@ if (!isset($_SESSION['username'])) {
 
 // Fetch wishlist items from the database for the current user
 $user_id = $_SESSION['user_id'];
-$sql = "SELECT w.wishlist_id, b.title, b.author, b.listed_price, b.image_url FROM wishlists w JOIN books b ON w.book_id = b.book_id WHERE w.user_id = :user_id";
+$sql = "SELECT w.wishlist_id, b.book_id, b.title, b.author, b.listed_price, b.image_url FROM wishlists w JOIN books b ON w.book_id = b.book_id WHERE w.user_id = :user_id";
 $stmt = $conn->prepare($sql);
 $stmt->execute(['user_id' => $user_id]);
 $wishlistItems = $stmt->fetchAll();
@@ -27,6 +27,37 @@ if (isset($_GET['remove_from_wishlist']) && isset($_GET['wishlist_id'])) {
     // Redirect back to the wishlist page after removing the book
     header("Location: wishlist.php");
     exit;
+}
+
+// Check if a book is being added to the cart
+if (isset($_GET['add_to_cart']) && isset($_GET['book_id'])) {
+    $user_id = $_SESSION['user_id'];
+    $book_id = $_GET['book_id'];
+
+    // Check if the book is not already in the cart
+    $stmt = $conn->prepare("SELECT * FROM shopping_cart WHERE user_id = :user_id AND book_id = :book_id");
+    $stmt->execute(['user_id' => $user_id, 'book_id' => $book_id]);
+    $existingItem = $stmt->fetch();
+
+    if (!$existingItem) {
+        // Insert the book into the cart with a quantity of 1
+        $stmt = $conn->prepare("INSERT INTO shopping_cart (user_id, book_id, quantity) VALUES (:user_id, :book_id, 1)");
+        $result = $stmt->execute(['user_id' => $user_id, 'book_id' => $book_id]);
+
+        if ($result) {
+            // Delete the book from the wishlist after adding to the cart
+            $stmt = $conn->prepare("DELETE FROM wishlists WHERE user_id = :user_id AND book_id = :book_id");
+            $stmt->execute(['user_id' => $user_id, 'book_id' => $book_id]);
+
+            // Redirect back to wishlist.php after adding the book to the cart
+            header("Location: wishlist.php");
+            exit;
+        } else {
+            echo "Error adding book to cart: " . $stmt->errorInfo()[2];
+        }
+    } else {
+        echo "Book already exists in the cart.";
+    }
 }
 ?>
 
@@ -52,7 +83,7 @@ if (isset($_GET['remove_from_wishlist']) && isset($_GET['wishlist_id'])) {
             <li><a href="#">Selling</a></li>
             <li><a href="wishlist.php">Wishlist</a></li>
             <li><a href="profile.php">Profile</a></li>
-            <li><a href="cart.html">Cart</a></li>
+            <li><a href="cart.php">Cart</a></li>
         </ul>
     </nav>
 </header>
@@ -71,6 +102,8 @@ if (isset($_GET['remove_from_wishlist']) && isset($_GET['wishlist_id'])) {
                     <p class="book-item-price">€<?php echo number_format($item['listed_price'], 2); ?></p>
                     <!-- Add a link to remove the book from wishlist -->
                     <a href="wishlist.php?remove_from_wishlist=true&wishlist_id=<?php echo $item['wishlist_id']; ?>">Remove from Wishlist</a>
+                    <!-- Add a link to add the book to cart -->
+                    <a href="wishlist.php?add_to_cart=true&book_id=<?php echo $item['book_id']; ?>">Add to Cart</a>
                 </div>
             <?php endforeach; ?>
         </div>
