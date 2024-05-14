@@ -115,13 +115,16 @@ $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
         try {
             $sql = "SELECT book_id, title, author, listed_price, image_url FROM books LIMIT 8";
             $stmt = $conn->query($sql);
-
+        
             while ($book = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 echo '<div class="book-item">';
+                // Add hyperlink around the book item to redirect to book_details.php
+                echo '<a href="/web/book_details.php?book_id=' . $book['book_id'] . '">';
                 echo '<img src="./images/' . htmlspecialchars($book['image_url']) . '" alt="' . htmlspecialchars($book['title']) . '">';
                 echo '<h3 class="book-item-title">' . htmlspecialchars($book['title']) . '</h3>';
                 echo '<p class="book-item-author">by ' . htmlspecialchars($book['author']) . '</p>';
                 echo '<p class="book-item-price">€' . number_format($book['listed_price'], 2) . '</p>';
+                echo '</a>'; // Close the hyperlink
                 // Add a link to add the book to wishlist
                 echo '<a href="index.php?add_to_wishlist=true&book_id=' . $book['book_id'] . '">Add to Wishlist</a>';
                 // Add a link to add the book to cart

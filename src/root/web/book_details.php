@@ -1,11 +1,27 @@
 <?php
 include 'db.php'; // Include your database connection
 
-$book_id = 1; // This should be dynamically set, perhaps passed via GET request
+// Retrieve book_id from the URL parameter
+$book_id = isset($_GET['book_id']) ? $_GET['book_id'] : null;
+
+if (!$book_id) {
+    // Redirect or display an error message if book_id is not provided
+    header("Location: index.php");
+    exit;
+}
+
 $stmt = $conn->prepare("SELECT * FROM books WHERE book_id = ?");
 $stmt->execute([$book_id]);
 $book = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Check if the book exists
+if (!$book) {
+    // Redirect or display an error message if the book does not exist
+    header("Location: index.php");
+    exit;
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
