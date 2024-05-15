@@ -1237,4 +1237,91 @@ footer {
 }
 
 
+/* cart.php */
+.cart-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+}
 
+.cart-items {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.checkout-form {
+    flex: 1;
+    max-width: 300px;
+}
+
+.checkout-form input,
+.checkout-form select {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+}
+
+.checkout-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--forest-green);
+    color: white;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.payment-option {
+    position: relative;
+    padding-left: 30px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    display: block;
+}
+
+.payment-option input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+}
+
+.payment-option:hover input ~ .checkmark {
+    background-color: #f0f0f0;
+}
+
+.payment-option input:checked ~ .checkmark {
+    background-color: #2196F3;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.payment-option input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.payment-option .checkmark:after {
+    top: 7px;
+    left: 7px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: white;
+}

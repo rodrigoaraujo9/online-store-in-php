@@ -33,6 +33,18 @@ $sql = "SELECT b.title, b.author, b.listed_price, b.image_url, c.book_id FROM sh
 $stmt = $conn->prepare($sql);
 $stmt->execute(['user_id' => $user_id]);
 $cartItems = $stmt->fetchAll();
+
+// Calculate total cost of books in the cart
+$totalCost = 0;
+foreach ($cartItems as $item) {
+    $totalCost += $item['listed_price'];
+}
+
+// Add shipping costs (example: €5 flat rate)
+$shippingCost = 5; // You can adjust this based on your shipping criteria
+
+// Calculate total cost including shipping
+$totalCostWithShipping = $totalCost + $shippingCost;
 ?>
 
 <!DOCTYPE html>
@@ -42,43 +54,7 @@ $cartItems = $stmt->fetchAll();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FableFoundry - Cart</title>
     <link rel="stylesheet" href="style2.css">
-    <style>
-        /* Your custom styles for cart.php */
-        .cart-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 20px;
-        }
 
-        .cart-items {
-            flex: 1;
-            margin-right: 20px;
-        }
-
-        .checkout-form {
-            flex: 1;
-            max-width: 300px;
-        }
-
-        .checkout-form input {
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 8px;
-        }
-
-        .checkout-button {
-            display: block;
-            width: 100%;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            text-align: center;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-    </style>
 </head>
 <body>
 <header>
@@ -99,10 +75,9 @@ $cartItems = $stmt->fetchAll();
     </nav>
 </header>
 
+<br>
 <main class="cart-container">
     <div class="cart-items">
-        <br>
-        <br>
         <h2>Shopping Cart</h2>
         <?php if (empty($cartItems)) : ?>
             <p>Your cart is empty.</p>
@@ -111,7 +86,7 @@ $cartItems = $stmt->fetchAll();
                 <?php foreach ($cartItems as $item) : ?>
                     <div class="book-item-cart">
                         <div class="book-card-cart">
-                            <img src="./images/<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>">
+                            <img class="book-item-image-cart" src="./images/<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>">
                             <div class="book-details-cart">
                                 <h3 class="book-item-title-cart"><?php echo htmlspecialchars($item['title']); ?></h3>
                                 <p class="book-item-author-cart">by <?php echo htmlspecialchars($item['author']); ?></p>
@@ -126,23 +101,37 @@ $cartItems = $stmt->fetchAll();
         <?php endif; ?>
     </div>
 
+    <br>
     <div class="checkout-form">
         <h2>Checkout</h2>
+        <p>Total cost of books: €<?php echo number_format($totalCost, 2); ?></p>
+        <p>Shipping cost: €<?php echo number_format($shippingCost, 2); ?></p>
+        <p>Total cost including shipping: €<?php echo number_format($totalCostWithShipping, 2); ?></p>
         <form action="#" method="post">
             <input type="text" name="address" placeholder="Address" required>
             <input type="text" name="postal_code" placeholder="Postal Code" required>
-            <select name="payment_type" required>
-                <option value="" disabled selected>Select Payment Type</option>
-                <option value="Credit Card">Credit Card</option>
-                <option value="PayPal">PayPal</option>
-                <option value="Bank Transfer">Bank Transfer</option>
-            </select>
+            <br>
+            <p> Payment options: </p>
+            <label class="payment-option">
+                Credit Card
+                <input type="radio" name="payment_type" value="Credit Card" required>
+                <span class="checkmark"></span>
+            </label>
+            <label class="payment-option">
+                PayPal
+                <input type="radio" name="payment_type" value="PayPal" required>
+                <span class="checkmark"></span>
+            </label>
+            <label class="payment-option">
+                Bank Transfer
+                <input type="radio" name="payment_type" value="Bank Transfer" required>
+                <span class="checkmark"></span>
+            </label>
+            <br>
             <button type="submit" class="checkout-button">Checkout</button>
         </form>
     </div>
 </main>
-
-
 
 <footer>
     <p>&copy; <?php echo date('Y'); ?> FableFoundry. All rights reserved.</p>
