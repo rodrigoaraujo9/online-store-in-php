@@ -53,48 +53,42 @@ function echoSessionVar($varName) {
     </header>
 
     <main class="profile-container">
-    <div class="profile-card"> <!-- New wrapper div for profile card -->
-        <section class="profile-info">
-            <img src="<?php echo !empty($_SESSION['profile_picture_url']) ? htmlspecialchars($_SESSION['profile_picture_url'], ENT_QUOTES, 'UTF-8') . '?t=' . time() : '../images/default_profile.png'; ?>" alt="Profile Photo" class="profile-photo">
-            <h1><?php echoSessionVar('name'); ?></h1>
-            <h3><?php echoSessionVar('bio'); ?></h3>
-            <p><?php echoSessionVar('email'); ?></p>
-            
-            <div class="profile-action-buttons">
-                <button class="action-button" onclick="openModal('editProfileModal')">Edit Profile</button>
-                <form action="logout.php" method="post">
-                    <button type="submit" class="action-button">Logout</button>
+        <div class="profile-card">
+            <section class="profile-info">
+                <form id="profilePhotoForm" action="upload_profile_photo.php" method="post" enctype="multipart/form-data">
+                    <div class="profile-photo-wrapper" onclick="document.getElementById('profilePhotoUpload').click();">
+                        <img src="<?php echo !empty($_SESSION['profile_picture_url']) ? htmlspecialchars($_SESSION['profile_picture_url'], ENT_QUOTES, 'UTF-8') . '?t=' . time() : '../images/default_profile.png'; ?>" alt="Profile Photo" class="profile-photo" id="profilePhoto">
+                        <div class="edit-overlay">Edit</div>
+                        <input type="file" id="profilePhotoUpload" name="profile_photo" accept="image/*" onchange="previewAndUploadPhoto();">
+                    </div>
                 </form>
-            </div>
-        </section>
-    </div>
-</main>
-
-
-<div id="editProfileModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeModal('editProfileModal')">&times;</span>
-        <h2 class="modal-title">Edit Profile</h2>
-        <div class="profile-photo-wrapper">
-            <label for="profilePhotoUpload" style="cursor: pointer;">
-                <img src="<?php echo !empty($_SESSION['profile_picture_url']) ? htmlspecialchars($_SESSION['profile_picture_url'], ENT_QUOTES, 'UTF-8') : '../images/default_profile.png'; ?>" alt="Profile Photo" class="previous-profile-photo">
-                <div class="edit-overlay">
-                    <div class="edit-text">Edit</div>
-                    <div class="edit-icon"><i class="fas fa-edit"></i></div>
+                <h1><?php echoSessionVar('name'); ?></h1>
+                <h3><?php echoSessionVar('bio'); ?></h3>
+                <p><?php echoSessionVar('email'); ?></p>
+                
+                <div class="profile-action-buttons">
+                    <button class="action-button" onclick="openModal('editProfileModal')">Edit Profile</button>
+                    <form action="logout.php" method="post">
+                        <button type="submit" class="action-button">Logout</button>
+                    </form>
                 </div>
-            </label>
-            <input type="file" id="profilePhotoUpload" name="profile_photo" style="display: none;" onchange="previewProfilePhoto(this);">
+            </section>
         </div>
-        <form action="update_profile.php" method="post" enctype="multipart/form-data">
-            <label for="editName">Name:</label>
-            <input type="text" id="editName" name="name" value="<?php echoSessionVar('name'); ?>"><br>
+    </main>
 
-            <label for="editEmail">Email:</label>
-            <input type="email" id="editEmail" name="email" value="<?php echoSessionVar('email'); ?>"><br>
+    <div id="editProfileModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('editProfileModal')">&times;</span>
+            <h2 class="modal-title">Edit Profile</h2>
+            <form action="update_profile.php" method="post" enctype="multipart/form-data">
+                <label for="editName">Name:</label>
+                <input type="text" id="editName" name="name" value="<?php echoSessionVar('name'); ?>"><br>
+
+                <label for="editEmail">Email:</label>
+                <input type="email" id="editEmail" name="email" value="<?php echoSessionVar('email'); ?>"><br>
 
                 <label for="editBio">Bio:</label>
                 <textarea id="editBio" name="bio"><?php echoSessionVar('bio'); ?></textarea><br>
-
 
                 <button type="submit" class="action-button">Save Changes</button>
             </form>
@@ -106,17 +100,19 @@ function echoSessionVar($varName) {
     </footer>
 
     <script>
-function previewProfilePhoto(input) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
+function previewAndUploadPhoto() {
+    const fileInput = document.getElementById('profilePhotoUpload');
+    const profilePhoto = document.getElementById('profilePhoto');
+
+    if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
         reader.onload = function (e) {
-            // Assume the image to update has class 'previous-profile-photo'
-            var profilePhoto = document.querySelector('.previous-profile-photo');
-            if (profilePhoto) {
-                profilePhoto.src = e.target.result;
-            }
+            profilePhoto.src = e.target.result;
+
+            // Submit the form automatically after preview
+            document.getElementById('profilePhotoForm').submit();
         };
-        reader.readAsDataURL(input.files[0]);
+        reader.readAsDataURL(fileInput.files[0]);
     }
 }
 
