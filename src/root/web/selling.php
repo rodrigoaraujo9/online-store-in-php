@@ -11,7 +11,8 @@ if (!isset($_SESSION['username'])) {
 
 // Fetch books sold by the current user
 $user_id = $_SESSION['user_id'];
-$sql = "SELECT b.book_id, b.title, b.author, b.listed_price, b.image_url, t.transaction_id, t.sale_price, t.transaction_date, t.status
+$sql = "SELECT b.book_id, b.title, b.author, b.listed_price, b.image_url, 
+               t.transaction_id, t.sale_price, t.transaction_date, t.status
         FROM books b
         LEFT JOIN transactions t ON b.book_id = t.book_id
         WHERE b.seller_id = :user_id";
@@ -22,10 +23,11 @@ $sellingItems = $stmt->fetchAll();
 // Check if a book is being removed from the selling list
 if (isset($_GET['remove_from_selling']) && isset($_GET['book_id'])) {
     $book_id = $_GET['book_id'];
-    
+
     // Delete the book from the books table
     $stmt = $conn->prepare("DELETE FROM books WHERE book_id = :book_id AND seller_id = :user_id");
     $stmt->execute(['book_id' => $book_id, 'user_id' => $user_id]);
+    
     // Redirect back to the selling page after removing the book
     header("Location: selling.php");
     exit;
@@ -61,6 +63,12 @@ if (isset($_GET['remove_from_selling']) && isset($_GET['book_id'])) {
 
 <main>
     <h1>Books You're Selling</h1>
+
+    <!-- Add Book Button -->
+    <div class="add-book-button">
+        <a href="sell.php" class="add-book-link">Add New Book</a>
+    </div>
+
     <?php if (empty($sellingItems)) : ?>
         <p>You are not selling any books.</p>
     <?php else : ?>
@@ -74,13 +82,15 @@ if (isset($_GET['remove_from_selling']) && isset($_GET['book_id'])) {
                             <p class="book-item-author">by <?php echo htmlspecialchars($item['author']); ?></p>
                             <p class="book-item-price">€<?php echo number_format($item['listed_price'], 2); ?></p>
                             <?php if ($item['transaction_id']) : ?>
-                                <h4>Transaction Details</h4>
-                                <p>Transaction ID: <?php echo htmlspecialchars($item['transaction_id']); ?></p>
-                                <p>Sale Price: €<?php echo number_format($item['sale_price'], 2); ?></p>
-                                <p>Transaction Date: <?php echo htmlspecialchars($item['transaction_date']); ?></p>
-                                <p>Status: <?php echo htmlspecialchars($item['status']); ?></p>
+                                <div class="transaction-details">
+                                    <h4>Transaction Details</h4>
+                                    <p>Transaction ID: <?php echo htmlspecialchars($item['transaction_id']); ?></p>
+                                    <p>Sale Price: €<?php echo number_format($item['sale_price'], 2); ?></p>
+                                    <p>Transaction Date: <?php echo htmlspecialchars($item['transaction_date']); ?></p>
+                                    <p>Status: <?php echo htmlspecialchars($item['status']); ?></p>
+                                </div>
                             <?php endif; ?>
-                            <a href="selling.php?remove_from_selling=true&book_id=<?php echo $item['book_id']; ?>" class="remove-from-selling">Remove from Selling</a>
+                            <a href="selling.php?remove_from_selling=true&book_id=<?php echo $item['book_id']; ?>" class="remove-from-selling">Remove Listing</a>
                         </div>
                     </div>
                 </div>
