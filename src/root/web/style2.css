@@ -368,7 +368,7 @@ footer {
     display: flex;
     flex-wrap: wrap;
     max-width: 800px;
-    background-color: var(--almost-white);
+    background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     align-items: center; /* Align items vertically in the center */
@@ -406,7 +406,7 @@ footer {
 
 .add-to-cart-button {
     margin-top: 20px;
-    background-color: var(--forest-green);
+    background-color: var(--darker-forest-green);
     color: white;
     border: none;
     font-family: 'CustomFontSemi';
@@ -418,7 +418,7 @@ footer {
 }
 
 .add-to-cart-button:hover {
-    background-color: var(--button-hover-purple);
+    background-color: var(--pastel-green);
 }
 
 .seller-profile {
@@ -426,7 +426,7 @@ footer {
     display: flex;
     justify-content: center; /* Center horizontally */
     padding: 20px;
-    background-color: var(--forest-green);
+    background-color: var(--darker-forest-green);
     border-radius: 50px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
     max-width: 800px;
@@ -1645,4 +1645,22 @@ Ensure your
 .alert.error {
     background-color: #f8d7da;
     color: #721c24;
+}
+
+.seller-info a {
+    color: white;
+    text-decoration: none;
+}
+
+.seller-info a:hover {
+    color: var(--pastel-green); /* Change hover color if needed */
+}
+
+a {
+    color: var(--darker-forest-green);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--pastel-green); /* Change hover color if needed */
 }
