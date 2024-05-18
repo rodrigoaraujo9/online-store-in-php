@@ -106,7 +106,9 @@ if (isset($_POST['add_to_cart'])) {
     <div class="seller-profile">
         <div class="seller-info">
             <img src="../images/<?= htmlspecialchars($seller['profile_picture_url']); ?>" alt="Seller Photo" class="seller-photo">
-            <h3> <?= htmlspecialchars($seller['name']); ?></h3>
+            <a href="profile_other.php?user_id=<?= htmlspecialchars($seller_id); ?>">
+                        <?= htmlspecialchars($seller['name']); ?>
+                    </a>
         </div>
     </div>
 
