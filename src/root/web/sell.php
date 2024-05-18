@@ -1,4 +1,14 @@
 <?php
+include 'db.php';
+
+session_start();
+
+// Ensure the uploads directory exists
+$uploadDir = '../images/';
+if (!is_dir($uploadDir)) {
+    mkdir($uploadDir, 0777, true);
+}
+
 // Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form data
@@ -6,26 +16,46 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $author = $_POST["author"];
     $isbn = $_POST["isbn"];
     $condition = $_POST["condition"];
-    $price = $_POST["price"];
+    $price = $_POST["listed_price"];
     $description = $_POST["description"];
-    
-    // Process the image upload (save to server, store file path in database, etc.)
-    // For demonstration purposes, let's assume the image is stored in a directory named 'uploads'
-    $image_path = 'uploads/' . $_FILES['image']['name'];
-    move_uploaded_file($_FILES['image']['tmp_name'], $image_path);
-    
-    // Now you can save the form data and image path to your database or perform other actions
-    
-    // For demonstration purposes, let's just display the submitted data
-    echo "<h2>Book Details</h2>";
-    echo "<p>Title: $title</p>";
-    echo "<p>Author: $author</p>";
-    echo "<p>ISBN: $isbn</p>";
-    echo "<p>Condition: $condition</p>";
-    echo "<p>Price: $price</p>";
-    echo "<p>Description: $description</p>";
-    echo "<p>Image Path: $image_path</p>";
+    $genre_id = $_POST["genre_id"];
+    $age_group = $_POST["age_group"];
+    $language = $_POST["language"]; // Ensure this field is in your form
+
+    // Process the image upload
+    $image_path = $uploadDir . basename($_FILES['image']['name']);
+    if (move_uploaded_file($_FILES['image']['tmp_name'], $image_path)) {
+        // Save the form data and image path to your database
+        $stmt = $conn->prepare("INSERT INTO books (title, author, isbn, genre_id, condition, listed_price, description, image_url, age_group, listing_date, seller_id, language) 
+                                VALUES (:title, :author, :isbn, :genre_id, :condition, :listed_price, :description, :image_url, :age_group, :listing_date, :seller_id, :language)");
+        $stmt->execute([
+            ':title' => $title,
+            ':author' => $author,
+            ':isbn' => $isbn,
+            ':genre_id' => $genre_id,
+            ':condition' => $condition,
+            ':listed_price' => $price,
+            ':description' => $description,
+            ':image_url' => $image_path,
+            ':age_group' => $age_group,
+            ':listing_date' => date('Y-m-d'),
+            ':seller_id' => $_SESSION['user_id'],
+            ':language' => $language
+        ]);
+        
+        // Redirect to the book's page (assuming you have a page to view book details)
+        $book_id = $conn->lastInsertId();
+        header("Location: book_details.php?book_id=$book_id");
+        exit;
+    } else {
+        echo "Error uploading image.";
+    }
 }
+
+// Fetch genres from the database
+$sql = "SELECT genre_id, name FROM genres";
+$stmt = $conn->query($sql);
+$genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -56,41 +86,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body>
 <header>
-        <h2 class="logo-title"><a href="../index.php">FableFoundry</a></h2>
-        <nav class="nav-left">
-            <ul>
-                <li><a href="../index.php">Home</a></li>
-                <li><a href="lookups.php">Shop All</a></li>
-                <?php
-                include 'db.php';
+    <h2 class="logo-title"><a href="../index.php">FableFoundry</a></h2>
+    <nav class="nav-left">
+        <ul>
+            <li><a href="../index.php">Home</a></li>
+            <li><a href="lookups.php">Shop All</a></li>
+            <?php
+            // Display genre filters
+            foreach ($genres as $genre) {
+                echo '<li><a href="lookups.php?genre=' . $genre['genre_id'] . '">' . htmlspecialchars($genre['name']) . '</a></li>';
+            }
+            ?>
+        </ul>
+    </nav>
+    <nav class="nav-right">
+        <ul>
+            <li><a href="sell.php">Selling</a></li>
+            <li><a href="wishlist.php">Wishlist</a></li>
+            <li><a href="profile.php">Profile</a></li>
+            <li><a href="cart.php">Cart</a></li>
+        </ul>
+    </nav>
+</header>
 
-                // Fetch genres from the database
-                $sql = "SELECT genre_id, name FROM genres LIMIT 2";
-                $stmt = $conn->query($sql);
-                $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                // Display genre filters
-                foreach ($genres as $genre) {
-                    echo '<li><a href="lookups.php?genre=' . $genre['genre_id'] . '">' . htmlspecialchars($genre['name']) . '</a></li>';
-                }
-                ?>
-            </ul>
-        </nav>
-        <nav class="nav-right">
-            <ul>
-                <li><a href="sell.php">Selling</a></li>
-                <li><a href="wishlist.php">Wishlist</a></li>
-                <li><a href="profile.php">Profile</a></li>
-                <li><a href="cart.php">Cart</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section class="sell-container">
-            <div class="selling-details">
+<main>
+    <section class="sell-container">
+        <div class="selling-details">
             <h2>Enter Book Details</h2>
-            <form action="submit_book.php" method="post" enctype="multipart/form-data">
+            <form action="sell.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="title">Title:</label>
                     <input type="text" id="title" name="title" required>
@@ -107,13 +130,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label for="genre">Genre:</label>
                     <select id="genre" name="genre_id" required>
                         <option value="">Select Genre</option>
-                        <!-- Populate options dynamically from database -->
+                        <?php
+                        foreach ($genres as $genre) {
+                            echo '<option value="' . $genre['genre_id'] . '">' . htmlspecialchars($genre['name']) . '</option>';
+                        }
+                        ?>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="language">Language:</label>
+                    <input type="text" id="language" name="language" required>
+                </div>
                 <div class="form-group-condition">
-                <label for="condition">Condition:</label>
+                    <label for="condition">Condition:</label>
                     <div class="stars">
-                    <input type="radio" id="star1" name="condition" value="1">
+                        <input type="radio" id="star1" name="condition" value="1">
                         <label for="star1">☆</label>
                         <input type="radio" id="star2" name="condition" value="2">
                         <label for="star2">☆</label>
@@ -148,27 +179,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </div>
                 <button class="sell-page-button" type="submit">Sell</button>
             </form>
-        </section>
-    </main>
+        </div>
+    </section>
+</main>
 
-    <footer>
-        <p>&copy; 2024 Your Bookstore. All rights reserved.</p>
-    </footer>
+<footer>
+    <p>&copy; 2024 Your Bookstore. All rights reserved.</p>
+</footer>
 
-    <script>
-        const stars = document.querySelectorAll('.stars input[type="radio"]');
-
-        stars.forEach((star, index) => {
-            star.addEventListener('change', function() {
-                // Uncheck all stars
-                stars.forEach(s => s.checked = false);
-
-                // Check selected star and stars to its left
-                for (let i = 0; i <= index; i++) {
-                    stars[i].checked = true;
-                }
-            });
+<script>
+    const stars = document.querySelectorAll('.stars input[type="radio"]');
+    stars.forEach((star, index) => {
+        star.addEventListener('change', function() {
+            // Uncheck all stars
+            stars.forEach(s => s.checked = false);
+            // Check selected star and stars to its left
+            for (let i = 0; i <= index; i++) {
+                stars[i].checked = true;
+            }
         });
-    </script>
+    });
+</script>
 </body>
 </html>

@@ -29,7 +29,10 @@ if (isset($_GET['remove_from_cart']) && isset($_GET['book_id'])) {
 
 // Fetch cart items from the database for the current user
 $user_id = $_SESSION['user_id'];
-$sql = "SELECT b.title, b.author, b.listed_price, b.image_url, c.book_id FROM shopping_cart c JOIN books b ON c.book_id = b.book_id WHERE c.user_id = :user_id";
+$sql = "SELECT b.title, b.author, b.listed_price, b.image_url, c.book_id 
+        FROM shopping_cart c 
+        JOIN books b ON c.book_id = b.book_id 
+        WHERE c.user_id = :user_id";
 $stmt = $conn->prepare($sql);
 $stmt->execute(['user_id' => $user_id]);
 $cartItems = $stmt->fetchAll();
@@ -54,7 +57,6 @@ $totalCostWithShipping = $totalCost + $shippingCost;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FableFoundry - Cart</title>
     <link rel="stylesheet" href="style2.css">
-
 </head>
 <body>
 <header>
