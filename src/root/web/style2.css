@@ -1325,3 +1325,57 @@ footer {
     border-radius: 50%;
     background: white;
 }
+
+/* Recycle styles from wishlist or other components */
+.books-container-selling {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.book-item-selling {
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.book-card-selling {
+    padding: 15px;
+    text-align: center;
+}
+
+.book-card-selling img {
+    max-width: 100%;
+    height: auto;
+}
+
+.book-details-selling {
+    margin-top: 10px;
+}
+
+.book-item-title, .book-item-author, .book-item-price {
+    margin: 10px 0;
+}
+
+.transaction-details {
+    margin-top: 15px;
+    text-align: left;
+}
+
+.remove-from-selling {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #f44336;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.remove-from-selling:hover {
+    background-color: #d32f2f;
+}
+

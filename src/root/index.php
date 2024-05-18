@@ -93,7 +93,7 @@ $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </nav>
     <nav class="nav-right">
         <ul>
-            <li><a href="/web/sell.php">Selling</a></li>
+            <li><a href="/web/selling.php">Selling</a></li>
             <li><a href="/web/wishlist.php">Wishlist</a></li>
             <li><a href="/web/profile.php">Profile</a></li>
             <li><a href="/web/cart.php">Cart</a></li>
