@@ -12,6 +12,7 @@ if (!$book_id) {
     exit;
 }
 
+// Fetch book details
 $stmt = $conn->prepare("SELECT * FROM books WHERE book_id = ?");
 $stmt->execute([$book_id]);
 $book = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -22,6 +23,12 @@ if (!$book) {
     header("Location: index.php");
     exit;
 }
+
+// Fetch seller details (only name and profile picture)
+$seller_id = $book['seller_id'];
+$sellerStmt = $conn->prepare("SELECT name, profile_picture_url FROM users WHERE user_id = ?");
+$sellerStmt->execute([$seller_id]);
+$seller = $sellerStmt->fetch(PDO::FETCH_ASSOC);
 
 // Check if a book is being added to the cart
 if (isset($_POST['add_to_cart'])) {
@@ -69,24 +76,24 @@ if (isset($_POST['add_to_cart'])) {
 </head>
 <body>
     <header>
-        <h2 class="logo-title"><a href="../index.php">FableFoundry </a></h2>
+        <h2 class="logo-title"><a href="../index.php">FableFoundry</a></h2>
     </header>
 
     <main class="book-detail-container">
         <div class="book-detail">
             <div class="book-image">
-                <img src="../images/<?= $book['image_url']; ?>" alt="<?= htmlspecialchars($book['title']); ?>">
+                <img src="../images/<?= htmlspecialchars($book['image_url']); ?>" alt="<?= htmlspecialchars($book['title']); ?>">
             </div>
             <div class="book-metadata">
                 <h1 class="book-title">Title: <?= htmlspecialchars($book['title']); ?></h1>
                 <p class="book-author">Author: <?= htmlspecialchars($book['author']); ?></p>
                 <p class="book-isbn">ISBN: <?= htmlspecialchars($book['isbn']); ?></p>
                 <p class="book-genre">Genre ID: <?= $book['genre_id']; ?> (Classics)</p>
-                <p class="book-seller">Seller ID: <?= $book['seller_id']; ?></p>
+                <p class="book-seller">Seller: <?= htmlspecialchars($seller['name']); ?></p>
                 <p class="book-condition">Condition: <?= htmlspecialchars($book['condition']); ?></p>
                 <p class="book-price">Listed Price: $<?= number_format($book['listed_price'], 2); ?></p>
                 <p class="book-description">Description: <?= htmlspecialchars($book['description']); ?></p>
-                <p class="book-listing-date">Listing Date: <?= $book['listing_date']; ?></p>
+                <p class="book-listing-date">Listing Date: <?= htmlspecialchars($book['listing_date']); ?></p>
                 <!-- Add form to submit book to cart -->
                 <form method="post">
                     <input type="hidden" name="book_id" value="<?= $book_id ?>">
@@ -95,10 +102,11 @@ if (isset($_POST['add_to_cart'])) {
             </div>
         </div>
     </main>
+
     <div class="seller-profile">
         <div class="seller-info">
-            <img src="../images/profile_picture.png" alt="seller Photo" class="seller-photo">
-            <h3>Seller Name</h3>
+            <img src="../images/<?= htmlspecialchars($seller['profile_picture_url']); ?>" alt="Seller Photo" class="seller-photo">
+            <h3> <?= htmlspecialchars($seller['name']); ?></h3>
         </div>
     </div>
 
