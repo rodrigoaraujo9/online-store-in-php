@@ -88,7 +88,7 @@ $totalCostWithShipping = $totalCost + $shippingCost;
                 <?php foreach ($cartItems as $item) : ?>
                     <div class="book-item-cart">
                         <div class="book-card-cart">
-                            <img class="book-item-image-cart" src="./images/<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>">
+                            <img class="book-item-image-cart" src="../images/<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>">
                             <div class="book-details-cart">
                                 <h3 class="book-item-title-cart"><?php echo htmlspecialchars($item['title']); ?></h3>
                                 <p class="book-item-author-cart">by <?php echo htmlspecialchars($item['author']); ?></p>

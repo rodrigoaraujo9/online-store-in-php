@@ -3,7 +3,7 @@ include 'db.php';
 
 session_start();
 
-// Ensure the uploads directory exists
+// Ensure the images/books directory exists
 $uploadDir = '../images/';
 if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0777, true);
@@ -36,13 +36,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ':condition' => $condition,
             ':listed_price' => $price,
             ':description' => $description,
-            ':image_url' => $image_path,
+            ':image_url' => basename($_FILES['image']['name']),
             ':age_group' => $age_group,
             ':listing_date' => date('Y-m-d'),
-            ':seller_id' => $_SESSION['user_id'],
+            ':seller_id' => $_SESSION['user_id'], // Ensures book is associated with the logged-in seller
             ':language' => $language
         ]);
-        
+
         // Redirect to the book's page (assuming you have a page to view book details)
         $book_id = $conn->lastInsertId();
         header("Location: book_details.php?book_id=$book_id");
