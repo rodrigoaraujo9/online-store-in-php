@@ -85,7 +85,7 @@ if (isset($_POST['add_to_cart'])) {
                 <img src="../images/<?= htmlspecialchars($book['image_url']); ?>" alt="<?= htmlspecialchars($book['title']); ?>">
             </div>
             <div class="book-metadata">
-                <h1 class="book-title"><?= htmlspecialchars($book['title']); ?></h1>
+                <h1 class="book-title">Title: <?= htmlspecialchars($book['title']); ?></h1>
                 <p class="book-author">Author: <?= htmlspecialchars($book['author']); ?></p>
                 <p class="book-isbn">ISBN: <?= htmlspecialchars($book['isbn']); ?></p>
                 <p class="book-genre">Genre ID: <?= $book['genre_id']; ?> (Classics)</p>
