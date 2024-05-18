@@ -97,7 +97,7 @@ if (isset($_GET['add_to_cart']) && isset($_GET['book_id'])) {
             <?php foreach ($wishlistItems as $item) : ?>
                 <div class="book-item-wishlist">
                     <div class="book-card-wishlist">
-                    <img src="./images/<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>">
+                    <img src="../images/<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>">
                     <div class="book-details-wishlist">
                     <h3 class="book-item-title"><?php echo htmlspecialchars($item['title']); ?></h3>
                     <p class="book-item-author">by <?php echo htmlspecialchars($item['author']); ?></p>

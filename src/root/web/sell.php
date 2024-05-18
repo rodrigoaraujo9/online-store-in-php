@@ -4,7 +4,7 @@ include 'db.php';
 session_start();
 
 // Ensure the images/books directory exists
-$uploadDir = '../images/books/';
+$uploadDir = '../images/';
 if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0777, true);
 }
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Redirect to the book's page (assuming you have a page to view book details)
         $book_id = $conn->lastInsertId();
-        header("Location: book.php?book_id=$book_id");
+        header("Location: book_details.php?book_id=$book_id");
         exit;
     } else {
         echo "Error uploading image.";

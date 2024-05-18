@@ -5,8 +5,8 @@ include './web/db.php';
 session_start();
 
 // Check if the user is logged in, if not, redirect them to the login page
-if (!isset($_SESSION['username'])) {
-    header("Location: login.php");
+if (!isset($_SESSION['username']) || !isset($_SESSION['user_id'])) {
+    header("Location: /web/login.php");
     exit;
 }
 
@@ -29,7 +29,7 @@ if (isset($_GET['add_to_wishlist']) && isset($_GET['book_id'])) {
             header("Location: index.php");
             exit;
         } else {
-            echo "Error adding book to wishlist: " . $conn->errorInfo()[2];
+            echo "Error adding book to wishlist: " . $stmt->errorInfo()[2];
         }
     }
 }
@@ -60,7 +60,6 @@ if (isset($_GET['add_to_cart']) && isset($_GET['book_id'])) {
         echo "Book already exists in the cart.";
     }
 }
-
 
 // Fetch genres from the database
 $sql = "SELECT genre_id, name FROM genres LIMIT 2";

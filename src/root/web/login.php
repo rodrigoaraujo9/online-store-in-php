@@ -8,13 +8,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
 
     try {
-        // Include user_id in your SELECT query
+        // Prepare the SELECT query to fetch the user's details
         $sql = "SELECT user_id, username, name, email, password, role, bio, profile_picture_url FROM users WHERE username = :username";
         
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':username', $username);
         $stmt->execute();
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Verify the password
         if ($user && password_verify($password, $user['password'])) {
             // Set all necessary session variables
             $_SESSION['user_id'] = $user['user_id'];
@@ -25,6 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['bio'] = $user['bio'];
             $_SESSION['profile_picture_url'] = $user['profile_picture_url'];
 
+            // Redirect to the profile page
             header("Location: profile.php");
             exit;
         } else {
@@ -36,6 +39,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <form class="login-form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <h1 class="form-title">Login to Your Account</h1>
             <?php if (isset($login_error)): ?>
-                <p class="error"><?php echo $login_error; ?></p> <!-- Display the login error if set -->
+                <p class="error"><?php echo htmlspecialchars($login_error); ?></p> <!-- Display the login error if set -->
             <?php endif; ?>
             <div class="form-field">
                 <label for="username">Username</label>
@@ -72,4 +76,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <p>© 2024 FableFoundry. All rights reserved.</p>
     </footer>
 </body>
-</html>    
+</html>
