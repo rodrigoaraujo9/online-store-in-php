@@ -40,30 +40,43 @@ function echoSessionVar($varName) {
             <ul>
                 <li><a href="../index.php">Home</a></li>
                 <li><a href="lookups.php">Shop All</a></li>
+                <?php
+                include 'db.php';
+
+                // Fetch genres from the database
+                $sql = "SELECT genre_id, name FROM genres LIMIT 2";
+                $stmt = $conn->query($sql);
+                $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                // Display genre filters
+                foreach ($genres as $genre) {
+                    echo '<li><a href="lookups.php?genre=' . $genre['genre_id'] . '">' . $genre['name'] . '</a></li>';
+                }
+                ?>
             </ul>
         </nav>
         <nav class="nav-right">
             <ul>
-                <li><a href="#">Selling</a></li>
-                <li><a href="#">Wishlist</a></li>
+                <li><a href="selling.php">Selling</a></li>
+                <li><a href="wishlist.php">Wishlist</a></li>
                 <li><a href="profile.php">Profile</a></li>
                 <li><a href="cart.php">Cart</a></li>
             </ul>
         </nav>
+    </header>
     </header>
 
     <main class="profile-container">
         <div class="profile-card">
             <section class="profile-info">
                 <form id="profilePhotoForm" action="upload_profile_photo.php" method="post" enctype="multipart/form-data">
-                <div class="profile-photo-wrapper" onclick="document.getElementById('profilePhotoUpload').click();">
-    <div class="profile-photo-inner">
-        <img src="<?php echo !empty($_SESSION['profile_picture_url']) ? htmlspecialchars($_SESSION['profile_picture_url'], ENT_QUOTES, 'UTF-8') . '?t=' . time() : '../images/default_profile.png'; ?>" alt="Profile Photo" class="profile-photo" id="profilePhoto">
-    </div>
-    <div class="edit-overlay">Edit</div>
-    <input type="file" id="profilePhotoUpload" name="profile_photo" accept="image/*" onchange="previewAndUploadPhoto();">
-</div>
-
+                    <div class="profile-photo-wrapper" onclick="document.getElementById('profilePhotoUpload').click();">
+                        <div class="profile-photo-inner">
+                            <img src="<?php echo !empty($_SESSION['profile_picture_url']) ? htmlspecialchars($_SESSION['profile_picture_url'], ENT_QUOTES, 'UTF-8') . '?t=' . time() : '../images/profiles/profile.jpeg'; ?>" alt="Profile Photo" class="profile-photo" id="profilePhoto">
+                        </div>
+                        <div class="edit-overlay">Edit</div>
+                        <input type="file" id="profilePhotoUpload" name="profile_photo" accept="image/*" onchange="previewAndUploadPhoto();">
+                    </div>
                 </form>
                 <h1><?php echoSessionVar('name'); ?></h1>
                 <h3><?php echoSessionVar('bio'); ?></h3>

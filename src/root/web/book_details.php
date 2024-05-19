@@ -106,7 +106,8 @@ if (isset($_POST['add_to_cart'])) {
         </nav>
     </header>
 
-    <main class="book-detail-container">
+    <main>
+        <div class="book-detail-container">
         <div class="book-detail">
             <div class="book-image">
                 <img src="../images/<?= htmlspecialchars($book['image_url']); ?>" alt="<?= htmlspecialchars($book['title']); ?>">
@@ -128,6 +129,7 @@ if (isset($_POST['add_to_cart'])) {
                 </form>
             </div>
         </div>
+            </div>
     </main>
 
     <div class="seller-profile">

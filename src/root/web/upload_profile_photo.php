@@ -44,9 +44,9 @@ try {
     $uniqueFileName = uniqid() . "_" . $sanitizedFileName;
     $target_file = $target_dir . $uniqueFileName;
 
-    // Attempt to move the uploaded file to the target directory
-    if (!move_uploaded_file($_FILES['profile_photo']['tmp_name'], $target_file)) {
-        throw new Exception("Failed to move uploaded file. Check permissions and file size limits.");
+    // Resize the image before saving it
+    if (!resizeImage($_FILES['profile_photo']['tmp_name'], $target_file, $imageFileType, 500, 500)) {
+        throw new Exception("Failed to resize image.");
     }
 
     // Update the database with the new profile picture URL
@@ -68,4 +68,61 @@ try {
 
 header("Location: profile.php"); // Redirect back to the profile page
 exit;
+
+// Function to resize the image
+function resizeImage($sourcePath, $destPath, $imageFileType, $maxWidth, $maxHeight) {
+    list($origWidth, $origHeight) = getimagesize($sourcePath);
+
+    $width = $origWidth;
+    $height = $origHeight;
+
+    if ($width > $maxWidth || $height > $maxHeight) {
+        $aspectRatio = $origWidth / $origHeight;
+
+        if ($width / $height > $aspectRatio) {
+            $width = $maxWidth;
+            $height = $maxWidth / $aspectRatio;
+        } else {
+            $height = $maxHeight;
+            $width = $maxHeight * $aspectRatio;
+        }
+    }
+
+    $image_p = imagecreatetruecolor($width, $height);
+
+    switch ($imageFileType) {
+        case 'jpg':
+        case 'jpeg':
+            $image = imagecreatefromjpeg($sourcePath);
+            break;
+        case 'png':
+            $image = imagecreatefrompng($sourcePath);
+            break;
+        case 'gif':
+            $image = imagecreatefromgif($sourcePath);
+            break;
+        default:
+            return false;
+    }
+
+    imagecopyresampled($image_p, $image, 0, 0, 0, 0, $width, $height, $origWidth, $origHeight);
+
+    switch ($imageFileType) {
+        case 'jpg':
+        case 'jpeg':
+            imagejpeg($image_p, $destPath, 90);
+            break;
+        case 'png':
+            imagepng($image_p, $destPath);
+            break;
+        case 'gif':
+            imagegif($image_p, $destPath);
+            break;
+    }
+
+    imagedestroy($image_p);
+    imagedestroy($image);
+
+    return true;
+}
 ?>

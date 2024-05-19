@@ -77,8 +77,8 @@ function echoUserVar($user, $varName) {
             </ul>
         </nav>
     </header>
-
-    <main class="profile-container">
+    <main>
+    <div class="profile-container">
         <div class="profile-card">
             <section class="profile-info">
                 <div class="profile-photo-wrapper">

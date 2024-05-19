@@ -106,17 +106,17 @@ if (isset($_GET['add_to_cart']) && isset($_GET['book_id'])) {
     <?php if (empty($wishlistItems)) : ?>
         <p>No items in your wishlist.</p>
     <?php else : ?>
-        <div class="books-container-wishlist">
+        <div class="books-container">
             <?php foreach ($wishlistItems as $item) : ?>
-                <div class="book-item-wishlist">
-                    <div class="book-card-wishlist">
+                <div class="book-item">
+                    <div class="book-card">
                     <img src="../images/<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>">
                     <div class="book-details-wishlist">
                     <h3 class="book-item-title"><?php echo htmlspecialchars($item['title']); ?></h3>
                     <p class="book-item-author">by <?php echo htmlspecialchars($item['author']); ?></p>
                     <p class="book-item-price">€<?php echo number_format($item['listed_price'], 2); ?></p>
                     <!-- Add a link to remove the book from wishlist -->
-                    <a href="wishlist.php?remove_from_wishlist=true&wishlist_id=<?php echo $item['wishlist_id']; ?>" class="remove-from-wishlist">Remove from Wishlist</a>
+                    <a href="wishlist.php?remove_from_wishlist=true&wishlist_id=<?php echo $item['wishlist_id']; ?>" class="remove-from-wishlist">Remove</a>
                     <!-- Add a link to add the book to cart -->
                     <a href="wishlist.php?add_to_cart=true&book_id=<?php echo $item['book_id']; ?>" class="add-to-cart">Add to Cart</a>
                 </div>

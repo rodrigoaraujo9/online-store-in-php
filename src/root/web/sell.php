@@ -84,7 +84,7 @@ $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     </style>
 </head>
-<body>
+<body class="sellbody">
 <header>
     <h2 class="logo-title"><a href="../index.php">FableFoundry</a></h2>
     <nav class="nav-left">

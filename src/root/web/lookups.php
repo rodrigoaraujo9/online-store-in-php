@@ -37,8 +37,8 @@
             </ul>
         </nav>
     </header>
-
-    <main class="books-container">
+                <main>
+    <div class="books-container">
         <form method="GET">
             <section class="filter-sort-bar">
                 <div class="book-filter">
