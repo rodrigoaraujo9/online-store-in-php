@@ -64,8 +64,8 @@ function echoSessionVar($varName) {
             </ul>
         </nav>
     </header>
-
-    <main class="profile-container">
+    <main>
+    <div class="profile-container">
         <div class="profile-card">
             <section class="profile-info">
                 <form id="profilePhotoForm" action="upload_profile_photo.php" method="post" enctype="multipart/form-data">
@@ -89,6 +89,7 @@ function echoSessionVar($varName) {
                     <button class="action-button" onclick="openModal('editProfileModal')">Edit Profile</button>
                     <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'): ?>
                         <button class="action-button" onclick="location.href='make_admin.php'">Make Admin</button>
+                        <button class="action-button" onclick="location.href='admin_op.php'">Operations</button>
                     <?php endif; ?>
                     <form action="logout.php" method="post">
                         <button type="submit" class="action-button">Logout</button>
