@@ -56,11 +56,14 @@ function echoSessionVar($varName) {
         <div class="profile-card">
             <section class="profile-info">
                 <form id="profilePhotoForm" action="upload_profile_photo.php" method="post" enctype="multipart/form-data">
-                    <div class="profile-photo-wrapper" onclick="document.getElementById('profilePhotoUpload').click();">
-                        <img src="<?php echo !empty($_SESSION['profile_picture_url']) ? htmlspecialchars($_SESSION['profile_picture_url'], ENT_QUOTES, 'UTF-8') . '?t=' . time() : '../images/default_profile.png'; ?>" alt="Profile Photo" class="profile-photo" id="profilePhoto">
-                        <div class="edit-overlay">Edit</div>
-                        <input type="file" id="profilePhotoUpload" name="profile_photo" accept="image/*" onchange="previewAndUploadPhoto();">
-                    </div>
+                <div class="profile-photo-wrapper" onclick="document.getElementById('profilePhotoUpload').click();">
+    <div class="profile-photo-inner">
+        <img src="<?php echo !empty($_SESSION['profile_picture_url']) ? htmlspecialchars($_SESSION['profile_picture_url'], ENT_QUOTES, 'UTF-8') . '?t=' . time() : '../images/default_profile.png'; ?>" alt="Profile Photo" class="profile-photo" id="profilePhoto">
+    </div>
+    <div class="edit-overlay">Edit</div>
+    <input type="file" id="profilePhotoUpload" name="profile_photo" accept="image/*" onchange="previewAndUploadPhoto();">
+</div>
+
                 </form>
                 <h1><?php echoSessionVar('name'); ?></h1>
                 <h3><?php echoSessionVar('bio'); ?></h3>

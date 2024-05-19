@@ -30,8 +30,8 @@
         </nav>
         <nav class="nav-right">
             <ul>
-                <li><a href="#">Selling</a></li>
-                <li><a href="#">Wishlist</a></li>
+                <li><a href="selling.php">Selling</a></li>
+                <li><a href="wishlist.php">Wishlist</a></li>
                 <li><a href="profile.php">Profile</a></li>
                 <li><a href="cart.php">Cart</a></li>
             </ul>

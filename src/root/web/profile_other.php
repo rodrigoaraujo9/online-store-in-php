@@ -53,11 +53,24 @@ function echoUserVar($user, $varName) {
             <ul>
                 <li><a href="../index.php">Home</a></li>
                 <li><a href="lookups.php">Shop All</a></li>
+                <?php
+                include 'db.php';
+
+                // Fetch genres from the database
+                $sql = "SELECT genre_id, name FROM genres LIMIT 2";
+                $stmt = $conn->query($sql);
+                $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                // Display genre filters
+                foreach ($genres as $genre) {
+                    echo '<li><a href="lookups.php?genre=' . $genre['genre_id'] . '">' . $genre['name'] . '</a></li>';
+                }
+                ?>
             </ul>
         </nav>
         <nav class="nav-right">
             <ul>
-                <li><a href="sell.php">Selling</a></li>
+                <li><a href="selling.php">Selling</a></li>
                 <li><a href="wishlist.php">Wishlist</a></li>
                 <li><a href="profile.php">Profile</a></li>
                 <li><a href="cart.php">Cart</a></li>
@@ -68,7 +81,11 @@ function echoUserVar($user, $varName) {
     <main class="profile-container">
         <div class="profile-card">
             <section class="profile-info">
-                <img src="<?php echo !empty($user['profile_picture_url']) ? htmlspecialchars($user['profile_picture_url'], ENT_QUOTES, 'UTF-8') : '../images/default_profile.png'; ?>" alt="Profile Photo" class="profile-photo">
+                <div class="profile-photo-wrapper">
+                    <div class="profile-photo-inner">
+                        <img src="<?php echo !empty($user['profile_picture_url']) ? htmlspecialchars($user['profile_picture_url'], ENT_QUOTES, 'UTF-8') : '../images/default_profile.png'; ?>" alt="Profile Photo" class="profile-photo" id="profilePhoto">
+                    </div>
+                </div>
                 <h1><?php echoUserVar($user, 'name'); ?></h1>
                 <h3><?php echoUserVar($user, 'bio'); ?></h3>
                 <p><?php echoUserVar($user, 'email'); ?></p>

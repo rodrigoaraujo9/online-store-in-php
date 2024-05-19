@@ -418,7 +418,7 @@ footer {
 }
 
 .add-to-cart-button:hover {
-    background-color: var(--pastel-green);
+    background-color: var(--darker-pastel-green);
 }
 
 .seller-profile {
@@ -600,21 +600,23 @@ footer {
 /* Add specific styling for the book items similar to previous examples */
 
 
-
+/* General Container Styles */
 .cart-container {
-   
     max-width: 800px;
-    margin: 40px auto;
+    margin: 80px auto 40px;
     background-color: var(--almost-white);
-    padding: 20px;
+    padding: 30px;
     box-sizing: border-box;
-    margin-top: 80px auto;
+    border-radius: 8px; /* Added border radius for smoother edges */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    background-color: #fff;
 }
 
 h1 {
     font-family: 'CustomFontSemi', sans-serif;
     color: var(--text-dark);
     padding-bottom: 20px;
+    text-align: center; /* Centered the heading */
 }
 
 .cart-item {
@@ -624,22 +626,20 @@ h1 {
     align-items: center;
     border-bottom: 1px solid var(--darker-forest-green);
     padding-bottom: 20px;
-    margin-bottom:  20px auto;
-    flex: auto;
+    margin-bottom: 20px;
+    padding-top: 20px; /* Added padding for top */
 }
 
 .cart-item-image img {
     max-width: 100px;
     height: 100px;
-    object-fit:contain;
-    margin-right: 10px auto;
-    margin-top: 10px auto;
+    object-fit: contain;
 }
 
 .cart-item-info h2 {
     font-family: 'CustomFontSemi', sans-serif;
     color: var(--text-dark);
-    margin-bottom: 5px auto;
+    margin-bottom: 5px;
 }
 
 .cart-item-info p {
@@ -651,6 +651,8 @@ h1 {
     width: 50px;
     padding: 5px;
     text-align: center;
+    border: 1px solid var(--darker-forest-green); /* Added border for input */
+    border-radius: 4px; /* Rounded corners */
 }
 
 .cart-item-total p {
@@ -663,9 +665,9 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    text-align: center;
-    width: 100%;
-    
+    margin-top: 20px; /* Added margin for top spacing */
+    padding-top: 20px; /* Added padding for top spacing */
+    border-top: 1px solid var(--darker-forest-green); /* Added border for separation */
 }
 
 .button-continue {
@@ -677,7 +679,6 @@ h1 {
     cursor: pointer;
     border-radius: 50px;
     text-decoration: none;
-
     transition: background-color 0.1s;
 }
 
@@ -688,9 +689,7 @@ h1 {
 
 .total-container {
     text-align: center;
-    align-items: center;
     width: 100%;
-
 }
 
 .total-container h3 {
@@ -707,7 +706,6 @@ h1 {
 .total-container p {
     font-family: 'CustomFont', sans-serif;
     color: var(--text-dark);
-    align-items:center;
 }
 
 .button-checkout {
@@ -719,17 +717,30 @@ h1 {
     cursor: pointer;
     border-radius: 10px;
     text-decoration: none;
-    
-
-    transition: background-color 0.1s;
     text-transform: uppercase;
-
     transition: background-color 0.3s;
 }
 
 .button-checkout:hover {
     background-color: var(--darker-forest-green);
     color: var(--almost-white);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .cart-item {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .cart-item-image, .cart-item-info, .cart-item-quantity, .cart-item-total {
+        margin-bottom: 10px;
+    }
+
+    .cart-summary {
+        flex-direction: column;
+        gap: 20px;
+    }
 }
 
 .profile-container {
@@ -1005,7 +1016,6 @@ footer {
     border-radius: 50%;
     overflow: hidden;
     margin-right: 20px;
-    border: 5px solid var(--pastel-green);
 }
 
 .profile-container {
@@ -1038,7 +1048,6 @@ footer {
     overflow: hidden;
     border-radius: 50%;
     margin-bottom: 20px; /* Center the image and add bottom margin */
-    border: 5px solid var(--pastel-green); /* Assuming you have this color defined */
     padding: 5px; /* Add slight padding */
 }
 
@@ -1243,7 +1252,7 @@ Ensure your
 
 .checkout-button {
     margin-top: 20px;
-    background-color: var(--forest-green);
+    background-color: var(--darker-forest-green);
     color: white;
     border: none;
     font-family: 'CustomFontSemi';
@@ -1255,7 +1264,7 @@ Ensure your
 }
 
 .checkout-button:hover {
-    background-color: var(--button-hover-purple);
+    background-color: var(--darker-pastel-green);
 }
 
 .books-grid {
@@ -1376,7 +1385,7 @@ Ensure your
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 20px;
+    padding: 50px;
 }
 
 .cart-items {
@@ -1563,14 +1572,28 @@ Ensure your
     overflow: hidden;
     border-radius: 50%;
     margin: 0 auto 20px; /* Center the image */
-    border: 5px solid var(--pastel-green); /* Brand color border */
+    background: linear-gradient(45deg, var(--pastel-green), var(--button-hover-purple)); /* Gradient effect */
+    padding: 10px; /* Thicker border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-photo-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: var(--almost-white); /* Background color inside the border */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .profile-photo {
-    width: calc(100% + 10px); /* Make the image slightly larger to cover the border */
-    height: calc(100% + 10px); /* Make the image slightly larger to cover the border */
-    margin: -5px; /* Offset the margin to center the image */
-    object-fit: cover; /* Ensure the photo covers the area nicely */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
 }
 
 .edit-overlay {
@@ -1596,6 +1619,8 @@ Ensure your
 .profile-photo-wrapper input[type="file"] {
     display: none;
 }
+
+
 
 .profile-info {
     margin-bottom: 20px;
@@ -1663,4 +1688,146 @@ a {
 
 a:hover {
     color: var(--pastel-green); /* Change hover color if needed */
+}
+
+.profile-container {
+    margin-top: 120px;
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    background-color: var(--almost-white);
+}
+
+.profile-card {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 400px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    align-items: center;
+    padding: 20px;
+    text-align: center;
+}
+
+.profile-photo-wrapper {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    background: linear-gradient(45deg, var(--pastel-green), var(--button-hover-purple));
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid var(--almost-white);
+    box-sizing: border-box;
+}
+
+.profile-info h1, .profile-info h3, .profile-info p {
+    margin: 10px 0;
+    color: var(--text-dark);
+}
+
+.books-list {
+    margin-top: 40px;
+    text-align: center;
+}
+
+
+
+.book-item {
+    border: 2px solid var(--moss-green);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 200px;
+    padding: 10px;
+}
+
+.book-item img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 10px;
+    object-fit: cover;
+}
+
+.book-item h3 {
+    font-family: 'CustomFontSemi';
+    font-size: 1rem;
+    color: var(--text-dark);
+    margin: 10px 0;
+}
+
+.book-item p {
+    font-family: 'CustomFont';
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    margin: 5px 0;
+}
+
+.view-book-details {
+    font-family: 'CustomFontSemi';
+    background-color: var(--button-hover-purple);
+    color: var(--almost-white);
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.view-book-details:hover {
+    background-color: var(--text-dark);
+}
+
+.footer {
+    margin: 20px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.alert.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.alert.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .profile-container, .profile-card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-photo-wrapper {
+        width: 200px;
+        height: 200px;
+    }
+
+    .books-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .book-item {
+        width: 100%;
+    }
 }

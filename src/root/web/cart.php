@@ -62,19 +62,32 @@ $totalCostWithShipping = $totalCost + $shippingCost;
 <header>
     <h2 class="logo-title"><a href="../index.php">FableFoundry</a></h2>
     <nav class="nav-left">
-        <ul>
-            <li><a href="../index.php">Home</a></li>
-            <li><a href="lookups.php">Shop All</a></li>
-        </ul>
-    </nav>
-    <nav class="nav-right">
-        <ul>
-            <li><a href="#">Selling</a></li>
-            <li><a href="wishlist.php">Wishlist</a></li>
-            <li><a href="profile.php">Profile</a></li>
-            <li><a href="cart.php">Cart</a></li>
-        </ul>
-    </nav>
+            <ul>
+                <li><a href="../index.php">Home</a></li>
+                <li><a href="lookups.php">Shop All</a></li>
+                <?php
+                include 'db.php';
+
+                // Fetch genres from the database
+                $sql = "SELECT genre_id, name FROM genres LIMIT 2";
+                $stmt = $conn->query($sql);
+                $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+                // Display genre filters
+                foreach ($genres as $genre) {
+                    echo '<li><a href="lookups.php?genre=' . $genre['genre_id'] . '">' . $genre['name'] . '</a></li>';
+                }
+                ?>
+            </ul>
+        </nav>
+        <nav class="nav-right">
+            <ul>
+                <li><a href="selling.php">Selling</a></li>
+                <li><a href="wishlist.php">Wishlist</a></li>
+                <li><a href="profile.php">Profile</a></li>
+                <li><a href="cart.php">Cart</a></li>
+            </ul>
+        </nav>
 </header>
 
 <br>
