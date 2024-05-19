@@ -153,7 +153,7 @@ if (isset($_GET['remove_from_selling']) && isset($_GET['book_id'])) {
             border: 1px solid var(--text-dark);
             border-radius: 0.25rem;
             padding: 0.5rem 1rem;
-            transition: background-color 0.3s, color 0.3s;
+            transition: background-color 0.1s, color 0.3s;
         }
 
         .remove-from-selling:hover, .print-shipping:hover {
@@ -171,7 +171,7 @@ if (isset($_GET['remove_from_selling']) && isset($_GET['book_id'])) {
         .book-actions a {
             font-family: 'CustomFontSemi', Arial, sans-serif;
             padding: 0.5rem 1rem;
-            background-color: var(--darker-forest-green);
+            background-color: var(--text-dark);
             color: #fff;
             border-radius: 0.25rem;
             text-decoration: none;
@@ -181,7 +181,7 @@ if (isset($_GET['remove_from_selling']) && isset($_GET['book_id'])) {
 
         .book-actions a:hover {
             background-color: var(--text-dark);
-            transform: scale(1.1); /* Slightly enlarge on hover */
+            transform: scale(1.05); /* Slightly enlarge on hover */
         }
     </style>
 </head>
