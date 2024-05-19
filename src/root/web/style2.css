@@ -1,16 +1,11 @@
 :root {
-    --pastel-blue: #AEC6CF; /* Existing */
-    --pastel-red: #C9A0DC; /* Existing */
-    --pastel-green: #a4e5a4; /* Existing */
-    --pastel-yellow: #FDFD96; /* Existing */
-    --darker-pastel-green: #6dbd6d; /* Darker pastel green */
-
-
-    /* Darker shades of green */
+    --pastel-blue: #AEC6CF;
+    --pastel-red: #C9A0DC;
+    --pastel-green: #a4e5a4;
+    --pastel-yellow: #FDFD96;
+    --darker-pastel-green: #6dbd6d;
     --moss-green: #2A4238;
     --forest-green: #3C6E47;
-
-    /* Complementary colors */
     --muted-rose: #D0B6B1;
     --dusky-pink: #AA8A86;
     --blue-grey: #A0AEB2;
@@ -19,9 +14,10 @@
     --button-pastel-purple: #c7add3;
     --button-hover-purple: #b496c2;
     --darker-forest-green: #2A4238;
-    --balloon-box-color: #3B554B; /* Balloon box color */
-
+    --balloon-box-color: #3B554B;
 }
+
+
 
 @font-face {
     font-family: 'CustomFont';
@@ -31,12 +27,10 @@
     font-family: 'CustomFontLight';
     src: url('../../fonts/fontlight.ttf') format('truetype');
 }
-
 @font-face {
     font-family: 'CustomFontBold';
     src: url('../../fonts/fontBOLD.ttf') format('truetype');
 }
-
 @font-face {
     font-family: 'CustomFontSemi';
     src: url('../../fonts/fontsemi.ttf') format('truetype');
@@ -44,78 +38,64 @@
 
 body {
     font-family: 'CustomFont', Arial, sans-serif;
-    background-color: #FAFAF9;
+    background-color: var(--almost-white);
     margin: 0;
     padding: 0;
 }
 
+
+
 header {
-    background-color: #FAFAF9;
-    padding: 1em;
+    background-color: var(--almost-white);
+    padding: 1rem;
     display: flex;
     align-items: center;
-    justify-content:space-between;
-    position: fixed; /* Makes the header fixed at the top */
-    top: 0; /* Align the header at the top */
-    left: 0; /* Align the header to the left side */
-    width: 100%; /* Ensures the header spans the full width of the viewport */
-    z-index: 1000; /* Ensures the header stays above other content */
-    
-}
-nav {
-    font-family: 'CustomFontSemi', Arial, sans-serif;
-    display:inline-flex;
-    flex: 2; /* Takes up any remaining space */
-    justify-content:end; /* Separates left and right nav */
-    margin-right: 20px;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
+nav {
+    font-family: 'CustomFontSemi', Arial, sans-serif;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 1.25rem;
+    flex: 2;
+}
 
 .logo-title {
     font-family: 'CustomFontBold', Arial, sans-serif;
-    color: #3C6E47;
-    margin-right: 1em;
+    color: var(--forest-green);
+    margin-right: 1rem;
 }
 
 .logo-title a {
     text-decoration: none;
-    color: #3C6E47;
+    color: var(--forest-green);
 }
-
 
 .nav-left, .nav-right {
     list-style-type: none;
     padding: 0;
     margin: 0;
     display: flex;
-    margin-bottom: 0.5em;
 }
 
 .nav-left {
     float: left;
-    
 }
 
 #logo {
     border-radius: 50%;
-    width: 50px;
+    width: 3.125rem;
 }
 
 .nav-right {
     float: right;
-    margin-right: 20px;
-}
-
-/* Clearfix for the floated elements */
-nav::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-#logo {
-    border-radius: 50%;
-    width: 50px;
+    margin-right: 1.25rem;
 }
 
 nav ul {
@@ -126,110 +106,108 @@ nav ul {
 }
 
 nav ul li {
-    padding: 0 15px;
+    padding: 0 0.9375rem;
 }
+
 .nav-left li, .nav-right li {
-    padding: 0 15px; /* Provides spacing between navigation items */
+    padding: 0 0.9375rem;
 }
 
 .nav-left li a, .nav-right li a {
     text-decoration: none;
-    color: var(--text-dark); /* Same dark color for text */
-    padding: 0.5em 1em;
-    border-radius: 20px; /* Rounded edges for aesthetic */
+    color: var(--text-dark);
+    padding: 0.5rem 1rem;
+    border-radius: 1.25rem;
 }
+
 nav ul li a {
     text-decoration: none;
-    color: #2A3132;
-    border-radius: 20px;
-    padding: 10px 15px;
+    color: var(--text-dark);
+    border-radius: 1.25rem;
+    padding: 0.625rem 0.9375rem;
     transition: background-color 0.05s;
-    white-space: nowrap; /* Prevents text from wrapping inside links */
+    white-space: nowrap;
 }
 
 nav ul li a:hover {
     background-color: var(--text-dark);
-    color: #FAFAF9;
+    color: var(--almost-white);
 }
 
 .sell-cta {
-    background-color: #FAFAF9; /* Light background color from your palette */
-    color: var(--text-dark); /* Dark color for text for readability */
+    background-color: var(--almost-white);
+    color: var(--text-dark);
     text-align: center;
-    padding: 300px 80px;
+    padding: 18.75rem 5rem;
 }
 
 .sell-cta h1 {
     font-family: 'CustomFontSemi', Arial, sans-serif;
     font-size: 2rem;
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
 }
 
 .sell-cta p {
     font-size: 1.25rem;
-    margin-bottom: 30px;
+    margin-bottom: 1.875rem;
 }
 
 .sell-button {
     font-family: 'CustomFontSemi', Arial, sans-serif;
     display: inline-block;
-    padding: 1px 30px;
-    background-color: var(--text-dark); /* A contrasting button color */
-    color:var(--almost-white);
-    border-radius: 50px;
+    padding: 0.625rem 1.875rem;
+    background-color: var(--text-dark);
+    color: var(--almost-white);
+    border-radius: 3.125rem;
     text-decoration: none;
-
     transition: background-color 0.3s;
 }
 
 .sell-button:hover {
-    background-color:var(--moss-green); /* Slightly lighter color for hover */
+    background-color: var(--moss-green);
     transform: scale(1.02);
 }
-
 
 .main-feature {
     font-family: 'CustomFontSemi', Arial, sans-serif;
     text-align: center;
-    color: #2A3132;
-    padding: 50px 0;
-    background-color: #FAFAF9;
+    color: var(--text-dark);
+    padding: 3.125rem 0;
+    background-color: var(--almost-white);
 }
 
 .books-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 15px;
-    padding: 20px;
-    justify-content: center; /* Centers grid items within the grid area */
-    align-items: start; /* Aligns items from the start vertically */
+    grid-template-columns: repeat(auto-fill, minmax(11.25rem, 1fr));
+    gap: 0.9375rem;
+    padding: 1.25rem;
+    justify-content: center;
+    align-items: start;
     box-sizing: border-box;
     width: 100%;
-    margin: 0 auto; /* Centers the grid container horizontally */
-    background-color: #FAFAF9;
+    margin: 0 auto;
+    background-color: var(--almost-white);
 }
 
 .book-item {
-    padding: 7px;
+    padding: 0.4375rem;
     text-align: center;
-    color: #2A3132;
+    color: var(--text-dark);
 }
-
 
 .book-item img {
     max-width: 100%;
-    height: 280px; /* Fixed height */
-    object-fit:fill; /* This will cover the area without distorting the aspect ratio */
+    height: 17.5rem;
+    object-fit: fill;
 }
-
 
 footer {
     color: var(--text-dark);
     text-align: center;
-    padding: 10px 0;
+    padding: 0.625rem 0;
 }
 
-@media (max-width: 300px) {
+@media (max-width: 18.75rem) {
     header {
         flex-direction: column;
         text-align: center;
@@ -240,17 +218,18 @@ footer {
     }
 
     nav ul li a {
-        padding: 10px;
+        padding: 0.625rem;
     }
 
     .search-container {
-        margin-top: 10px;
+        margin-top: 0.625rem;
     }
 
     .search-container input[type="text"],
     .search-container button {
         width: 100%;
     }
+
     .nav-left, .nav-right {
         float: none;
         width: 100%;
@@ -261,26 +240,23 @@ footer {
         width: 100%;
         text-align: center;
     }
-    .nav-left li:not(:first-child),  /* Hide all nav-left links except the first */
-    .nav-right li:not(:last-child) { /* Hide all nav-right links except the last */
+
+    .nav-left li:not(:first-child), .nav-right li:not(:last-child) {
         display: none;
     }
 }
-
-
 
 .text-button {
     background: none;
     border: none;
     color: var(--text-dark);
-    padding: 10px;
-    font-size: 16px;
+    padding: 0.625rem;
+    font-size: 1rem;
     cursor: pointer;
-    display: block; /* To make it a block-level element, aligning it nicely */
-    margin-top: 10px; /* Adds some space between the Enter button and this link */
+    display: block;
+    margin-top: 0.625rem;
     width: 100%;
     font-family: 'CustomFontLight', Arial, sans-serif;
-    
 }
 
 .text-button:hover {
@@ -288,61 +264,58 @@ footer {
     color: var(--darker-forest-green);
 }
 
-
-
 .login-container {
-    margin-top: 30px;
+    margin-top: 1.875rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 80vh; /* Sets the minimum height of the login container */
-    padding: 30px;
+    min-height: 80vh;
+    padding: 1.875rem;
 }
 
 .login-form {
     width: 100%;
-    max-width: 320px; /* Maximum width of the form */
+    max-width: 20rem;
     background-color: var(--almost-white);
-    padding: 20px;
-    border-radius: 8px;
-    
+    padding: 1.25rem;
+    border-radius: 0.5rem;
 }
 
 .form-title {
     font-family: 'CustomFontSemi', Arial, sans-serif;
     text-align: center;
     color: var(--text-dark);
-    margin-bottom: 1em;
+    margin-bottom: 1rem;
 }
 
 .form-field {
-    margin-bottom: 2em;
+    margin-bottom: 2rem;
 }
 
 .form-field label {
     display: block;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.5rem;
     color: var(--text-dark);
 }
 
 .form-field input[type="text"],
 .form-field input[type="password"],
-.form-field input[type="email"]  {
+.form-field input[type="email"] {
     width: 100%;
-    padding: 10px;
-    border-radius: 4px;
+    padding: 0.625rem;
+    border-radius: 0.25rem;
     border: 1px solid #ccc;
-    box-sizing: border-box; /* Ensures padding is included in total width and height */
+    box-sizing: border-box;
 }
 
 .login-button {
     font-family: 'CustomFontSemi', Arial, sans-serif;
     width: 100%;
-    padding: 1px;
+    padding: 0.625rem;
     border: none;
     background-color: var(--text-dark);
     color: var(--almost-white);
-    border-radius: 40px;
+    border-radius: 2.5rem;
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -352,67 +325,62 @@ footer {
     transform: scale(1.02);
 }
 
-
-
-
-
 .book-detail-container {
-    margin-top: 120px;
+    margin-top: 7.5rem;
     display: flex;
     justify-content: center;
-    padding: 20px;
+    padding: 1.25rem;
     background-color: var(--almost-white);
 }
 
 .book-detail {
     display: flex;
     flex-wrap: wrap;
-    max-width: 800px;
+    max-width: 50rem;
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    align-items: center; /* Align items vertically in the center */
+    border-radius: 0.5rem;
+    box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
+    align-items: center;
 }
 
 .book-image {
     flex-basis: 40%;
     text-align: center;
-    padding: 20px;
-    box-sizing: border-box; /* Ensure padding is included in width calculation */
+    padding: 1.25rem;
+    box-sizing: border-box;
 }
 
 .book-image img {
     max-width: 100%;
     height: auto;
-    border-radius: 4px;
+    border-radius: 0.25rem;
 }
 
 .book-metadata {
     flex-basis: 60%;
-    padding: 20px;
-    box-sizing: border-box; /* Ensure padding is included in width calculation */
+    padding: 1.25rem;
+    box-sizing: border-box;
 }
 
 .book-title, .book-author, .book-isbn, .book-genre, .book-seller, .book-condition, .book-price, .book-description, .book-listing-date {
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
     color: var(--text-dark);
 }
 
 .book-title {
     font-family: 'CustomFontBold', Arial, sans-serif;
-    font-size: 1.5em;
+    font-size: 1.5rem;
 }
 
-
 .add-to-cart-button {
-    margin-top: 20px;
+    margin-top: 1.25rem;
     background-color: var(--darker-forest-green);
     color: white;
     border: none;
     font-family: 'CustomFontSemi';
-    border-radius: 4px;
-    padding: 10px 20px;
-    font-size: 16px;
+    border-radius: 0.25rem;
+    padding: 0.625rem 1.25rem;
+    font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -422,156 +390,143 @@ footer {
 }
 
 .seller-profile {
-    margin-top: 12px;
+    margin-top: 0.75rem;
     display: flex;
-    justify-content: center; /* Center horizontally */
-    padding: 20px;
+    justify-content: center;
+    padding: 1.25rem;
     background-color: var(--darker-forest-green);
-    border-radius: 50px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    max-width: 800px;
-    margin-left: auto; /* Align to right side */
-    margin-right: auto; /* Align to left side */
+    border-radius: 2.5rem;
+    box-shadow: 0 0.25rem 0.375rem rgba(0, 0, 0, 0.1);
+    max-width: 50rem;
+    margin-left: auto;
+    margin-right: auto;
 }
-
 
 .seller-info {
     display: flex;
-    align-items: center; /* Center items vertically */
+    align-items: center;
 }
 
 .seller-photo {
-    width: 60px; /* Adjust size as needed */
-    height: 60px; /* Adjust size as needed */
-    border-radius: 50%; /* This makes the image circular */
-    object-fit: cover; /* Ensures the image fills the circle */
-    margin-right: 20px; /* Add spacing between the photo and the name */
+    width: 3.75rem;
+    height: 3.75rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1.25rem;
 }
 
 .seller-profile h3 {
-    margin: 0; /* Remove default margin for h3 */
-    font-size: 1.2em; /* Adjust font size as needed */
-    color: #fff; /* Set color for the name */
+    margin: 0;
+    font-size: 1.2rem;
+    color: #fff;
 }
-
-
 
 .books-container {
-    margin-top: 120px;
-    padding: 20px;
+    margin-top: 1.875rem;
+    padding: 1.25rem;
     background-color: var(--almost-white);
 }
-
 
 .filter-sort-bar {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Aligns items to the left and right */
-    margin-bottom: 20px;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
 }
 
 .book-filter {
-    margin-right: auto; /* Pushes the sort section to the right */
-    margin-left: 20px; /* Add slight margin to the left */
+    margin-right: auto;
+    margin-left: 1.25rem;
 }
 
 .book-sort {
-    margin-left: auto; /* Pushes the sort section to the right */
-    margin-right: 20px; /* Add slight margin to the right */
+    margin-left: auto;
+    margin-right: 1.25rem;
 }
 
-.book-filter label,
-.book-sort label {
-    margin-right: 10px;
+.book-filter label, .book-sort label {
+    margin-right: 0.625rem;
 }
 
-.book-filter select,
-.book-sort select {
-    padding: 8px;
-    border-radius: 4px;
+.book-filter select, .book-sort select {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
     border: 1px solid #ccc;
-    font-size: 14px;
+    font-size: 0.875rem;
     outline: none;
     transition: border-color 0.3s ease;
 }
 
-
 .apply {
-    padding: 7px 16px;
+    padding: 0.4375rem 1rem;
     border: none;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     background-color: var(--darker-forest-green);
     color: #fff;
-    font-size: 14px;
+    font-size: 0.875rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
     font-family: 'CustomFontSemi', Arial, sans-serif;
 }
 
 .apply:hover {
-    background-color:  var(--text-dark);
+    background-color: var(--text-dark);
 }
-
 
 .books-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 15px;
+    grid-template-columns: repeat(auto-fill, minmax(11.25rem, 1fr));
+    gap: 0.9375rem;
     justify-content: center;
-    align-items: stretch; /* Change align-items to stretch */
+    align-items: stretch;
 }
 
-/* Style for each book item */
 .book-item {
-    border: 2px solid var(--moss-green); /* Small green outline */
-    border-radius: 4px; /* Slight rounding of corners for aesthetics */
-    overflow: hidden; /* Ensures no content spills out of border-radius */
-    padding: 10px;
-    transition: transform 0.3s ease; /* Smooth transition for hover effect */
+    border: 2px solid var(--moss-green);
+    border-radius: 0.25rem;
+    overflow: hidden;
+    padding: 0.625rem;
+    transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Align content horizontally to center */
-    text-align: center; /* Align text content to center */
-    height: 450px; /* Ensure items stretch vertically */
-    width: 200px;
+    align-items: center;
+    text-align: center;
+    height: 28.125rem;
+    width: 12.5rem;
 }
-
-
 
 .book-item:hover {
-    transform: translateY(-5px); /* Lifts the item slightly on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional: Adds shadow for depth */
+    transform: translateY(-0.3125rem);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
 }
 
-/* Additional styles for content inside .book-item */
 .book-item img {
     max-width: 100%;
     height: auto;
     display: block;
-    margin-bottom: 10px; /* Space between image and text */
-    object-fit: cover; /* Keeps aspect ratio but may crop the image */
-    flex-grow: 0; /* Prevents the image from stretching */
-    flex-shrink: 0; /* Prevents the image from shrinking */
+    margin-bottom: 0.625rem;
+    object-fit: cover;
+    flex-grow: 0;
+    flex-shrink: 0;
 }
 
 .book-item-title {
-
     font-size: 1rem;
     font-family: 'CustomFontSemi';
-    margin: 10px 0;
+    margin: 0.625rem 0;
     color: var(--text-dark);
 }
 
 .book-item-author {
     font-size: 0.85rem;
     color: var(--text-dark);
-    margin: 5px 0;
+    margin: 0.3125rem 0;
 }
 
 .book-item-price {
     font-size: 1rem;
     color: var(--moss-green);
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem;
 }
 
 .book-item-labels {
@@ -581,65 +536,62 @@ footer {
 }
 
 .book-item-title, .book-item-author, .book-item-price {
-    margin: 5px 0; /* Adjusts spacing between text elements */
+    margin: 0.3125rem 0;
 }
 
 .book-item-label {
     background-color: var(--pastel-green);
-    border-radius: 5px;
-    padding: 3px 6px;
+    border-radius: 0.3125rem;
+    padding: 0.1875rem 0.375rem;
     font-size: 0.75rem;
-    margin: 2px auto;
+    margin: 0.125rem auto;
     color: var(--almost-white);
     text-transform: uppercase;
-    margin-top: auto; 
+    margin-top: auto;
 }
 
-
-
-/* Add specific styling for the book items similar to previous examples */
-
-
-/* General Container Styles */
 .cart-container {
-    max-width: 800px;
-    margin: 80px auto 40px;
-    background-color: var(--almost-white);
-    padding: 30px;
-    box-sizing: border-box;
-    border-radius: 8px; /* Added border radius for smoother edges */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
     background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-top: 60px; 
 }
 
 h1 {
     font-family: 'CustomFontSemi', sans-serif;
     color: var(--text-dark);
-    padding-bottom: 20px;
-    text-align: center; /* Centered the heading */
+    padding-bottom: 1.25rem;
+    text-align: center;
 }
 
 .cart-item {
     display: grid;
     grid-template-columns: auto 1fr auto auto auto;
-    gap: 10px;
+    gap: 0.625rem;
     align-items: center;
     border-bottom: 1px solid var(--darker-forest-green);
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-    padding-top: 20px; /* Added padding for top */
+    padding-bottom: 1.25rem;
+    margin-bottom: 1.25rem;
+    padding-top: 1.25rem;
 }
 
 .cart-item-image img {
-    max-width: 100px;
-    height: 100px;
+    max-width: 6.25rem;
+    height: 6.25rem;
     object-fit: contain;
 }
 
 .cart-item-info h2 {
     font-family: 'CustomFontSemi', sans-serif;
     color: var(--text-dark);
-    margin-bottom: 5px;
+    margin-bottom: 0.3125rem;
 }
 
 .cart-item-info p {
@@ -648,11 +600,11 @@ h1 {
 }
 
 .cart-item-quantity input {
-    width: 50px;
-    padding: 5px;
+    width: 3.125rem;
+    padding: 0.3125rem;
     text-align: center;
-    border: 1px solid var(--darker-forest-green); /* Added border for input */
-    border-radius: 4px; /* Rounded corners */
+    border: 1px solid var(--darker-forest-green);
+    border-radius: 0.25rem;
 }
 
 .cart-item-total p {
@@ -665,9 +617,9 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: 20px; /* Added margin for top spacing */
-    padding-top: 20px; /* Added padding for top spacing */
-    border-top: 1px solid var(--darker-forest-green); /* Added border for separation */
+    margin-top: 1.25rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--darker-forest-green);
 }
 
 .button-continue {
@@ -675,9 +627,9 @@ h1 {
     background-color: transparent;
     color: var(--text-dark);
     border: 2px solid var(--text-dark);
-    padding: 10px 20px;
+    padding: 0.625rem 1.25rem;
     cursor: pointer;
-    border-radius: 50px;
+    border-radius: 3.125rem;
     text-decoration: none;
     transition: background-color 0.1s;
 }
@@ -713,9 +665,9 @@ h1 {
     background-color: transparent;
     color: var(--text-dark);
     border: 2px solid var(--text-dark);
-    padding: 10px 20px;
+    padding: 0.625rem 1.25rem;
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     text-decoration: none;
     text-transform: uppercase;
     transition: background-color 0.3s;
@@ -726,20 +678,19 @@ h1 {
     color: var(--almost-white);
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
+@media (max-width: 37.5rem) {
     .cart-item {
         grid-template-columns: 1fr;
         text-align: center;
     }
 
     .cart-item-image, .cart-item-info, .cart-item-quantity, .cart-item-total {
-        margin-bottom: 10px;
+        margin-bottom: 0.625rem;
     }
 
     .cart-summary {
         flex-direction: column;
-        gap: 20px;
+        gap: 1.25rem;
     }
 }
 
@@ -749,38 +700,52 @@ h1 {
     align-items: center;
     flex-direction: column;
     min-height: 100vh;
-    padding: 20px;
+    padding: 1.25rem;
 }
 
 .profile-card {
     background: #FFFFFF;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
+    box-shadow: 0 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.1);
+    border-radius: 1.25rem;
     width: 100%;
-    max-width: 350px;
-    padding: 20px;
+    max-width: 21.875rem;
+    padding: 1.25rem;
     text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center the content */
+    align-items: center;
 }
 
 .profile-photo-wrapper {
     position: relative;
-    width: 230px; /* Increased size */
-    height: 230px;
+    width: 14.375rem;
+    height: 14.375rem;
     cursor: pointer;
     overflow: hidden;
     border-radius: 50%;
-    margin-bottom: 20px; /* Center the image and add bottom margin */
-    border: 5px solid var(--pastel-green); /* Assuming you have this color defined */
-    padding: 5px; /* Add slight padding */
+    margin-bottom: 1.25rem;
+    background: linear-gradient(45deg, var(--pastel-green), var(--button-hover-purple));
+    padding: 0.625rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-photo-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: var(--almost-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .profile-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 50%;
 }
 
 .edit-overlay {
@@ -794,7 +759,7 @@ h1 {
     justify-content: center;
     align-items: center;
     color: white;
-    font-size: 20px;
+    font-size: 1.25rem;
     opacity: 0;
     transition: opacity 0.3s;
 }
@@ -808,13 +773,13 @@ h1 {
 }
 
 .profile-info {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
     width: 100%;
-    text-align: center; /* Ensure text is centered */
+    text-align: center;
 }
 
 .profile-info h1 {
-    margin: 10px 0;
+    margin: 0.625rem 0;
     color: #333;
 }
 
@@ -826,11 +791,10 @@ h1 {
 .profile-action-buttons {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 1.25rem;
 }
 
-/* Responsive design for smaller devices */
-@media (max-width: 600px) {
+@media (max-width: 37.5rem) {
     .profile-container {
         flex-direction: column;
         align-items: center;
@@ -842,9 +806,9 @@ h1 {
 }
 
 .alert {
-    margin: 20px;
-    padding: 10px;
-    border-radius: 5px;
+    margin: 1.25rem;
+    padding: 0.625rem;
+    border-radius: 0.3125rem;
 }
 
 .alert.success {
@@ -860,13 +824,13 @@ h1 {
 .action-button {
     font-family: 'CustomFont', sans-serif;
     display: block;
-    width: 150px;
-    padding: 10px;
-    margin-top: 10px;
+    width: 9.375rem;
+    padding: 0.625rem;
+    margin-top: 0.625rem;
     background-color: var(--darker-forest-green);
     color: var(--almost-white);
     border: none;
-    border-radius: 40px;
+    border-radius: 2.5rem;
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -877,23 +841,20 @@ h1 {
 }
 
 header, footer {
-    padding: 10px;
+    padding: 0.625rem;
     text-align: center;
 }
 
 footer {
     font-size: 0.8em;
-    margin-top: 20px;
+    margin-top: 1.25rem;
 }
 
 .error {
     color: var(--dusky-pink);
     font-family: 'CustomFontLight', sans-serif;
     text-align: center;
-
 }
-
-
 
 .modal {
     display: none;
@@ -911,20 +872,17 @@ footer {
 .modal-content {
     background-color: var(--almost-white);
     margin: 15% auto;
-    padding-top: 30px;
-    padding-bottom: 30px;
-    padding-right: 35px;
-    padding-left:35px;
+    padding: 2.1875rem;
     border: 1px solid #888;
     width: 50%;
-    border-radius: 30px;
+    border-radius: 1.875rem;
     align-items: center;
 }
 
 .close {
     color: #aaa;
     float: right;
-    font-size: 28px;
+    font-size: 1.75rem;
     font-weight: bold;
 }
 
@@ -938,84 +896,74 @@ footer {
 
 .modal h2 {
     color: var(--text-dark);
-    margin-bottom: 20px;
-    
+    margin-bottom: 1.25rem;
 }
 
 .modal form {
     display: flex;
     flex-direction: column;
-    
 }
 
 .modal label {
-    margin-bottom: 5px;
+    margin-bottom: 0.3125rem;
     color: var(--text-dark);
     font-weight: bold;
-    
 }
 
 .modal input[type="text"],
 .modal input[type="email"],
 .modal textarea,
 .modal input[type="file"] {
-    padding: 8px;
+    padding: 0.5rem;
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 0.9375rem;
     border: 1px solid #ccc;
-    border-radius: 4px;
+    border-radius: 0.25rem;
     background-color: var(--almost-white);
     font-family: 'CustomFontLight', sans-serif;
 }
 
 .modal textarea {
-    height: 100px;
-    resize: vertical; /* Allows vertical resizing only */
+    height: 6.25rem;
+    resize: vertical;
 }
 
 .file-upload-wrapper {
-    margin: 10px 0;
+    margin: 0.625rem 0;
     position: relative;
     display: flex;
     align-items: center;
 }
 
 .custom-file-upload {
-    border: 2px solid var(--balloon-box-color);  /* Use the brand color */
-    color: var(--balloon-box-color); ;
+    border: 2px solid var(--balloon-box-color);
+    color: var(--balloon-box-color);
     background-color: var(--almost-white);
-    border-radius: 20px;
-    padding: 8px 12px;
+    border-radius: 1.25rem;
+    padding: 0.5rem 0.75rem;
     cursor: pointer;
     transition: background-color 0.2s;
     font-family: 'CustomFont', sans-serif;
 }
 
 .custom-file-upload:hover {
-    background-color:var(--balloon-box-color);
+    background-color: var(--balloon-box-color);
     color: var(--almost-white);
 }
 
 #file-chosen {
-    margin-left: 10px;
+    margin-left: 0.625rem;
     font-size: 0.9em;
     color: #555;
-    
-}
-
-.file-upload-wrapper {
-    margin: 10px 0;
-    display: flex;
-    align-items: center;
 }
 
 .profile-photo-wrapper {
     position: relative;
-    width: 150px;
-    height: 150px;
+    width: 9.375rem;
+    height: 9.375rem;
     border-radius: 50%;
     overflow: hidden;
-    margin-right: 20px;
+    margin-right: 1.25rem;
 }
 
 .profile-container {
@@ -1024,31 +972,31 @@ footer {
     align-items: center;
     flex-direction: column;
     min-height: 100vh;
-    padding: 20px;
+    padding: 1.25rem;
 }
 
 .profile-card {
     background: #FFFFFF;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
+    box-shadow: 0 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.1);
+    border-radius: 1.25rem;
     width: 100%;
-    max-width: 350px;
-    padding: 20px;
+    max-width: 21.875rem;
+    padding: 1.25rem;
     text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center the content */
+    align-items: center;
 }
 
 .profile-photo-wrapper {
     position: relative;
-    width: 230px; /* Increased size */
-    height: 230px;
+    width: 14.375rem;
+    height: 14.375rem;
     cursor: pointer;
     overflow: hidden;
     border-radius: 50%;
-    margin-bottom: 20px; /* Center the image and add bottom margin */
-    padding: 5px; /* Add slight padding */
+    margin-bottom: 1.25rem;
+    padding: 0.3125rem;
 }
 
 .profile-photo {
@@ -1068,7 +1016,7 @@ footer {
     justify-content: center;
     align-items: center;
     color: white;
-    font-size: 20px;
+    font-size: 1.25rem;
     opacity: 0;
     transition: opacity 0.3s;
 }
@@ -1082,13 +1030,13 @@ footer {
 }
 
 .profile-info {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
     width: 100%;
-    text-align: center; /* Ensure text is centered */
+    text-align: center;
 }
 
 .profile-info h1 {
-    margin: 10px 0;
+    margin: 0.625rem 0;
     color: #333;
 }
 
@@ -1100,11 +1048,10 @@ footer {
 .profile-action-buttons {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 1.25rem;
 }
 
-/* Responsive design for smaller devices */
-@media (max-width: 600px) {
+@media (max-width: 37.5rem) {
     .profile-container {
         flex-direction: column;
         align-items: center;
@@ -1116,9 +1063,9 @@ footer {
 }
 
 .alert {
-    margin: 20px;
-    padding: 10px;
-    border-radius: 5px;
+    margin: 1.25rem;
+    padding: 0.625rem;
+    border-radius: 0.3125rem;
 }
 
 .alert.success {
@@ -1130,416 +1077,150 @@ footer {
     background-color: #f8d7da;
     color: #721c24;
 }
-Updated profile.php
-Ensure your 
-.edit-text {
-    transform: translateY(20px);
-    transition: transform 0.3s ease;
-}
 
-.edit-icon {
-    transform: translateY(-20px);
-    transition: transform 0.3s ease;
-}
-
-.edit-icon i {
-    font-size: 24px;
-}
-
-.edit-text {
-    font-size: 14px;
-    font-weight: bold;
-}
-
-
-.previous-profile-photo {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    
-}
-
-
-.save-button {
-
+.action-button {
     font-family: 'CustomFont', sans-serif;
     display: block;
-    width: 150px;
-    padding: 10px;
-    margin-top: 20px;
+    width: 9.375rem;
+    padding: 0.625rem;
+    margin-top: 0.625rem;
     background-color: var(--darker-forest-green);
     color: var(--almost-white);
     border: none;
-    border-radius: 40px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    align-self: center;
-}
-
-.save-button:hover {
-    background-color: var(--almost-white);
-    color: var(--darker-forest-green);
-    border: 2px solid var(--darker-forest-green);
-}
-
-.modal-title {
-    text-align: center; /* Align only the title to the center */
-    margin-bottom: 20px; /* Add margin to separate from other elements */
-}
-
-
-.sell-container {
-    margin-top: 120px;
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    background-color: var(--almost-white);
-}
-
-.sell-container h2 {
-    width: 100%;
-    max-width: 320px; /* Maximum width of the form */
-    background-color: var(--almost-white);
-    padding: 20px;
-    border-radius: 8px;
-}
-
-.selling-details {
-    display: flex;
-    flex-wrap: wrap;
-    max-width: 800px;
-    background-color: var(--almost-white);
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-    align-items: center; /* Align items vertically in the center */
-}
-
-.sell-page-button {
-    margin-top: 20px;
-    background-color: var(--forest-green);
-    color: white;
-    border: none;
-    font-family: 'CustomFontSemi';
-    border-radius: 4px;
-    padding: 10px 20px;
-    font-size: 16px;
+    border-radius: 2.5rem;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.sell-page-button:hover {
-    background-color: var(--button-hover-purple);
+.action-button:hover {
+    background-color: var(--text-dark);
+    transform: scale(1.03);
 }
 
-
-.form-group {
-    margin-bottom: 20px;
-    margin-bottom: 2em;
-}
-
-.form-group-condition {
-    margin-bottom: 20px;
-    margin-bottom: 2em;
-}
-
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5em;
-    color: var(--text-dark);
-}
-
-
-.checkout-button {
-    margin-top: 20px;
-    background-color: var(--darker-forest-green);
-    color: white;
-    border: none;
-    font-family: 'CustomFontSemi';
-    border-radius: 4px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.checkout-button:hover {
-    background-color: var(--darker-pastel-green);
-}
-
-.books-grid {
-    margin-top: 120px;
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    background-color: var(--almost-white);
-}
-
-
-.books-container-wishlist {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Add gap between each book item */
-    padding: 20px; /* Add padding to the container */
-}
-
-.book-item-wishlist {
-    margin-bottom: 20px;
-}
-
-.book-card-wishlist {
-    display: flex;
-    align-items: center;
-    background-color: #f9f9f9; /* Adjust the background color as needed */
-    border: 2px solid var(--forest-green); /* Adjust the border color and thickness as needed */
-    border-radius: 8px; /* Adjust the border radius as needed */
-    padding: 20px; /* Adjust the padding as needed */
-}
-
-.book-card-wishlist img {
-    max-width: 120px; /* Adjust the width of the image as needed */
-    margin-right: 20px; /* Adjust the spacing between the image and text */
-}
-
-.book-details-wishlist {
-    flex: 1;
-}
-
-.remove-from-wishlist {
-    margin-left: 10px; /* Push the link to the right */
-    color: var(--darker-forest-green); /* Adjust the color as needed */
-    cursor: pointer; /* Change cursor to pointer on hover */
-}
-
-.remove-from-wishlist a {
-    text-decoration: none;
-}
-
-.add-to-cart {
-    color: var(--darker-forest-green);
-    margin-left: 15px;    
-    cursor: pointer; /* Change cursor to pointer on hover */
-}
-
-.add-to-cart a {
-    text-decoration: none;
-}
-
-.books-container-cart {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Add gap between each book item */
-    padding: 20px; /* Add padding to the container */
-}
-
-.book-item-cart {
-    margin-bottom: 20px;
-}
-
-.book-card-cart {
-    display: flex;
-    align-items: center;
-    background-color: #f9f9f9; /* Adjust the background color as needed */
-    border: 2px solid var(--forest-green); /* Adjust the border color and thickness as needed */
-    border-radius: 8px; /* Adjust the border radius as needed */
-    padding: 20px; /* Adjust the padding as needed */
-}
-
-.book-card-cart img {
-    width: 120px; /* Adjust the width of the image as needed */
-    margin-right: 20px; /* Adjust the spacing between the image and text */
-}
-
-.book-details-cart {
-    flex: 1;
-}
-
-.remove-from-cart {
-    margin-left: 10px; /* Push the link to the right */
-    color: var(--darker-forest-green); /* Adjust the color as needed */
-    cursor: pointer; /* Change cursor to pointer on hover */
-}
-
-.remove-from-cart a {
-    text-decoration: none;
-}
-
-
-/* Media query for smaller screens */
-@media screen and (max-width: 768px) {
-    .books-grid {
-        display: flex;
-        flex-direction: column;
-        align-items: center; /* Center-align the books vertically */
-    }
-
-    /* Optional: Adjust individual book items for better spacing */
-    .book-item {
-        margin-bottom: 20px;
-    }
-}
-
-
-/* cart.php */
-.cart-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    padding: 50px;
-}
-
-.cart-items {
-    flex: 1;
-    margin-right: 20px;
-}
-
-.checkout-form {
-    flex: 1;
-    max-width: 300px;
-}
-
-.checkout-form input,
-.checkout-form select {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 8px;
-}
-
-.checkout-button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: var(--forest-green);
-    color: white;
-    border: none;
+header, footer {
+    padding: 0.625rem;
     text-align: center;
-    cursor: pointer;
-    margin-top: 10px;
 }
 
-.payment-option {
-    position: relative;
-    padding-left: 30px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    display: block;
+footer {
+    font-size: 0.8em;
+    margin-top: 1.25rem;
 }
 
-.payment-option input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
+.error {
+    color: var(--dusky-pink);
+    font-family: 'CustomFontLight', sans-serif;
+    text-align: center;
 }
 
-.checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 20px;
-    width: 20px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 50%;
-}
-
-.payment-option:hover input ~ .checkmark {
-    background-color: #f0f0f0;
-}
-
-.payment-option input:checked ~ .checkmark {
-    background-color: #2196F3;
-}
-
-.checkmark:after {
-    content: "";
-    position: absolute;
+.modal {
     display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    align-items: center;
 }
 
-.payment-option input:checked ~ .checkmark:after {
-    display: block;
+.modal-content {
+    background-color: var(--almost-white);
+    margin: 15% auto;
+    padding: 2.1875rem;
+    border: 1px solid #888;
+    width: 50%;
+    border-radius: 1.875rem;
+    align-items: center;
 }
 
-.payment-option .checkmark:after {
-    top: 7px;
-    left: 7px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: white;
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 1.75rem;
+    font-weight: bold;
 }
 
-/* Recycle styles from wishlist or other components */
-.books-container-selling {
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.modal h2 {
+    color: var(--text-dark);
+    margin-bottom: 1.25rem;
+}
+
+.modal form {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
+    flex-direction: column;
 }
 
-.book-item-selling {
-    width: 200px;
+.modal label {
+    margin-bottom: 0.3125rem;
+    color: var(--text-dark);
+    font-weight: bold;
+}
+
+.modal input[type="text"],
+.modal input[type="email"],
+.modal textarea,
+.modal input[type="file"] {
+    padding: 0.5rem;
+    width: 100%;
+    margin-bottom: 0.9375rem;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 0.25rem;
+    background-color: var(--almost-white);
+    font-family: 'CustomFontLight', sans-serif;
+}
+
+.modal textarea {
+    height: 6.25rem;
+    resize: vertical;
+}
+
+.file-upload-wrapper {
+    margin: 0.625rem 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.custom-file-upload {
+    border: 2px solid var(--balloon-box-color);
+    color: var(--balloon-box-color);
+    background-color: var(--almost-white);
+    border-radius: 1.25rem;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-family: 'CustomFont', sans-serif;
+}
+
+.custom-file-upload:hover {
+    background-color: var(--balloon-box-color);
+    color: var(--almost-white);
+}
+
+#file-chosen {
+    margin-left: 0.625rem;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.profile-photo-wrapper {
+    position: relative;
+    width: 9.375rem;
+    height: 9.375rem;
+    border-radius: 50%;
     overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.book-card-selling {
-    padding: 15px;
-    text-align: center;
-}
-
-.book-card-selling img {
-    max-width: 100%;
-    height: auto;
-}
-
-.book-details-selling {
-    margin-top: 10px;
-}
-
-.book-item-title, .book-item-author, .book-item-price {
-    margin: 10px 0;
-}
-
-.transaction-details {
-    margin-top: 15px;
-    text-align: left;
-}
-
-.remove-from-selling {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 5px 10px;
-    background-color: #f44336;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-.remove-from-selling:hover {
-    background-color: #d32f2f;
-}
-
-/* Style for Add Book Button */
-.add-book-button {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.add-book-link {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #4CAF50;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 16px;
-}
-
-.add-book-link:hover {
-    background-color: #45a049;
+    margin-right: 1.25rem;
 }
 
 .profile-container {
@@ -1548,52 +1229,37 @@ Ensure your
     align-items: center;
     flex-direction: column;
     min-height: 100vh;
-    padding: 20px;
+    padding: 1.25rem;
 }
 
 .profile-card {
     background: #FFFFFF;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-    border-radius: 20px;
+    box-shadow: 0 0.25rem 0.5rem 0 rgba(0, 0, 0, 0.1);
+    border-radius: 1.25rem;
     width: 100%;
-    max-width: 350px;
-    padding: 20px;
+    max-width: 21.875rem;
+    padding: 1.25rem;
     text-align: center;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Center the content */
+    align-items: center;
 }
 
 .profile-photo-wrapper {
     position: relative;
-    width: 220px; /* Adjusted size */
-    height: 220px;
+    width: 14.375rem;
+    height: 14.375rem;
     cursor: pointer;
     overflow: hidden;
     border-radius: 50%;
-    margin: 0 auto 20px; /* Center the image */
-    background: linear-gradient(45deg, var(--pastel-green), var(--button-hover-purple)); /* Gradient effect */
-    padding: 10px; /* Thicker border */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.profile-photo-inner {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    background-color: var(--almost-white); /* Background color inside the border */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-bottom: 1.25rem;
+    padding: 0.3125rem;
 }
 
 .profile-photo {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 50%;
 }
 
 .edit-overlay {
@@ -1607,7 +1273,7 @@ Ensure your
     justify-content: center;
     align-items: center;
     color: white;
-    font-size: 20px;
+    font-size: 1.25rem;
     opacity: 0;
     transition: opacity 0.3s;
 }
@@ -1620,16 +1286,14 @@ Ensure your
     display: none;
 }
 
-
-
 .profile-info {
-    margin-bottom: 20px;
+    margin-bottom: 1.25rem;
     width: 100%;
-    text-align: center; /* Ensure text is centered */
+    text-align: center;
 }
 
 .profile-info h1 {
-    margin: 10px 0;
+    margin: 0.625rem 0;
     color: #333;
 }
 
@@ -1641,11 +1305,10 @@ Ensure your
 .profile-action-buttons {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 1.25rem;
 }
 
-/* Responsive design for smaller devices */
-@media (max-width: 600px) {
+@media (max-width: 37.5rem) {
     .profile-container {
         flex-direction: column;
         align-items: center;
@@ -1657,9 +1320,9 @@ Ensure your
 }
 
 .alert {
-    margin: 20px;
-    padding: 10px;
-    border-radius: 5px;
+    margin: 1.25rem;
+    padding: 0.625rem;
+    border-radius: 0.3125rem;
 }
 
 .alert.success {
@@ -1678,7 +1341,7 @@ Ensure your
 }
 
 .seller-info a:hover {
-    color: var(--pastel-green); /* Change hover color if needed */
+    color: var(--pastel-green);
 }
 
 a {
@@ -1687,40 +1350,151 @@ a {
 }
 
 a:hover {
-    color: var(--pastel-green); /* Change hover color if needed */
+    color: var(--pastel-green);
 }
 
-.profile-container {
-    margin-top: 120px;
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    background-color: var(--almost-white);
-}
-
-.profile-card {
+.books-container-selling {
     display: flex;
     flex-wrap: wrap;
-    max-width: 400px;
+    justify-content: center;
+    gap: 1.25rem;
     background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    align-items: center;
-    padding: 20px;
-    text-align: center;
 }
 
+.book-item-selling {
+    border: 2px solid var(--moss-green);
+    border-radius: 0.25rem;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 12.5rem;
+    padding: 0.625rem;
+}
+
+.book-item-selling img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 0.625rem;
+    object-fit: cover;
+}
+
+.book-item-selling h3 {
+    font-family: 'CustomFontSemi';
+    font-size: 1rem;
+    color: var(--text-dark);
+    margin: 0.625rem 0;
+}
+
+.book-item-selling p {
+    font-family: 'CustomFont';
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    margin: 0.3125rem 0;
+}
+
+.view-book-details, .remove-from-selling {
+    font-family: 'CustomFontSemi';
+    background-color: var(--button-hover-purple);
+    color: var(--almost-white);
+    border: none;
+    padding: 0.3125rem 0.625rem;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.view-book-details:hover, .remove-from-selling:hover {
+    background-color: var(--text-dark);
+}
+
+.add-book-button {
+    text-align: center;
+    margin-bottom: 1.25rem;
+}
+
+.add-book-link {
+    font-family: 'CustomFontSemi';
+    background-color: var(--button-hover-purple);
+    color: var(--almost-white);
+    border: none;
+    padding: 0.625rem 1.25rem;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.add-book-link:hover {
+    background-color: var(--text-dark);
+}
+
+@media (max-width: 37.5rem) {
+    .profile-container, .profile-card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .profile-photo-wrapper {
+        width: 12.5rem;
+        height: 12.5rem;
+    }
+
+    .books-container, .books-container-selling {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .book-item, .book-item-selling {
+        width: 100%;
+    }
+}
+
+
+
+@media (max-width: 37.5rem) { /* max-width: 600px */
+    .cart-item {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .cart-item-image, .cart-item-info, .cart-item-quantity, .cart-item-total {
+        margin-bottom: 0.625rem; /* margin-bottom: 10px */
+    }
+
+    .cart-summary {
+        flex-direction: column;
+        gap: 1.25rem; /* gap: 20px */
+    }
+}
+
+/* Profile Image Wrapper */
 .profile-photo-wrapper {
     position: relative;
-    width: 220px;
-    height: 220px;
+    width: 14.375rem; /* width: 230px */
+    height: 14.375rem; /* height: 230px */
     cursor: pointer;
     overflow: hidden;
     border-radius: 50%;
-    margin: 0 auto 20px;
+    margin: 0 auto 1.25rem; /* margin: 0 auto 20px */
     background: linear-gradient(45deg, var(--pastel-green), var(--button-hover-purple));
-    padding: 10px;
-    box-sizing: border-box;
+    padding: 0.625rem; /* padding: 10px */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-photo-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: var(--almost-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .profile-photo {
@@ -1728,106 +1502,364 @@ a:hover {
     height: 100%;
     object-fit: cover;
     border-radius: 50%;
-    border: 5px solid var(--almost-white);
+}
+
+/* Book Grid Items */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(11.25rem, 1fr)); /* minmax(180px, 1fr) */
+    gap: 0.9375rem; /* gap: 15px */
+    padding: 1.25rem; /* padding: 20px */
+    justify-content: center;
+    align-items: start;
     box-sizing: border-box;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #FAFAF9;
 }
-
-.profile-info h1, .profile-info h3, .profile-info p {
-    margin: 10px 0;
-    color: var(--text-dark);
-}
-
-.books-list {
-    margin-top: 40px;
-    text-align: center;
-}
-
-
 
 .book-item {
-    border: 2px solid var(--moss-green);
-    border-radius: 4px;
+    border: 0.125rem solid var(--moss-green); /* border: 2px */
+    border-radius: 0.25rem; /* border-radius: 4px */
     overflow: hidden;
     transition: transform 0.3s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 200px;
-    padding: 10px;
+    width: 12.5rem; /* width: 200px */
+    padding: 0.625rem; /* padding: 10px */
 }
 
 .book-item img {
     max-width: 100%;
     height: auto;
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 0.625rem; /* margin-bottom: 10px */
     object-fit: cover;
 }
 
-.book-item h3 {
-    font-family: 'CustomFontSemi';
-    font-size: 1rem;
-    color: var(--text-dark);
-    margin: 10px 0;
+
+
+/* General Container Styles */
+.cart-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-top: 10em auto;
+    
 }
 
-.book-item p {
-    font-family: 'CustomFont';
-    font-size: 0.85rem;
-    color: var(--text-dark);
-    margin: 5px 0;
+.cart-items {
+    flex: 1;
+    margin-right: 20px;
 }
 
-.view-book-details {
-    font-family: 'CustomFontSemi';
-    background-color: var(--button-hover-purple);
+.cart-items h2 {
+    font-family: 'CustomFontBold', sans-serif;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.books-container-cart {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.book-item-cart {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.book-card-cart {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.book-item-image-cart {
+    height: auto;
+    width: 120px;
+    object-fit: cover;
+    border-radius: 10px 0 0 10px;
+}
+
+.book-details-cart {
+    flex: 1;
+    padding: 20px;
+}
+
+.book-item-title-cart {
+    font-family: 'CustomFontBold', sans-serif;
+    font-size: 1.2em;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.book-item-author-cart, .book-item-price-cart {
+    font-family: 'CustomFont', sans-serif;
+    font-size: 1em;
+    color: var(--text-dark);
+    margin-bottom: 2em;
+}
+
+.remove-from-cart {
+    
+    font-family: 'CustomFontSemi', sans-serif;
+    color: var(--text-dark);
+    text-decoration: none;
+    background-color: transparent;
+    border: 2px solid var(--text-dark);
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    
+}
+
+.remove-from-cart:hover {
+    background-color: var(--text-dark);
+    color: var(--almost-white);
+}
+
+.checkout-form {
+    flex: 1;
+    max-width: 35%;
+    background: linear-gradient(45deg, var(--pastel-green), var(--button-hover-purple));
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    align-items: center;
+}
+
+.checkout-form h2 {
+    font-family: 'CustomFontBold', sans-serif;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.checkout-form p {
+    font-family: 'CustomFontSemi', sans-serif;
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    align-items: center;
+}
+
+.checkout-form input {
+    width: 99%;
+    padding: 0.5em 1em; /* Use em units for padding */
+    margin-bottom: 1em; /* Use em units for margin */
+    border: 2px solid var(--text-dark);
+    border-radius: 10px;
+    font-family: 'CustomFont', sans-serif;
+    box-sizing: border-box; /* Ensure padding is included in the total width */
+    outline: none; /* Remove default outline */
+    align-self: center;
+}
+.checkout-form input:focus {
+    border-color: var(--pastel-green); /* Change border color to pastel green on focus */
+    box-shadow: 0 0 0 2px var(--pastel-green); /* Add a custom outline with pastel green color */
+}
+
+.payment-option {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-family: 'CustomFont', sans-serif;
+    color: var(--text-dark);
+}
+
+.payment-option input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.payment-option .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #fff;
+    border: 2px solid var(--text-dark);
+    border-radius: 50%;
+}
+
+.payment-option:hover input ~ .checkmark {
+    background-color: #f0f0f0;
+}
+
+.payment-option input:checked ~ .checkmark {
+    background-color: var(--darker-forest-green);
+}
+
+.payment-option .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.payment-option input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.payment-option .checkmark:after {
+    top: 7px;
+    left: 7px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: white;
+}
+
+.checkout-button {
+    font-family: 'CustomFontSemi', sans-serif;
+    width: 100%;
+    padding: 10px;
+    background-color: var(--text-dark);
     color: var(--almost-white);
     border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    text-decoration: none;
+    border-radius: 10px;
+    cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.view-book-details:hover {
-    background-color: var(--text-dark);
-}
+.checkout-button:hover {
 
-.footer {
-    margin: 20px;
-    padding: 10px;
-    border-radius: 5px;
-}
-
-.alert.success {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.alert.error {
-    background-color: #f8d7da;
-    color: #721c24;
+    color: var(--button-hover-purple);
+    
 }
 
 /* Responsive Design */
-@media (max-width: 600px) {
-    .profile-container, .profile-card {
+@media (max-width: 768px) {
+    .cart-container {
         flex-direction: column;
         align-items: center;
+        padding: 20px;
     }
 
-    .profile-photo-wrapper {
-        width: 200px;
-        height: 200px;
-    }
-
-    .books-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .book-item {
+    .cart-items, .checkout-form {
         width: 100%;
+        margin: 10px 0;
     }
+
+    .book-item-cart {
+        flex-direction: column;
+    }
+
+    .book-item-image-cart {
+        width: 100%;
+        height: auto;
+        border-radius: 10px 10px 0 0;
+    }
+
+    .remove-from-cart {
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+    }
+}
+
+/* Profile Image Wrapper */
+.profile-photo-wrapper {
+    position: relative;
+    width: 14.375rem; /* width: 230px */
+    height: 14.375rem; /* height: 230px */
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: 0 auto 1.25rem; /* margin: 0 auto 20px */
+    background: linear-gradient(45deg, var(--pastel-green), var(--button-hover-purple));
+    padding: 0.625rem; /* padding: 10px */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-photo-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: var(--almost-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Book Grid Items */
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(11.25rem, 1fr)); /* minmax(180px, 1fr) */
+    gap: 1.5rem; /* gap: 24px */
+    padding: 1.5rem; /* padding: 24px */
+    justify-content: center;
+    align-items: start;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #FAFAF9;
+}
+
+.book-item {
+    border: 0.125rem solid var(--moss-green); /* border: 2px */
+    border-radius: 0.5rem; /* border-radius: 8px */
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 12.5rem; /* width: 200px */
+    padding: 1.25rem; /* padding: 20px */
+    background-color: var(--almost-white);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Adds shadow for depth */
+}
+
+.book-item img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-bottom: 0.625rem; /* margin-bottom: 10px */
+    object-fit: cover;
+    border-radius: 0.5rem; /* border-radius: 8px */
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Adds shadow for depth */
+}
+
+.book-item h3 {
+    font-family: 'CustomFontSemi', sans-serif;
+    font-size: 1.125rem; /* font-size: 18px */
+    color: var(--text-dark);
+    margin: 0.625rem 0; /* margin: 10px 0 */
+}
+
+.book-item p {
+    font-family: 'CustomFont', sans-serif;
+    font-size: 0.9375rem; /* font-size: 15px */
+    color: var(--text-dark);
+    margin: 0.3125rem 0; /* margin: 5px 0 */
+}
+
+main{
+    margin-top: 10em;
 }

@@ -46,70 +46,68 @@ if (isset($_GET['remove_from_selling']) && isset($_GET['book_id'])) {
 <header>
     <h2 class="logo-title"><a href="../index.php">FableFoundry</a></h2>
     <nav class="nav-left">
-            <ul>
-                <li><a href="../index.php">Home</a></li>
-                <li><a href="lookups.php">Shop All</a></li>
-                <?php
-                include 'db.php';
+        <ul>
+            <li><a href="../index.php">Home</a></li>
+            <li><a href="lookups.php">Shop All</a></li>
+            <?php
+            // Fetch genres from the database
+            $sql = "SELECT genre_id, name FROM genres LIMIT 2";
+            $stmt = $conn->query($sql);
+            $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                // Fetch genres from the database
-                $sql = "SELECT genre_id, name FROM genres LIMIT 2";
-                $stmt = $conn->query($sql);
-                $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                // Display genre filters
-                foreach ($genres as $genre) {
-                    echo '<li><a href="lookups.php?genre=' . $genre['genre_id'] . '">' . $genre['name'] . '</a></li>';
-                }
-                ?>
-            </ul>
-        </nav>
-        <nav class="nav-right">
-            <ul>
-                <li><a href="selling.php">Selling</a></li>
-                <li><a href="wishlist.php">Wishlist</a></li>
-                <li><a href="profile.php">Profile</a></li>
-                <li><a href="cart.php">Cart</a></li>
-            </ul>
-        </nav>
+            // Display genre filters
+            foreach ($genres as $genre) {
+                echo '<li><a href="lookups.php?genre=' . $genre['genre_id'] . '">' . $genre['name'] . '</a></li>';
+            }
+            ?>
+        </ul>
+    </nav>
+    <nav class="nav-right">
+        <ul>
+            <li><a href="selling.php">Selling</a></li>
+            <li><a href="wishlist.php">Wishlist</a></li>
+            <li><a href="profile.php">Profile</a></li>
+            <li><a href="cart.php">Cart</a></li>
+        </ul>
+    </nav>
 </header>
 
-<main>
-    <h1>Books You're Selling</h1>
-
-    <!-- Add Book Button -->
-    <div class="add-book-button">
-        <a href="sell.php" class="add-book-link">Add New Book</a>
-    </div>
-
-    <?php if (empty($sellingItems)) : ?>
-        <p>You are not selling any books.</p>
-    <?php else : ?>
-        <div class="books-container-selling">
-            <?php foreach ($sellingItems as $item) : ?>
-                <div class="book-item-selling">
-                    <div class="book-card-selling">
-                        <img src="../images/<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>">
-                        <div class="book-details-selling">
-                            <h3 class="book-item-title"><?php echo htmlspecialchars($item['title']); ?></h3>
-                            <p class="book-item-author">by <?php echo htmlspecialchars($item['author']); ?></p>
-                            <p class="book-item-price">€<?php echo number_format($item['listed_price'], 2); ?></p>
-                            <?php if ($item['transaction_id']) : ?>
-                                <div class="transaction-details">
-                                    <h4>Transaction Details</h4>
-                                    <p>Transaction ID: <?php echo htmlspecialchars($item['transaction_id']); ?></p>
-                                    <p>Sale Price: €<?php echo number_format($item['sale_price'], 2); ?></p>
-                                    <p>Transaction Date: <?php echo htmlspecialchars($item['transaction_date']); ?></p>
-                                    <p>Status: <?php echo htmlspecialchars($item['status']); ?></p>
-                                </div>
-                            <?php endif; ?>
-                            <a href="selling.php?remove_from_selling=true&book_id=<?php echo $item['book_id']; ?>" class="remove-from-selling">Remove Listing</a>
+<main class="profile-container">
+    <div class="profile-card">
+        <section class="profile-info">
+            <h1>Books You're Selling</h1>
+            <!-- Add Book Button -->
+            <div class="add-book-button">
+                <a href="sell.php" class="add-book-link">Add New Book</a>
+            </div>
+            <?php if (empty($sellingItems)) : ?>
+                <p>You are not selling any books.</p>
+            <?php else : ?>
+                <div class="books-container-selling">
+                    <?php foreach ($sellingItems as $item) : ?>
+                        <div class="book-item">
+                            <img src="../images/<?php echo htmlspecialchars($item['image_url']); ?>" alt="<?php echo htmlspecialchars($item['title']); ?>">
+                            <div class="book-details">
+                                <h3 class="book-item-title"><?php echo htmlspecialchars($item['title']); ?></h3>
+                                <p class="book-item-author">by <?php echo htmlspecialchars($item['author']); ?></p>
+                                <p class="book-item-price">€<?php echo number_format($item['listed_price'], 2); ?></p>
+                                <?php if ($item['transaction_id']) : ?>
+                                    <div class="transaction-details">
+                                        <h4>Transaction Details</h4>
+                                        <p>Transaction ID: <?php echo htmlspecialchars($item['transaction_id']); ?></p>
+                                        <p>Sale Price: €<?php echo number_format($item['sale_price'], 2); ?></p>
+                                        <p>Transaction Date: <?php echo htmlspecialchars($item['transaction_date']); ?></p>
+                                        <p>Status: <?php echo htmlspecialchars($item['status']); ?></p>
+                                    </div>
+                                <?php endif; ?>
+                                <a href="selling.php?remove_from_selling=true&book_id=<?php echo $item['book_id']; ?>" class="remove-from-selling">Remove Listing</a>
+                            </div>
                         </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
-            <?php endforeach; ?>
-        </div>
-    <?php endif; ?>
+            <?php endif; ?>
+        </section>
+    </div>
 </main>
 
 <footer>

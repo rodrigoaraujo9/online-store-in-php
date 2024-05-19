@@ -62,37 +62,35 @@ $totalCostWithShipping = $totalCost + $shippingCost;
 <header>
     <h2 class="logo-title"><a href="../index.php">FableFoundry</a></h2>
     <nav class="nav-left">
-            <ul>
-                <li><a href="../index.php">Home</a></li>
-                <li><a href="lookups.php">Shop All</a></li>
-                <?php
-                include 'db.php';
+        <ul>
+            <li><a href="../index.php">Home</a></li>
+            <li><a href="lookups.php">Shop All</a></li>
+            <?php
+            // Fetch genres from the database
+            $sql = "SELECT genre_id, name FROM genres LIMIT 2";
+            $stmt = $conn->query($sql);
+            $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                // Fetch genres from the database
-                $sql = "SELECT genre_id, name FROM genres LIMIT 2";
-                $stmt = $conn->query($sql);
-                $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-                // Display genre filters
-                foreach ($genres as $genre) {
-                    echo '<li><a href="lookups.php?genre=' . $genre['genre_id'] . '">' . $genre['name'] . '</a></li>';
-                }
-                ?>
-            </ul>
-        </nav>
-        <nav class="nav-right">
-            <ul>
-                <li><a href="selling.php">Selling</a></li>
-                <li><a href="wishlist.php">Wishlist</a></li>
-                <li><a href="profile.php">Profile</a></li>
-                <li><a href="cart.php">Cart</a></li>
-            </ul>
-        </nav>
+            // Display genre filters
+            foreach ($genres as $genre) {
+                echo '<li><a href="lookups.php?genre=' . $genre['genre_id'] . '">' . $genre['name'] . '</a></li>';
+            }
+            ?>
+        </ul>
+    </nav>
+    <nav class="nav-right">
+        <ul>
+            <li><a href="selling.php">Selling</a></li>
+            <li><a href="wishlist.php">Wishlist</a></li>
+            <li><a href="profile.php">Profile</a></li>
+            <li><a href="cart.php">Cart</a></li>
+        </ul>
+    </nav>
 </header>
 
-<br>
-<main class="cart-container">
-    <div class="cart-items">
+<main>
+<div class="cart-container">
+<div class="cart-items">
         <h2>Shopping Cart</h2>
         <?php if (empty($cartItems)) : ?>
             <p>Your cart is empty.</p>
@@ -106,7 +104,6 @@ $totalCostWithShipping = $totalCost + $shippingCost;
                                 <h3 class="book-item-title-cart"><?php echo htmlspecialchars($item['title']); ?></h3>
                                 <p class="book-item-author-cart">by <?php echo htmlspecialchars($item['author']); ?></p>
                                 <p class="book-item-price-cart">€<?php echo number_format($item['listed_price'], 2); ?></p>
-                                <!-- Add a link to remove the item from the cart -->
                                 <a href="cart.php?remove_from_cart=true&book_id=<?php echo $item['book_id']; ?>" class="remove-from-cart">Remove from Cart</a>
                             </div>
                         </div>
@@ -116,7 +113,6 @@ $totalCostWithShipping = $totalCost + $shippingCost;
         <?php endif; ?>
     </div>
 
-    <br>
     <div class="checkout-form">
         <h2>Checkout</h2>
         <p>Total cost of books: €<?php echo number_format($totalCost, 2); ?></p>
@@ -125,7 +121,6 @@ $totalCostWithShipping = $totalCost + $shippingCost;
         <form action="#" method="post">
             <input type="text" name="address" placeholder="Address" required>
             <input type="text" name="postal_code" placeholder="Postal Code" required>
-            <br>
             <p> Payment options: </p>
             <label class="payment-option">
                 Credit Card
@@ -142,10 +137,10 @@ $totalCostWithShipping = $totalCost + $shippingCost;
                 <input type="radio" name="payment_type" value="Bank Transfer" required>
                 <span class="checkmark"></span>
             </label>
-            <br>
             <button type="submit" class="checkout-button">Checkout</button>
         </form>
     </div>
+                </div>
 </main>
 
 <footer>
