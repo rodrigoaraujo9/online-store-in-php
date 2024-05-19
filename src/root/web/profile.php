@@ -78,7 +78,7 @@ function echoSessionVar($varName) {
                     </div>
                 </form>
                 <h1><?php echoSessionVar('name'); ?> 
-                    <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'): ?>
                         <span class="admin-check">✔</span>
                     <?php endif; ?>
                 </h1>
@@ -87,13 +87,12 @@ function echoSessionVar($varName) {
                 
                 <div class="profile-action-buttons">
                     <button class="action-button" onclick="openModal('editProfileModal')">Edit Profile</button>
-                    <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+                    <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'Admin'): ?>
                         <button class="action-button" onclick="location.href='make_admin.php'">Make Admin</button>
                     <?php endif; ?>
                     <form action="logout.php" method="post">
                         <button type="submit" class="action-button">Logout</button>
                     </form>
-                    
                 </div>
             </section>
         </div>

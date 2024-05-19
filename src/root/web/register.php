@@ -14,50 +14,63 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Default profile picture URL
     $profilePictureUrl = '../images/profile_picture.png'; // Ensure this path points to your default image
 
-    // Check if username or email already exists
-    $checkSql = "SELECT username, email FROM users WHERE username = :username OR email = :email";
-    $checkStmt = $conn->prepare($checkSql);
-    $checkStmt->bindParam(':username', $username);
-    $checkStmt->bindParam(':email', $email);
-    $checkStmt->execute();
+    try {
+        // Check if username or email already exists
+        $checkSql = "SELECT username, email FROM users WHERE username = :username OR email = :email";
+        $checkStmt = $conn->prepare($checkSql);
+        $checkStmt->bindParam(':username', $username);
+        $checkStmt->bindParam(':email', $email);
+        $checkStmt->execute();
 
-    if ($checkStmt->rowCount() > 0) {
-        $existing = $checkStmt->fetch(PDO::FETCH_ASSOC);
-        if ($existing['username'] === $username) {
-            $error = "Username already in use. Please choose another.";
-        }
-        if ($existing['email'] === $email) {
-            $error = "Email address already in use. Please use a different email address.";
-        }
-    } else {
-        // Proceed with registration if no conflicts
-        $sql = "INSERT INTO users (name, username, password, email, role, registered_date, profile_picture_url) 
-                VALUES (:name, :username, :password, :email, 'Admin', DATE('now'), :profile_picture_url)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bindParam(':name', $name);
-        $stmt->bindParam(':username', $username);
-        $stmt->bindParam(':password', $hashed_password);
-        $stmt->bindParam(':email', $email);
-        $stmt->bindParam(':profile_picture_url', $profilePictureUrl);
+        // Debug: Print the number of rows returned
+        $rowCount = $checkStmt->rowCount();
+        echo "Row count: " . $rowCount . "<br>";
 
-        try {
-            $stmt->execute();
-            $_SESSION['user_id'] = $conn->lastInsertId();
-            $_SESSION['username'] = $username;
-            $_SESSION['name'] = $name;
-            $_SESSION['email'] = $email;
-            $_SESSION['role'] = 'Admin'; // Set the role to Admin
-            $_SESSION['profile_picture_url'] = $profilePictureUrl;
+        if ($rowCount > 0) {
+            $existing = $checkStmt->fetch(PDO::FETCH_ASSOC);
+            // Debug: Print the existing user details
+            echo "Existing User: ";
+            print_r($existing);
+            echo "<br>";
 
-            header("Location: profile.php");
-            exit;
-        } catch (PDOException $e) {
-            if ($e->getCode() == 23000) {
-                $error = "Email or username already in use.";
-            } else {
-                $error = "Registration failed. Please try again later.";
+            if ($existing['username'] === $username) {
+                $error = "Username already in use. Please choose another.";
+            }
+            if ($existing['email'] === $email) {
+                $error = "Email address already in use. Please use a different email address.";
+            }
+        } else {
+            // Proceed with registration if no conflicts
+            $sql = "INSERT INTO users (name, username, password, email, role, registered_date, profile_picture_url) 
+                    VALUES (:name, :username, :password, :email, 'User', DATE('now'), :profile_picture_url)";
+            $stmt = $conn->prepare($sql);
+            $stmt->bindParam(':name', $name);
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':password', $hashed_password);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':profile_picture_url', $profilePictureUrl);
+
+            try {
+                $stmt->execute();
+                $_SESSION['user_id'] = $conn->lastInsertId();
+                $_SESSION['username'] = $username;
+                $_SESSION['name'] = $name;
+                $_SESSION['email'] = $email;
+                $_SESSION['role'] = 'User'; // Set the role to User
+                $_SESSION['profile_picture_url'] = $profilePictureUrl;
+
+                header("Location: profile.php");
+                exit;
+            } catch (PDOException $e) {
+                if ($e->getCode() == 23000) {
+                    $error = "Email or username already in use.";
+                } else {
+                    $error = "Registration failed. Please try again later.";
+                }
             }
         }
+    } catch (PDOException $e) {
+        $error = "Database error: " . $e->getMessage();
     }
 }
 ?>

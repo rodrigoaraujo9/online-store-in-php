@@ -15,7 +15,7 @@ CREATE TABLE users (
     username TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
-    role TEXT NOT NULL CHECK(role IN ('Buyer', 'Seller', 'Admin')),
+    role TEXT NOT NULL CHECK(role IN ('User', 'Admin')),
     profile_picture_url TEXT,
     registered_date DATE NOT NULL,
     bio TEXT
@@ -111,6 +111,3 @@ VALUES
     ('Science Fiction', 'Fictional stories based on scientific discoveries, space exploration, etc.'),
     ('Fantasy', 'Stories often set in imaginary worlds with magical elements.'),
     ('Mystery', 'Intriguing narratives focused on solving puzzles or uncovering secrets.');
-
-INSERT INTO users (name, username, password, email, role, profile_picture_url, registered_date, bio)
-VALUES ('Admin User', 'admin', '$2y$10$0fbpAq5k./VLxg4tZCmGEOXbd8Bp9Pdh5x3Lw6RKHXrmFPiC3fy1W', 'admin@example.com', 'Admin', '../images/profiles/admin.jpg', DATE('now'), 'Administrator of the system');
