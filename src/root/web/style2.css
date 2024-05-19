@@ -158,7 +158,7 @@ nav ul li a:hover {
     font-family: 'CustomFontSemi', Arial, sans-serif;
     display: inline-block;
     padding: 0.625rem 1.875rem;
-    background: linear-gradient(45deg, var(--pastel-green), var(--button-hover-purple));
+    background: linear-gradient(135deg, var(--pastel-green) 0%, var(--button-hover-purple) 100%);
     color: var(--almost-white);
     border-radius: 3.125rem;
     text-decoration: none;
