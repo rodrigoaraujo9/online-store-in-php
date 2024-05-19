@@ -21,8 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 }
 
-$usersStmt = $conn->prepare("SELECT user_id, username, role FROM users");
-$usersStmt->execute();
+$currentUserId = $_SESSION['user_id'];
+$usersStmt = $conn->prepare("SELECT user_id, username, role FROM users WHERE user_id != :currentUserId");
+$usersStmt->execute(['currentUserId' => $currentUserId]);
 $users = $usersStmt->fetchAll(PDO::FETCH_ASSOC);
 
 function displayFlashMessage() {
