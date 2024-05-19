@@ -68,6 +68,78 @@ if (isset($_GET['add_to_cart']) && isset($_GET['book_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FableFoundry - Wishlist</title>
     <link rel="stylesheet" href="/web/style2.css">
+    <style>
+    .books-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        justify-content: center; /* Center items horizontally */
+        padding: 1rem;
+    }
+
+    .book-item {
+        width: 300px; /* Fixed width for better layout */
+        border: 1px solid var(--darker-forest-green);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        background-color: var(--almost-white);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+        transition: transform 0.3s ease;
+    }
+
+    .book-item:hover {
+        transform: scale(1.05); /* Slightly enlarge on hover */
+    }
+
+    .book-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .book-card img {
+        width: 100%;
+        height: 200px; /* Fixed height for images */
+        object-fit: cover;
+    }
+
+    .book-details-wishlist {
+        padding: 1rem;
+        text-align: center; /* Center text within each book item */
+    }
+
+    .book-item-title {
+        font-family: 'CustomFontSemi';
+        color: var(--text-dark);
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .book-item-author, .book-item-price {
+        font-family: 'CustomFont';
+        color: var(--text-dark);
+        margin-bottom: 0.5rem;
+    }
+
+    .remove-from-wishlist, .add-to-cart {
+        display: inline-block;
+        margin-top: 0.5rem;
+        color: var(--almost-white);
+        text-decoration: none;
+        font-family: 'CustomFontSemi';
+        background-color: var(--text-dark);
+        border: 1px solid var(--text-dark);
+        border-radius: 0.25rem;
+        padding: 0.5rem 1rem;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .remove-from-wishlist:hover, .add-to-cart:hover {
+        
+    }
+</style>
 </head>
 <body>
 <header>
