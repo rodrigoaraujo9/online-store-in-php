@@ -1890,6 +1890,10 @@ a:hover {
 }
 
 
+
+.sellbody{
+    background: linear-gradient(45deg, var(--pastel-green), var(--button-hover-purple));
+}
 .sell-container {
     display: flex;
     justify-content: center;
@@ -1906,7 +1910,8 @@ a:hover {
     box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 600px;
-    margin: 1rem; /* Add margin to ensure proper spacing */
+    margin: 1rem;
+    box-sizing: border-box;
 }
 
 .selling-details h2 {
@@ -1920,10 +1925,16 @@ a:hover {
 .selling-details form {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .form-group, .form-group-condition {
     margin-bottom: 1.25rem;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 0.75rem; /* Added padding for equal left and right margins */
 }
 
 .form-group label, .form-group-condition label {
@@ -1939,12 +1950,19 @@ a:hover {
     border: 1px solid #ccc;
     border-radius: 0.25rem;
     font-family: 'CustomFontLight', Arial, sans-serif;
+    box-sizing: border-box;
+}
+
+.form-group input[type="file"] {
+    padding: 0.375rem;
 }
 
 .form-group-condition .stars {
     display: flex;
     justify-content: space-between;
     width: 100%;
+    max-width: 550px;
+    box-sizing: border-box;
 }
 
 .form-group-condition .stars label {
@@ -1956,22 +1974,22 @@ a:hover {
 .sell-page-button {
     font-family: 'CustomFontSemi', Arial, sans-serif;
     padding: 0.75rem 1.5rem;
-    background-color: var(--button-hover-purple);
+    background: linear-gradient(135deg, var(--pastel-green) 0%, var(--button-hover-purple) 100%);
     color: var(--almost-white);
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
+    border-radius: 3.125rem;
+    text-decoration: none;
     transition: background-color 0.3s, transform 0.3s;
-    margin-top: 1rem; /* Add margin to ensure proper spacing */
+    border: none;
+    margin-top: 1rem;
+    width: calc(100% - 1.5rem); /* Adjusted width to match padding */
+    text-align: center;
 }
 
 .sell-page-button:hover {
-    background-color: var(--text-dark);
+    background: linear-gradient(135deg, var(--button-hover-purple) 0%, var(--pastel-green) 100%);
     transform: scale(1.05);
+    box-shadow: 0 0.35rem 0.75rem rgba(0, 0, 0, 0.15);
 }
 
-/* Footer */
 
-.sellbody{
-    background: linear-gradient(45deg, var(--pastel-green), var(--button-hover-purple));
-}
+   
