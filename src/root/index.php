@@ -107,12 +107,12 @@ $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <div class="main-feature">
-    <h1>Shop Our Picks For the Week</h1>
+    <h1>Shop Some of Our Picks</h1>
     <div class="books-grid">
         <?php
-        // Fetch and display books
+        // Fetch and display 7 random books
         try {
-            $sql = "SELECT book_id, title, author, listed_price, image_url FROM books LIMIT 8";
+            $sql = "SELECT book_id, title, author, listed_price, image_url FROM books ORDER BY RANDOM() LIMIT 7";
             $stmt = $conn->query($sql);
         
             while ($book = $stmt->fetch(PDO::FETCH_ASSOC)) {

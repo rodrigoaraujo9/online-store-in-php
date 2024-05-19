@@ -7,6 +7,7 @@ DROP TABLE IF EXISTS transactions;
 DROP TABLE IF EXISTS books;
 DROP TABLE IF EXISTS genres;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS age_groups;
 
 -- Create users table
 CREATE TABLE users (
@@ -28,6 +29,12 @@ CREATE TABLE genres (
     description TEXT
 );
 
+-- Create age_groups table
+CREATE TABLE age_groups (
+    age_group_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    age_group TEXT NOT NULL UNIQUE
+);
+
 -- Create books table
 CREATE TABLE books (
     book_id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -42,9 +49,10 @@ CREATE TABLE books (
     description TEXT,
     image_url TEXT,
     listing_date DATE NOT NULL,
-    age_group TEXT NOT NULL CHECK(age_group IN ('Children', 'Teens', 'Adults')),
+    age_group_id INTEGER NOT NULL,
     FOREIGN KEY (genre_id) REFERENCES genres(genre_id),
-    FOREIGN KEY (seller_id) REFERENCES users(user_id)
+    FOREIGN KEY (seller_id) REFERENCES users(user_id),
+    FOREIGN KEY (age_group_id) REFERENCES age_groups(age_group_id)
 );
 
 -- Create transactions table
@@ -111,3 +119,10 @@ VALUES
     ('Science Fiction', 'Fictional stories based on scientific discoveries, space exploration, etc.'),
     ('Fantasy', 'Stories often set in imaginary worlds with magical elements.'),
     ('Mystery', 'Intriguing narratives focused on solving puzzles or uncovering secrets.');
+
+-- Insert initial data into age_groups table
+INSERT INTO age_groups (age_group) 
+VALUES 
+    ('Children'),
+    ('Teens'),
+    ('Adults');

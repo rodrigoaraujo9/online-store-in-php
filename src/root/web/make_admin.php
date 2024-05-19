@@ -88,7 +88,7 @@ function displayFlashMessage() {
         }
 
         .promote-button:hover, .demote-button:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
             box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
         }
 
