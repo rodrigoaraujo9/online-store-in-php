@@ -65,7 +65,6 @@ if (isset($_POST['add_to_cart'])) {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,6 +72,27 @@ if (isset($_POST['add_to_cart'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Details - FableFoundry</title>
     <link rel="stylesheet" href="style2.css">
+    <style>
+        .star-rating {
+            display: inline-block;
+            color: var(--text-dark);
+        }
+        .star-rating .filled {
+            color: var(--pastel-green);
+        }
+        .add-to-cart-button {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.75rem 1.5rem;
+            background: linear-gradient(135deg, var(--button-hover-purple) 0%, var(--pastel-green) 100%);
+            color: var(--almost-white);
+            border-radius: 1.25rem;
+            text-decoration: none;
+            font-family: 'CustomFontSemi';
+            transition: transform 0.3s, background-color 0.3s;
+            border: none;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -108,36 +128,44 @@ if (isset($_POST['add_to_cart'])) {
 
     <main>
         <div class="book-detail-container">
-        <div class="book-detail">
-            <div class="book-image">
-                <img src="../images/<?= htmlspecialchars($book['image_url']); ?>" alt="<?= htmlspecialchars($book['title']); ?>">
-            </div>
-            <div class="book-metadata">
-                <h1 class="book-title">Title: <?= htmlspecialchars($book['title']); ?></h1>
-                <p class="book-author">Author: <?= htmlspecialchars($book['author']); ?></p>
-                <p class="book-isbn">ISBN: <?= htmlspecialchars($book['isbn']); ?></p>
-                <p class="book-genre">Genre ID: <?= $book['genre_id']; ?> (Classics)</p>
-                <p class="book-seller">Seller: <?= htmlspecialchars($seller['name']); ?></p>
-                <p class="book-condition">Condition: <?= htmlspecialchars($book['condition']); ?></p>
-                <p class="book-price">Listed Price: $<?= number_format($book['listed_price'], 2); ?></p>
-                <p class="book-description">Description: <?= htmlspecialchars($book['description']); ?></p>
-                <p class="book-listing-date">Listing Date: <?= htmlspecialchars($book['listing_date']); ?></p>
-                <!-- Add form to submit book to cart -->
-                <form method="post">
-                    <input type="hidden" name="book_id" value="<?= $book_id ?>">
-                    <button type="submit" name="add_to_cart" class="add-to-cart-button">Add to Cart</button>
-                </form>
+            <div class="book-detail">
+                <div class="book-image">
+                    <img src="../images/<?= htmlspecialchars($book['image_url']); ?>" alt="<?= htmlspecialchars($book['title']); ?>">
+                </div>
+                <div class="book-metadata">
+                    <h1 class="book-title">Title: <?= htmlspecialchars($book['title']); ?></h1>
+                    <p class="book-author">Author: <?= htmlspecialchars($book['author']); ?></p>
+                    <p class="book-isbn">ISBN: <?= htmlspecialchars($book['isbn']); ?></p>
+                    <p class="book-genre">Genre ID: <?= $book['genre_id']; ?> (Classics)</p>
+                    <p class="book-seller">Seller: <?= htmlspecialchars($seller['name']); ?></p>
+                    <div class="star-rating">
+                        <span>Condition: </span>
+                        <?php
+                        $condition = intval($book['condition']);
+                        for ($i = 1; $i <= 5; $i++) {
+                            echo $i <= $condition ? '<span class="filled">&#9733;</span>' : '<span>&#9733;</span>';
+                        }
+                        ?>
+                    </div>
+                    <p class="book-price">Listed Price: $<?= number_format($book['listed_price'], 2); ?></p>
+                    <p class="book-description">Description: <?= htmlspecialchars($book['description']); ?></p>
+                    <p class="book-listing-date">Listing Date: <?= htmlspecialchars($book['listing_date']); ?></p>
+                    <!-- Add form to submit book to cart -->
+                    <form method="post">
+                        <input type="hidden" name="book_id" value="<?= $book_id ?>">
+                        <button type="submit" name="add_to_cart" class="add-to-cart-button">Add to Cart</button>
+                    </form>
+                </div>
             </div>
         </div>
-            </div>
     </main>
 
     <div class="seller-profile">
         <div class="seller-info">
             <img src="../images/<?= htmlspecialchars($seller['profile_picture_url']); ?>" alt="Seller Photo" class="seller-photo">
             <a href="profile_other.php?user_id=<?= htmlspecialchars($seller_id); ?>">
-                        <?= htmlspecialchars($seller['name']); ?>
-                    </a>
+                <?= htmlspecialchars($seller['name']); ?>
+            </a>
         </div>
     </div>
 

@@ -22,33 +22,44 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $age_group = $_POST["age_group"];
     $language = $_POST["language"]; // Ensure this field is in your form
 
-    // Process the image upload
-    $image_path = $uploadDir . basename($_FILES['image']['name']);
-    if (move_uploaded_file($_FILES['image']['tmp_name'], $image_path)) {
-        // Save the form data and image path to your database
-        $stmt = $conn->prepare("INSERT INTO books (title, author, isbn, genre_id, condition, listed_price, description, image_url, age_group, listing_date, seller_id, language) 
-                                VALUES (:title, :author, :isbn, :genre_id, :condition, :listed_price, :description, :image_url, :age_group, :listing_date, :seller_id, :language)");
-        $stmt->execute([
-            ':title' => $title,
-            ':author' => $author,
-            ':isbn' => $isbn,
-            ':genre_id' => $genre_id,
-            ':condition' => $condition,
-            ':listed_price' => $price,
-            ':description' => $description,
-            ':image_url' => basename($_FILES['image']['name']),
-            ':age_group' => $age_group,
-            ':listing_date' => date('Y-m-d'),
-            ':seller_id' => $_SESSION['user_id'], // Ensures book is associated with the logged-in seller
-            ':language' => $language
-        ]);
+    // Fetch the age_group_id from the age_groups table
+    $stmt = $conn->prepare("SELECT age_group_id FROM age_groups WHERE age_group = :age_group");
+    $stmt->execute([':age_group' => $age_group]);
+    $ageGroupResult = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Redirect to the book's page (assuming you have a page to view book details)
-        $book_id = $conn->lastInsertId();
-        header("Location: book_details.php?book_id=$book_id");
-        exit;
+    if ($ageGroupResult) {
+        $age_group_id = $ageGroupResult['age_group_id'];
+
+        // Process the image upload
+        $image_path = $uploadDir . basename($_FILES['image']['name']);
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $image_path)) {
+            // Save the form data and image path to your database
+            $stmt = $conn->prepare("INSERT INTO books (title, author, isbn, genre_id, condition, listed_price, description, image_url, age_group_id, listing_date, seller_id, language) 
+                                    VALUES (:title, :author, :isbn, :genre_id, :condition, :listed_price, :description, :image_url, :age_group_id, :listing_date, :seller_id, :language)");
+            $stmt->execute([
+                ':title' => $title,
+                ':author' => $author,
+                ':isbn' => $isbn,
+                ':genre_id' => $genre_id,
+                ':condition' => $condition,
+                ':listed_price' => $price,
+                ':description' => $description,
+                ':image_url' => basename($_FILES['image']['name']),
+                ':age_group_id' => $age_group_id,
+                ':listing_date' => date('Y-m-d'),
+                ':seller_id' => $_SESSION['user_id'], // Ensures book is associated with the logged-in seller
+                ':language' => $language
+            ]);
+
+            // Redirect to the book's page (assuming you have a page to view book details)
+            $book_id = $conn->lastInsertId();
+            header("Location: book_details.php?book_id=$book_id");
+            exit;
+        } else {
+            echo "Error uploading image.";
+        }
     } else {
-        echo "Error uploading image.";
+        echo "Invalid age group selected.";
     }
 }
 
