@@ -71,8 +71,8 @@ if (isset($_GET['remove_from_selling']) && isset($_GET['book_id'])) {
         </ul>
     </nav>
 </header>
-
-<main class="profile-container">
+<main>
+<div class="profile-container">
     <div class="profile-card">
         <section class="profile-info">
             <h1>Books You're Selling</h1>

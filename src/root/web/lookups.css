@@ -1,0 +1,129 @@
+:root {
+    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Updated for a smoother shadow */
+}
+
+.lookups-main {
+    display: flex;
+}
+
+.lookups-sidebar {
+    width: 250px;
+    padding: 1.25rem;
+    box-sizing: border-box;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    border-radius: 0 10px 10px 0;
+    box-shadow: var(--box-shadow); /* Updated shadow */
+}
+
+.lookups-books-container {
+    flex: 1;
+    padding: 1.25rem;
+    background-color: var(--almost-white);
+}
+
+.lookups-filter-sort-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.lookups-book-filter,
+.lookups-book-sort {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.lookups-book-filter label,
+.lookups-book-sort label {
+    font-family: 'CustomFontSemi', Arial, sans-serif;
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+.lookups-book-filter select,
+.lookups-book-sort select {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.lookups-apply {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    background-color: var(--darker-forest-green);
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'CustomFontSemi', Arial, sans-serif;
+}
+
+.lookups-apply:hover {
+    background-color: var(--text-dark);
+}
+
+.lookups-books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: start;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0 auto;
+    background-color: var(--almost-white);
+}
+
+.lookups-book-item {
+    padding: 1rem;
+    text-align: center;
+    color: var(--text-dark);
+    border: 2px solid var(--moss-green);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: var(--almost-white);
+}
+
+.lookups-book-item img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+    object-fit: cover;
+}
+
+.lookups-book-item-title {
+    font-size: 1rem;
+    font-family: 'CustomFontSemi';
+    margin: 0.625rem 0;
+    color: var(--text-dark);
+}
+
+.lookups-book-item-author {
+    font-size: 0.85rem;
+    color: var(--text-dark);
+    margin: 0.3125rem 0;
+}
+
+.lookups-book-item-price {
+    font-size: 1rem;
+    color: var(--moss-green);
+    margin-bottom: 0.625rem;
+}
+
+.lookups-book-item a {
+    text-decoration: none;
+    color: inherit;
+}
+
+.lookups-book-item:hover {
+    transform: translateY(-0.3125rem);
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1);
+}

@@ -48,6 +48,28 @@ $shippingCost = 5; // You can adjust this based on your shipping criteria
 
 // Calculate total cost including shipping
 $totalCostWithShipping = $totalCost + $shippingCost;
+
+// Handle the checkout process
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['checkout'])) {
+    // Get the user's cart items
+    $stmt = $conn->prepare("SELECT b.book_id, b.title, b.author, b.listed_price, b.seller_id FROM shopping_cart sc JOIN books b ON sc.book_id = b.book_id WHERE sc.user_id = :user_id");
+    $stmt->execute(['user_id' => $_SESSION['user_id']]);
+    $cartItems = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Calculate the total price
+    $totalPrice = array_sum(array_column($cartItems, 'listed_price')) + $shippingCost;
+
+    // Set the transaction session
+    $_SESSION['transaction'] = [
+        'user_id' => $_SESSION['user_id'],
+        'total_price' => $totalPrice,
+        'books' => $cartItems
+    ];
+
+    // Redirect to the checkout completed page
+    header("Location: checkout_completed.php");
+    exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -118,7 +140,7 @@ $totalCostWithShipping = $totalCost + $shippingCost;
         <p>Total cost of books: €<?php echo number_format($totalCost, 2); ?></p>
         <p>Shipping cost: €<?php echo number_format($shippingCost, 2); ?></p>
         <p>Total cost including shipping: €<?php echo number_format($totalCostWithShipping, 2); ?></p>
-        <form action="#" method="post">
+        <form action="cart.php" method="post">
             <input type="text" name="address" placeholder="Address" required>
             <input type="text" name="postal_code" placeholder="Postal Code" required>
             <p> Payment options: </p>
@@ -137,10 +159,10 @@ $totalCostWithShipping = $totalCost + $shippingCost;
                 <input type="radio" name="payment_type" value="Bank Transfer" required>
                 <span class="checkmark"></span>
             </label>
-            <button type="submit" class="checkout-button">Checkout</button>
+            <button type="submit" name="checkout" class="checkout-button">Checkout</button>
         </form>
     </div>
-                </div>
+</div>
 </main>
 
 <footer>

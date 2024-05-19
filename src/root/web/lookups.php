@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Show All Books - FableFoundry</title>
     <link rel="stylesheet" href="style2.css">
+    <link rel="stylesheet" href="lookups.css"> <!-- New CSS file for specific styles -->
 </head>
 <body>
     <header>
@@ -37,91 +38,110 @@
             </ul>
         </nav>
     </header>
-                <main>
-    <div class="books-container">
-        <form method="GET">
-            <section class="filter-sort-bar">
-                <div class="book-filter">
-                    <label for="age-select">Age Group:</label>
-                    <select id="age-select" name="age">
-                        <option value="none">None</option>
-                        <option value="Adults">Adults</option>
-                        <option value="Teens">Teens</option>
-                        <option value="Children">Children</option>
-                    </select>
+    <main class="lookups-main">
+        <aside class="lookups-sidebar">
+            <form method="GET">
+                <section class="lookups-filter-sort-bar">
+                    <div class="lookups-book-filter">
+                        <label for="genre-select">Genre:</label>
+                        <select id="genre-select" name="genre">
+                            <option value="none">None</option>
+                            <?php
+                            // Fetch genres from the database
+                            $sql = "SELECT genre_id, name FROM genres";
+                            $stmt = $conn->query($sql);
+                            $genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-                    <label for="condition-select">Condition:</label>
-                    <select id="condition-select" name="condition">
-                        <option value="none">None</option>
-                        <option value="New">New</option>
-                        <option value="Used">Used</option>
-                    </select>
-                </div>
+                            // Display genre options
+                            foreach ($genres as $genre) {
+                                echo '<option value="' . $genre['genre_id'] . '">' . htmlspecialchars($genre['name']) . '</option>';
+                            }
+                            ?>
+                        </select>
 
-                <div class="book-sort">
-                    <label for="sort-select">Sort by:</label>
-                    <select id="sort-select" name="sort">
-                        <option value="title">Title</option>
-                        <option value="author">Author</option>
-                        <option value="listed_price">Price</option>
-                    </select>
-                </div>
+                        <label for="age-select">Age Group:</label>
+                        <select id="age-select" name="age">
+                            <option value="none">None</option>
+                            <option value="Adults">Adults</option>
+                            <option value="Teens">Teens</option>
+                            <option value="Children">Children</option>
+                        </select>
 
-                <button class="apply" type="submit">Apply Filters</button>
-            </section>
-        </form>
+                        <label for="condition-select">Condition:</label>
+                        <select id="condition-select" name="condition">
+                            <option value="none">None</option>
+                            <option value="New">New</option>
+                            <option value="Used">Used</option>
+                        </select>
+                    </div>
 
-        <section class="books-grid">
-            <?php
-            // Initialize filter variables
-            $genreFilter = isset($_GET['genre']) ? $_GET['genre'] : null;
-            $ageFilter = isset($_GET['age']) && $_GET['age'] !== 'none' ? $_GET['age'] : null;
-            $conditionFilter = isset($_GET['condition']) && $_GET['condition'] !== 'none' ? $_GET['condition'] : null;
-            $sortFilter = isset($_GET['sort']) ? $_GET['sort'] : 'title';
+                    <div class="lookups-book-sort">
+                        <label for="sort-select">Sort by:</label>
+                        <select id="sort-select" name="sort">
+                            <option value="title">Title</option>
+                            <option value="author">Author</option>
+                            <option value="listed_price">Price</option>
+                        </select>
+                    </div>
 
-            // Build the SQL query with filters
-            $sql = "SELECT book_id, title, author, listed_price, image_url FROM books WHERE 1=1";
-            if ($genreFilter) {
-                $sql .= " AND genre_id = :genre";
-            }
-            if ($ageFilter && $ageFilter !== 'none') {
-                $sql .= " AND age_group = :age";
-            }
-            if ($conditionFilter && $conditionFilter !== 'none') {
-                $sql .= " AND condition = :condition";
-            }
-            $sql .= " ORDER BY $sortFilter";
+                    <button class="lookups-apply" type="submit">Apply Filters</button>
+                </section>
+            </form>
+        </aside>
 
-            try {
-                $stmt = $conn->prepare($sql);
+        <div class="lookups-books-container">
+            <section class="lookups-books-grid">
+                <?php
+                // Initialize filter variables
+                $genreFilter = isset($_GET['genre']) && $_GET['genre'] !== 'none' ? $_GET['genre'] : null;
+                $ageFilter = isset($_GET['age']) && $_GET['age'] !== 'none' ? $_GET['age'] : null;
+                $conditionFilter = isset($_GET['condition']) && $_GET['condition'] !== 'none' ? $_GET['condition'] : null;
+                $sortFilter = isset($_GET['sort']) ? $_GET['sort'] : 'title';
+
+                // Build the SQL query with filters
+                $sql = "SELECT book_id, title, author, listed_price, image_url FROM books WHERE 1=1";
                 if ($genreFilter) {
-                    $stmt->bindParam(':genre', $genreFilter);
+                    $sql .= " AND genre_id = :genre";
                 }
                 if ($ageFilter && $ageFilter !== 'none') {
-                    $stmt->bindParam(':age', $ageFilter);
+                    $sql .= " AND age_group = :age";
                 }
                 if ($conditionFilter && $conditionFilter !== 'none') {
-                    $stmt->bindParam(':condition', $conditionFilter);
+                    $sql .= " AND condition = :condition";
                 }
-                $stmt->execute();
+                $sql .= " ORDER BY $sortFilter";
 
-                // Display filtered books
-                while ($book = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    echo '<div class="book-item">';
-                    // Add hyperlink around the book item to redirect to book_details.php
-                    echo '<a href="book_details.php?book_id=' . $book['book_id'] . '">';
-                    echo '<img src="../images/' . htmlspecialchars($book['image_url']) . '" alt="' . htmlspecialchars($book['title']) . '">';
-                    echo '<h3 class="book-item-title">' . htmlspecialchars($book['title']) . '</h3>';
-                    echo '<p class="book-item-author">by ' . htmlspecialchars($book['author']) . '</p>';
-                    echo '<p class="book-item-price">€' . number_format($book['listed_price'], 2) . '</p>';
-                    echo '</a>'; // Close the hyperlink
-                    echo '</div>';
+                try {
+                    $stmt = $conn->prepare($sql);
+                    if ($genreFilter) {
+                        $stmt->bindParam(':genre', $genreFilter);
+                    }
+                    if ($ageFilter && $ageFilter !== 'none') {
+                        $stmt->bindParam(':age', $ageFilter);
+                    }
+                    if ($conditionFilter && $conditionFilter !== 'none') {
+                        $stmt->bindParam(':condition', $conditionFilter);
+                    }
+                    $stmt->execute();
+
+                    // Display filtered books
+                    while ($book = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        echo '<div class="lookups-book-item">';
+                        // Add hyperlink around the book item to redirect to book_details.php
+                        echo '<a href="book_details.php?book_id=' . $book['book_id'] . '">';
+                        echo '<img src="../images/' . htmlspecialchars($book['image_url']) . '" alt="' . htmlspecialchars($book['title']) . '">';
+                        echo '<h3 class="lookups-book-item-title">' . htmlspecialchars($book['title']) . '</h3>';
+                        echo '<p class="lookups-book-item-author">by ' . htmlspecialchars($book['author']) . '</p>';
+                        echo '<p class="lookups-book-item-price">€' . number_format($book['listed_price'], 2) . '</p>';
+                        echo '</a>'; // Close the hyperlink
+                        echo '</div>';
+                    }
+                } catch (PDOException $e) {
+                    echo 'Database error: ' . $e->getMessage();
                 }
-            } catch (PDOException $e) {
-                echo 'Database error: ' . $e->getMessage();
-            }
-            ?>
-        </section>
+                ?>
+            </section>
+        </div>
     </main>
 
     <footer>
@@ -129,4 +149,3 @@
     </footer>
 </body>
 </html>
-
