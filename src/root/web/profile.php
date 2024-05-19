@@ -64,7 +64,6 @@ function echoSessionVar($varName) {
             </ul>
         </nav>
     </header>
-    </header>
 
     <main class="profile-container">
         <div class="profile-card">
@@ -78,15 +77,23 @@ function echoSessionVar($varName) {
                         <input type="file" id="profilePhotoUpload" name="profile_photo" accept="image/*" onchange="previewAndUploadPhoto();">
                     </div>
                 </form>
-                <h1><?php echoSessionVar('name'); ?></h1>
+                <h1><?php echoSessionVar('name'); ?> 
+                    <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+                        <span class="admin-check">✔</span>
+                    <?php endif; ?>
+                </h1>
                 <h3><?php echoSessionVar('bio'); ?></h3>
                 <p><?php echoSessionVar('email'); ?></p>
                 
                 <div class="profile-action-buttons">
                     <button class="action-button" onclick="openModal('editProfileModal')">Edit Profile</button>
+                    <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+                        <button class="action-button" onclick="location.href='make_admin.php'">Make Admin</button>
+                    <?php endif; ?>
                     <form action="logout.php" method="post">
                         <button type="submit" class="action-button">Logout</button>
                     </form>
+                    
                 </div>
             </section>
         </div>

@@ -27,6 +27,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['bio'] = $user['bio'];
             $_SESSION['profile_picture_url'] = $user['profile_picture_url'];
 
+            // Check if the user is an admin
+            $_SESSION['is_admin'] = ($user['role'] === 'Admin');
+
             // Redirect to the profile page
             header("Location: profile.php");
             exit;

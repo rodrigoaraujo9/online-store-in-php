@@ -48,7 +48,7 @@ function echoUserVar($user, $varName) {
 </head>
 <body>
     <header>
-        <h2 class="logo-title">FableFoundry</h2>
+        <h2 class="logo-title"><a href="../index.php">FableFoundry</a></h2>
         <nav class="nav-left">
             <ul>
                 <li><a href="../index.php">Home</a></li>
@@ -86,7 +86,12 @@ function echoUserVar($user, $varName) {
                         <img src="<?php echo !empty($user['profile_picture_url']) ? htmlspecialchars($user['profile_picture_url'], ENT_QUOTES, 'UTF-8') : '../images/default_profile.png'; ?>" alt="Profile Photo" class="profile-photo" id="profilePhoto">
                     </div>
                 </div>
-                <h1><?php echoUserVar($user, 'name'); ?></h1>
+                <h1>
+                    <?php echoUserVar($user, 'name'); ?> 
+                    <?php if ($user['role'] === 'Admin'): ?>
+                        <span class="admin-check">✔</span>
+                    <?php endif; ?>
+                </h1>
                 <h3><?php echoUserVar($user, 'bio'); ?></h3>
                 <p><?php echoUserVar($user, 'email'); ?></p>
             </section>

@@ -794,7 +794,7 @@ h1 {
 }
 
 .profile-action-buttons {
-    display: flex;
+    display:table-column;
     justify-content: center;
     gap: 1.25rem;
 }
@@ -1307,11 +1307,13 @@ footer {
     color: #555;
     font-size: 0.95em;
 }
-
 .profile-action-buttons {
     display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align the buttons */
+    gap: 1rem;
+    margin-top: 2rem;
     justify-content: center;
-    gap: 1.25rem;
 }
 
 @media (max-width: 37.5rem) {
@@ -1990,5 +1992,11 @@ a:hover {
     background: linear-gradient(135deg, var(--button-hover-purple) 0%, var(--pastel-green) 100%);
     transform: scale(1.05);
     box-shadow: 0 0.35rem 0.75rem rgba(0, 0, 0, 0.15);
+}
+
+.profile-info h1 .admin-check {
+    font-size: 1rem;
+    color: var(--accent-color);
+    opacity: 0.6;
 }
 

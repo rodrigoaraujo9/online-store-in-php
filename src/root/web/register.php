@@ -32,7 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Proceed with registration if no conflicts
         $sql = "INSERT INTO users (name, username, password, email, role, registered_date, profile_picture_url) 
-                VALUES (:name, :username, :password, :email, 'Buyer', DATE('now'), :profile_picture_url)";
+                VALUES (:name, :username, :password, :email, 'Admin', DATE('now'), :profile_picture_url)";
         $stmt = $conn->prepare($sql);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':username', $username);
@@ -42,9 +42,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         try {
             $stmt->execute();
+            $_SESSION['user_id'] = $conn->lastInsertId();
             $_SESSION['username'] = $username;
             $_SESSION['name'] = $name;
             $_SESSION['email'] = $email;
+            $_SESSION['role'] = 'Admin'; // Set the role to Admin
+            $_SESSION['profile_picture_url'] = $profilePictureUrl;
+
             header("Location: profile.php");
             exit;
         } catch (PDOException $e) {
@@ -72,10 +76,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </header>
 
     <main class="login-container">
-        <form class="login-form" method="POST">
+        <form class="login-form" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
             <h1 class="form-title">Create an account</h1>
             <?php if (!empty($error)): ?>
-                <p class="error"><?php echo $error; ?></p>
+                <p class="error"><?php echo htmlspecialchars($error); ?></p>
             <?php endif; ?>
             <div class="form-field">
                 <label for="name">Name</label>
