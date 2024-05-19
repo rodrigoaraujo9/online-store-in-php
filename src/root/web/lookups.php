@@ -60,10 +60,15 @@ if (isset($_GET['add_to_cart']) && isset($_GET['book_id'])) {
     }
 }
 
-// Fetch genres from the database
-$sql = "SELECT genre_id, name FROM genres";
-$stmt = $conn->query($sql);
-$genres = $stmt->fetchAll(PDO::FETCH_ASSOC);
+// Fetch all genres for filters
+$sql_all_genres = "SELECT genre_id, name FROM genres";
+$stmt_all_genres = $conn->query($sql_all_genres);
+$all_genres = $stmt_all_genres->fetchAll(PDO::FETCH_ASSOC);
+
+// Fetch only 2 genres for navigation
+$sql_nav_genres = "SELECT genre_id, name FROM genres LIMIT 2";
+$stmt_nav_genres = $conn->query($sql_nav_genres);
+$nav_genres = $stmt_nav_genres->fetchAll(PDO::FETCH_ASSOC);
 
 // Fetch books based on filters if set
 $filter_genre = isset($_GET['genre']) ? $_GET['genre'] : null;
@@ -104,125 +109,123 @@ $books = $stmt_books->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="style2.css">
     <link rel="stylesheet" href="lookups.css"> <!-- New CSS file for specific styles -->
     <style>
-       
         .book-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-}
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
 
-.actions a {
-    font-family: 'CustomFontSemi', Arial, sans-serif;
-    padding: 0.5rem 1rem;
-    background-color: var(--darker-forest-green);
-    color: #fff;
-    border-radius: 0.25rem;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-    text-align: center; /* Ensure the text is centered */
-}
+        .actions a {
+            font-family: 'CustomFontSemi', Arial, sans-serif;
+            padding: 0.5rem 1rem;
+            background-color: var(--darker-forest-green);
+            color: #fff;
+            border-radius: 0.25rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+            text-align: center; /* Ensure the text is centered */
+        }
 
-.actions a:hover {
-    background-color: var(--text-dark);
-}
-}
+        .actions a:hover {
+            background-color: var(--text-dark);
+        }
     </style>
 </head>
 <body>
-    <header>
-        <h2 class="logo-title"><a href="../index.php">FableFoundry</a></h2>
-        <nav class="nav-left">
-            <ul>
-                <li><a href="../index.php">Home</a></li>
-                <li><a href="lookups.php">Shop All</a></li>
-                <?php
-                // Display genre filters
-                foreach ($genres as $genre) {
-                    echo '<li><a href="lookups.php?genre=' . $genre['genre_id'] . '">' . htmlspecialchars($genre['name']) . '</a></li>';
-                }
-                ?>
-            </ul>
-        </nav>
-        <nav class="nav-right">
-            <ul>
-                <li><a href="selling.php">Selling</a></li>
-                <li><a href="wishlist.php">Wishlist</a></li>
-                <li><a href="profile.php">Profile</a></li>
-                <li><a href="cart.php">Cart</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main class="lookups-main">
-        <aside class="lookups-sidebar">
-            <form method="GET">
-                <section class="lookups-filter-sort-bar">
-                    <div class="lookups-book-filter">
-                        <label for="genre-select">Genre:</label>
-                        <select id="genre-select" name="genre">
-                            <option value="none">None</option>
-                            <?php
-                            // Display genre options
-                            foreach ($genres as $genre) {
-                                echo '<option value="' . $genre['genre_id'] . '"' . ($filter_genre == $genre['genre_id'] ? ' selected' : '') . '>' . htmlspecialchars($genre['name']) . '</option>';
-                            }
-                            ?>
-                        </select>
+<header>
+    <h2 class="logo-title"><a href="../index.php">FableFoundry</a></h2>
+    <nav class="nav-left">
+        <ul>
+            <li><a href="../index.php">Home</a></li>
+            <li><a href="lookups.php">Shop All</a></li>
+            <?php
+            // Display limited genre filters for navigation
+            foreach ($nav_genres as $genre) {
+                echo '<li><a href="lookups.php?genre=' . $genre['genre_id'] . '">' . htmlspecialchars($genre['name']) . '</a></li>';
+            }
+            ?>
+        </ul>
+    </nav>
+    <nav class="nav-right">
+        <ul>
+            <li><a href="selling.php">Selling</a></li>
+            <li><a href="wishlist.php">Wishlist</a></li>
+            <li><a href="profile.php">Profile</a></li>
+            <li><a href="cart.php">Cart</a></li>
+        </ul>
+    </nav>
+</header>
+<main class="lookups-main">
+    <aside class="lookups-sidebar">
+        <form method="GET">
+            <section class="lookups-filter-sort-bar">
+                <div class="lookups-book-filter">
+                    <label for="genre-select">Genre:</label>
+                    <select id="genre-select" name="genre">
+                        <option value="none">None</option>
+                        <?php
+                        // Display all genre options for filters
+                        foreach ($all_genres as $genre) {
+                            echo '<option value="' . $genre['genre_id'] . '"' . ($filter_genre == $genre['genre_id'] ? ' selected' : '') . '>' . htmlspecialchars($genre['name']) . '</option>';
+                        }
+                        ?>
+                    </select>
 
-                        <label for="age-select">Age Group:</label>
-                        <select id="age-select" name="age">
-                            <option value="none">None</option>
-                            <option value="Adults"<?php echo $filter_age == 'Adults' ? ' selected' : ''; ?>>Adults</option>
-                            <option value="Teens"<?php echo $filter_age == 'Teens' ? ' selected' : ''; ?>>Teens</option>
-                            <option value="Children"<?php echo $filter_age == 'Children' ? ' selected' : ''; ?>>Children</option>
-                        </select>
+                    <label for="age-select">Age Group:</label>
+                    <select id="age-select" name="age">
+                        <option value="none">None</option>
+                        <option value="Adults"<?php echo $filter_age == 'Adults' ? ' selected' : ''; ?>>Adults</option>
+                        <option value="Teens"<?php echo $filter_age == 'Teens' ? ' selected' : ''; ?>>Teens</option>
+                        <option value="Children"<?php echo $filter_age == 'Children' ? ' selected' : ''; ?>>Children</option>
+                    </select>
 
-                        <label for="condition-select">Condition:</label>
-                        <select id="condition-select" name="condition">
-                            <option value="none">None</option>
-                            <option value="New"<?php echo $filter_condition == 'New' ? ' selected' : ''; ?>>New</option>
-                            <option value="Used"<?php echo $filter_condition == 'Used' ? ' selected' : ''; ?>>Used</option>
-                        </select>
-                    </div>
+                    <label for="condition-select">Condition:</label>
+                    <select id="condition-select" name="condition">
+                        <option value="none">None</option>
+                        <option value="New"<?php echo $filter_condition == 'New' ? ' selected' : ''; ?>>New</option>
+                        <option value="Used"<?php echo $filter_condition == 'Used' ? ' selected' : ''; ?>>Used</option>
+                    </select>
+                </div>
 
-                    <div class="lookups-book-sort">
-                        <label for="sort-select">Sort by:</label>
-                        <select id="sort-select" name="sort">
-                            <option value="title"<?php echo $sort_order == 'title' ? ' selected' : ''; ?>>Title</option>
-                            <option value="author"<?php echo $sort_order == 'author' ? ' selected' : ''; ?>>Author</option>
-                            <option value="listed_price"<?php echo $sort_order == 'listed_price' ? ' selected' : ''; ?>>Price</option>
-                        </select>
-                    </div>
+                <div class="lookups-book-sort">
+                    <label for="sort-select">Sort by:</label>
+                    <select id="sort-select" name="sort">
+                        <option value="title"<?php echo $sort_order == 'title' ? ' selected' : ''; ?>>Title</option>
+                        <option value="author"<?php echo $sort_order == 'author' ? ' selected' : ''; ?>>Author</option>
+                        <option value="listed_price"<?php echo $sort_order == 'listed_price' ? ' selected' : ''; ?>>Price</option>
+                    </select>
+                </div>
 
-                    <button class="lookups-apply" type="submit">Apply Filters</button>
-                </section>
-            </form>
-        </aside>
-
-        <div class="lookups-books-container">
-            <section class="lookups-books-grid">
-                <?php
-                // Display filtered books
-                foreach ($books as $book): ?>
-                    <div class="book-item">
-                        <a href="book_details.php?book_id=<?php echo $book['book_id']; ?>">
-                            <img src="../images/<?php echo htmlspecialchars($book['image_url']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>">
-                            <h3 class="book-item-title"><?php echo htmlspecialchars($book['title']); ?></h3>
-                            <p class="book-item-author">by <?php echo htmlspecialchars($book['author']); ?></p>
-                            <p class="book-item-price">€<?php echo number_format($book['listed_price'], 2); ?></p>
-                        </a>
-                        <div class="actions">
-                            <a href="lookups.php?add_to_wishlist=true&book_id=<?php echo $book['book_id']; ?>">Wishlist</a>
-                            <a href="lookups.php?add_to_cart=true&book_id=<?php echo $book['book_id']; ?>">Cart</a>
-                        </div>
-                    </div>
-                <?php endforeach; ?>
+                <button class="lookups-apply" type="submit">Apply Filters</button>
             </section>
-        </div>
-    </main>
+        </form>
+    </aside>
 
-    <footer>
-        <p>© 2024 FableFoundry. All rights reserved.</p>
-    </footer>
+    <div class="lookups-books-container">
+        <section class="lookups-books-grid">
+            <?php
+            // Display filtered books
+            foreach ($books as $book): ?>
+                <div class="book-item">
+                    <a href="book_details.php?book_id=<?php echo $book['book_id']; ?>">
+                        <img src="../images/<?php echo htmlspecialchars($book['image_url']); ?>" alt="<?php echo htmlspecialchars($book['title']); ?>">
+                        <h3 class="book-item-title"><?php echo htmlspecialchars($book['title']); ?></h3>
+                        <p class="book-item-author">by <?php echo htmlspecialchars($book['author']); ?></p>
+                        <p class="book-item-price">€<?php echo number_format($book['listed_price'], 2); ?></p>
+                    </a>
+                    <div class="actions">
+                        <a href="lookups.php?add_to_wishlist=true&book_id=<?php echo $book['book_id']; ?>">Wishlist</a>
+                        <a href="lookups.php?add_to_cart=true&book_id=<?php echo $book['book_id']; ?>">Cart</a>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </section>
+    </div>
+</main>
+
+<footer>
+    <p>© 2024 FableFoundry. All rights reserved.</p>
+</footer>
 </body>
 </html>
